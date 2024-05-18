@@ -1,10 +1,10 @@
-# Very short description of the package
+# Package Description
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/sosupp/slim-dashboard.svg?style=flat-square)](https://packagist.org/packages/sosupp/slim-dashboard)
 [![Total Downloads](https://img.shields.io/packagist/dt/sosupp/slim-dashboard.svg?style=flat-square)](https://packagist.org/packages/sosupp/slim-dashboard)
 ![GitHub Actions](https://github.com/sosupp/slim-dashboard/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+A simple laravel dashboard that feels lightweight made more dynamic with easy interactions with livewire and alpinejs.
 
 ## Installation
 
