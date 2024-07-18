@@ -1,0 +1,27 @@
+preset: package
+
+namespace: Sosupp\SlimDashboard
+user-auth-model: App\Models\User
+
+paths:
+  src: src
+  resource: resources
+
+factory:
+  path: database/factories
+
+migration:
+  path: database/migrations
+  prefix: ''
+
+console:
+  namespace: Sosupp\SlimDashboard\Console
+
+model:
+  namespace: Sosupp\SlimDashboard\Models
+
+provider:
+  namespace: Sosupp\SlimDashboard\Providers
+
+testing:
+  namespace: Sosupp\SlimDashboard\Tests

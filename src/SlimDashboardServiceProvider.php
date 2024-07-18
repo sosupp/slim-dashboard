@@ -2,6 +2,7 @@
 
 namespace Sosupp\SlimDashboard;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -16,9 +17,15 @@ class SlimDashboardServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'slim-dashboard');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'slim-dashboard');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'slim-dashboard');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        // $this->loadViewComponentsAs('slim-dashboard', [
+
+        // ]);
+
+        Blade::componentNamespace('SlimDashboard\\Views\\Components', 'slim-dashboard');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
