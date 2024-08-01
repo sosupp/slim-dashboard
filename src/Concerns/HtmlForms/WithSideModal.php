@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\View;
 trait WithSideModal
 {
     public $hasSidePanel = false;
+    public $panelRecord;
 
     public function useSideModal()
     {
@@ -15,5 +16,10 @@ trait WithSideModal
     public function panelExtraView(): string|View
     {
         return '';
+    }
+
+    public function resolvePanelModel($id)
+    {
+        $this->panelRecord = $this->tableRecords->where('id', $id)->first();
     }
 }

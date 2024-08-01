@@ -11,7 +11,7 @@
 
                     @if ($cta['withSidePanel'])
                     <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}}"
-                        x-on:click="toggleSidePanel('{{ $cta['label'] }}')">{{ $cta['label'] }}</button>
+                        x-on:click="toggleSidePanel('{{ $cta['component'] }}', '{{ $cta['label'] }}')">{{ $cta['label'] }}</button>
                     @else
                     <a href="{{ $cta['route'] }}" wire:navigate class="custom-btn {{$cta['css'] ?? ''}}">{{ $cta['label'] }}</a>
                     @endif

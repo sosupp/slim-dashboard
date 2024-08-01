@@ -15,6 +15,7 @@ class PageCtas
         bool $shouldConfirm = false,
         string $confirmMessage = '',
         string $wireTarget = 'selectAll',
+        ?string $component = null,
         bool $show = true,
     )
     {
@@ -27,6 +28,7 @@ class PageCtas
         static::$pageActions[$label]['shouldConfirm'] = $shouldConfirm;
         static::$pageActions[$label]['confirmMessage'] = $confirmMessage;
         static::$pageActions[$label]['wireTarget'] = $wireTarget;
+        static::$pageActions[$label]['component'] = $component;
         static::$pageActions[$label]['show'] = $show;
 
         return new static;

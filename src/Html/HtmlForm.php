@@ -28,6 +28,10 @@ class HtmlForm
 
     protected bool $asAlpineTabbing = false;
 
+    protected string $wrapperCss = '';
+    protected string $labelCss = '';
+    protected string $inputCss = '';
+
     public function __construct(public string $css = '')
     {
         // $this->prepare();
@@ -126,6 +130,28 @@ class HtmlForm
         return $this;
     }
 
+    public function commonInputCss(
+        string $wrapperCss = '',
+        string $labelCss = '',
+        string $inputCss = '',
+    )
+    {
+        $this->wrapperCss = $wrapperCss;
+        $this->labelCss = $labelCss;
+        $this->inputCss = $inputCss;
+
+        return $this;
+    }
+
+    public function specialInput()
+    {
+        $this->wrapperCss = 'special-input-wrapper';
+        $this->labelCss = 'special-input-label';
+        $this->inputCss = 'special-input';
+
+        return $this;
+    }
+
     public function imageInput(
         $imagePath = null,
     )
@@ -190,18 +216,25 @@ class HtmlForm
         string $class = '',
         string $message = '',
         bool $wireLive = false,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
 
     )
     {
         $setLabel = is_null($label) ? $name : $label;
         $setState = $wireLive ? '' : '.defer';
 
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+
         $input = <<<INPUT
-        <div class="custom-input-wrapper">
-            <label for="$id">$setLabel</label>
+        <div class="$wrapperCss">
+            <label for="$id" class="$labelCss">$setLabel</label>
             <input type="$type"
                 id="$id"
-                class="custom-input $class @error('$name') is-error @enderror"
+                class="$inputCss $class @error('$name') is-error @enderror"
                 wire:model$setState="$name"
                 value="$value"
                 placeholder="$placeholder" />
@@ -231,16 +264,25 @@ class HtmlForm
         string $optionId = 'id',
         string $class = '',
         bool $wireLive = true,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
+        bool $customPlaceholder = true,
     )
     {
         $setLabel = is_null($label) ? $name : $label;
         // $wireIgnore = $action = 'multiple' ? 'wire:ignore' : '';
         $setState = $wireLive ? '.live' : '';
+        $usePlaceholder = $customPlaceholder ? $label : '';
+
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
         $selectInput = <<<SELECT
-        <div class="custom-input-wrapper">
-            <label for="$id">$setLabel</label>
-            <select class="custom-input $class @error('$name') is-error @enderror"
+        <div class="$wrapperCss">
+            <label for="$id" class="$labelCss">$setLabel</label>
+            <select class="$inputCss $class @error('$name') is-error @enderror"
                 id="$id"
                 wire:model$setState="$name"
                 wire:key="$name"
@@ -248,7 +290,7 @@ class HtmlForm
         SELECT;
 
         $selectInput .= <<<DEFAULT
-        <option>Select $label</option>
+        <option>$usePlaceholder</option>
         DEFAULT;
 
         // dd($options);

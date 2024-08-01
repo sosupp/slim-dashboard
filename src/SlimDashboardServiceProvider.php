@@ -40,7 +40,7 @@ class SlimDashboardServiceProvider extends ServiceProvider
             // Publishing assets.
             $this->publishes([
                 __DIR__.'/../public' => public_path('vendor/slim-dashboard'),
-            ], 'assets');
+            ], 'slim-assets');
 
             // Publishing the translation files.
             /*$this->publishes([
