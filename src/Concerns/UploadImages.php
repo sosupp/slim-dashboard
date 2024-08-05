@@ -24,7 +24,13 @@ trait UploadImages
 
         if(isset($data['image']) && $data['image'] !== null){
             // $filename = $data['image']->getClientOriginalName();
-            $filename = pathinfo($data['image']->getClientOriginalName(), PATHINFO_FILENAME);
+            $filename = '';
+
+            if(isset($data['filename']) && !empty($data['filename'])){
+                $filename = str()->slug($data['filename']);
+            }else{
+                $filename = pathinfo($data['image']->getClientOriginalName(), PATHINFO_FILENAME);
+            }
 
             $image = '';
             if($subDir !== null){
@@ -51,11 +57,19 @@ trait UploadImages
     {
         if(!empty($data)){
             foreach($data['images'] as $file){
-                $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $filename = '';
+
+                // dd($data['images'], $file['filename'], $file['image'], str()->slug($file['filename']), pathinfo($file['image']->getClientOriginalName(), PATHINFO_FILENAME));
+                if(isset($file['filename']) && !empty($file['filename'])){
+                    $filename = str()->slug($file['filename']);
+                }else{
+                    $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                }
+
 
                 $image = 'images/'.$filename.$fileType;
 
-                Image::make($file)
+                Image::make($file['image'])
                 // ->resize($width, $height)
                 ->save(
                     path: $image,
@@ -67,7 +81,6 @@ trait UploadImages
             }
             return $this->uploadedImagesPath;
         }
-
     }
 
     public function uploadInlineImage(array $data, $width = null, $height = null, $subDir = null)

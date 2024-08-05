@@ -1,8 +1,7 @@
 <?php
 namespace Sosupp\SlimDashboard\Concerns;
 
-use App\Models\Product;
-use App\Services\Products\ProductCrudService;
+use Exception;
 
 trait StatusToggleable
 {
@@ -13,6 +12,11 @@ trait StatusToggleable
 
     public function toggleStatus($modelId)
     {
+        if($this->useModel() == null){
+            throw new Exception("No model defined for delete action. Return an object or string for model.", 1);
+            return;
+        }
+        
         return $this->useModel()::where('id', $modelId)
         ->update([
             'status' => $this->setStatus($modelId)

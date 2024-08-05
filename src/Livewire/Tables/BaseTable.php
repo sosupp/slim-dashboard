@@ -8,12 +8,12 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Lazy;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Session;
-use App\Concerns\ModelDeleteable;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
 use Livewire\WithoutUrlPagination;
 use Sosupp\SlimDashboard\Concerns\UploadImages;
 use Sosupp\SlimDashboard\Concerns\AddsSessionData;
+use Sosupp\SlimDashboard\Concerns\ModelDeleteable;
 use Sosupp\SlimDashboard\Concerns\Html\WithDefaultCss;
 use Sosupp\SlimDashboard\Concerns\HtmlForms\WithTableFilters;
 
@@ -122,6 +122,10 @@ abstract class BaseTable extends Component
         return false;
     }
 
+    public function cardsWrapperCss()
+    {
+        return 'table-inline-stats-summary';
+    }
 
 
     public function configureCustomRelation($model, $relation, $col)

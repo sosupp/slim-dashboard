@@ -1,5 +1,5 @@
 <?php
-namespace App\Concerns;
+namespace Sosupp\SlimDashboard\Concerns;
 
 trait ModelDeleteable
 {

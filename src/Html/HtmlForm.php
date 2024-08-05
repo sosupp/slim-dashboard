@@ -215,7 +215,7 @@ class HtmlForm
         string $placeholder = '',
         string $class = '',
         string $message = '',
-        bool $wireLive = false,
+        bool|string $wireLive = false,
         string $wrapperCss = 'custom-input-wrapper',
         string $labelCss = '',
         string $inputCss = 'custom-input',
@@ -223,7 +223,7 @@ class HtmlForm
     )
     {
         $setLabel = is_null($label) ? $name : $label;
-        $setState = $wireLive ? '' : '.defer';
+        $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
 
         $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
@@ -263,7 +263,7 @@ class HtmlForm
         string $optionKey = 'name',
         string $optionId = 'id',
         string $class = '',
-        bool $wireLive = true,
+        bool|string $wireLive = true,
         string $wrapperCss = 'custom-input-wrapper',
         string $labelCss = '',
         string $inputCss = 'custom-input',
@@ -272,7 +272,7 @@ class HtmlForm
     {
         $setLabel = is_null($label) ? $name : $label;
         // $wireIgnore = $action = 'multiple' ? 'wire:ignore' : '';
-        $setState = $wireLive ? '.live' : '';
+        $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
         $usePlaceholder = $customPlaceholder ? $label : '';
 
         $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;

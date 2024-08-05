@@ -1,8 +1,7 @@
 <?php
 namespace Sosupp\SlimDashboard\Concerns;
 
-use App\Services\Html\Dropdown;
-use Illuminate\Support\Facades\Log;
+use Sosupp\SlimDashboard\Html\Dropdown;
 
 trait WithExportDropdown
 {

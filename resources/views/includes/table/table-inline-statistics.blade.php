@@ -1,4 +1,4 @@
-<div class="table-inline-stats-summary">
+<div class="{{$this->cardsWrapperCss()}}">
    <div class="inline-stats-label">
        {!! __($this->inlineTableStatistics['description'] ?? '') !!}
    </div>

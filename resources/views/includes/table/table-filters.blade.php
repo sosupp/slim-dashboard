@@ -9,7 +9,11 @@
 
             @if ($filter['options'])
                 @foreach ($filter['options'] as $key => $option)
+                @if (is_array($option))
                 <option class="as-pointer" value="{{$option[$filter['optionId']]}}">{{$option[$filter['optionKey']]}}</option>
+                @else
+                <option class="as-pointer" value="{{$option}}">{{$option}}</option>
+                @endif
                 @endforeach
             @endif
         </select>

@@ -4,6 +4,7 @@ namespace Sosupp\SlimDashboard\Livewire\Forms;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
 use Sosupp\SlimDashboard\Concerns\UploadImages;
 use Sosupp\SlimDashboard\Concerns\Html\WithBreadcrumb;
 use Sosupp\SlimDashboard\Livewire\Traits\PreparesFormEdit;
@@ -17,7 +18,10 @@ abstract class BaseForm extends Component
 
     public $pageTitle;
     public $isUpdate = false;
+    
+    #[Validate()]
     public $imagePath;
+    public $image;
 
     public $modelId;
 
@@ -33,6 +37,11 @@ abstract class BaseForm extends Component
     public abstract function isUpdateDetails();
 
 
+    public function colForImageName(): string
+    {
+        return '';
+    }
+
     public function updatedImage()
     {
         // dd("yes");
@@ -41,12 +50,15 @@ abstract class BaseForm extends Component
         ]);
 
         $this->imagePath = $this->uploadImage(
-            data: ['image' => $this->image],
+            data: [
+                'image' => $this->image,
+                'filename' => $this->colForImageName()
+            ],
         );
 
         // dd($this->imagePath);
     }
-
+    
     public function basePage()
     {
         return '';
