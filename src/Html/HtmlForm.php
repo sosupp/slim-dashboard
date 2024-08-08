@@ -374,6 +374,7 @@ class HtmlForm
             id="$id"
             class="$class"
             wire:$useWire
+            wire:loading.attr="disabled"
             $action>$useLabel</button>
 
         BUTTON;

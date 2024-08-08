@@ -6,7 +6,8 @@ trait WithBreadcrumb
     public function renderingWithBreadcrumb($view)
     {
         // dd($view);
-        return $view->layoutData(['breadcrumb' => $this->breadcrumbData()]);
+        return $view->layoutData(['breadcrumb' => $this->breadcrumbData()])
+        ->title($this->pageTitle);
 
     }
 
