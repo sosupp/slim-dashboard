@@ -53,7 +53,7 @@ trait CommonScopes
         $query->where($col, 'LIKE', '%'.$search.'%');
     }
 
-    public function withSearch(Builder $query, string $type = 'contain', string $col, string $search): void
+    public function scopeWithSearch(Builder $query, string $type = 'contain', string $col, string $search): void
     {
         if($type === 'contain'){
             $query->where($col, 'LIKE', '%'.$search.'%');
