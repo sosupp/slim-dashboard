@@ -10,6 +10,7 @@ abstract class TabWrapper extends Component
 {
     use WithBreadcrumb;
 
+    public $pageTitle;
     public $componentName = '';
     public $useViewFile = '';
     public $selectedUrl = '';
