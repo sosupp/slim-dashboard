@@ -213,6 +213,11 @@ abstract class BaseTable extends Component
         return false;
     }
 
+    public function tableAsCardsView()
+    {
+        return '';
+    }
+
     public function compositePage()
     {
         return '';

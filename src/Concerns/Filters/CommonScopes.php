@@ -43,6 +43,26 @@ trait CommonScopes
         });
     }
 
+    public function scopeMatchSearch(Builder $query, string $col, string $search): void
+    {
+        $query->where($col, 'LIKE', $search.'%');
+    }
+
+    public function scopeContainSearch(Builder $query, string $col, string $search): void
+    {
+        $query->where($col, 'LIKE', '%'.$search.'%');
+    }
+
+    public function withSearch(Builder $query, string $type = 'contain', string $col, string $search): void
+    {
+        if($type === 'contain'){
+            $query->where($col, 'LIKE', '%'.$search.'%');
+        }
+
+        if($type === 'match'){
+            $query->where($col, 'LIKE', $search.'%');
+        }
+    }
 
 
 }
