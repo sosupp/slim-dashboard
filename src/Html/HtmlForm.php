@@ -146,7 +146,7 @@ class HtmlForm
     public function specialInput()
     {
         $this->wrapperCss = 'special-input-wrapper';
-        $this->labelCss = 'special-input-label';
+        $this->labelCss = 'special-input-label inherit-bg';
         $this->inputCss = 'special-input';
 
         return $this;

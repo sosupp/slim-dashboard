@@ -57,6 +57,7 @@ trait CommonScopes
     {
         if($type === 'contain'){
             $query->where($col, 'LIKE', '%'.$search.'%');
+            return;
         }
 
         if($type === 'match'){
