@@ -16,20 +16,20 @@ trait CommonScopes
         $query->orWhere('status', 'inactive');
     }
 
-    public function scopeDated(Builder $query, string|array $date): void
+    public function scopeDated(Builder $query, string|array $date, string $col = 'created_at'): void
     {
         // dd($date);
-        $query->when(is_string($date) && !empty($date) && $date !== null, function($query) use($date){
-            $query->whereDate('created_at', '=', $date);
+        $query->when(is_string($date) && !empty($date) && $date !== null, function($query) use($date, $col){
+            $query->whereDate($col, '=', $date);
         })
-        ->when(is_array($date) && !empty($date), function($query) use($date){
+        ->when(is_array($date) && !empty($date), function($query) use($date, $col){
             // dd($date);
             $date = collect($date)->reject(function($date){
                 return empty($date) || is_null($date);
             });
 
             if($date->count() == 1){
-                $query->whereDate('created_at', '=', $date);
+                $query->whereDate($col, '=', $date);
                 return;
             }
 
@@ -39,9 +39,10 @@ trait CommonScopes
             ];
 
 
-            $query->whereBetween('created_at', $useDate);
+            $query->whereBetween($col, $useDate);
         });
     }
+
 
     public function scopeMatchSearch(Builder $query, string $col, string $search): void
     {

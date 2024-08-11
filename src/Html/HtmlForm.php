@@ -325,21 +325,28 @@ class HtmlForm
         string $placeholder = '',
         string $action = '',
         bool $withEditor = true,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
+        bool $customPlaceholder = true,
     )
     {
         $setLabel = is_null($label) ? $name : $label;
-        // $setId
+        
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
         $textarea = <<<TEXTAREA
-        <div class="custom-input-wrapper">
-            <label for="$id">$setLabel</label>
+        <div class="$wrapperCss">
+            <label for="$id" class="$labelCss">$setLabel</label>
             <div wire:ignore wire:key="custom_editor_$name">
                 <textarea
                     id="$id"
                     rows="$rows"
                     wire:model.defer="$name"
                     data-content="@this"
-                    class="custom-input hero-textarea"
+                    class="$inputCss hero-textarea"
                     placeholder="$placeholder"
                     $action></textarea>
             </div>

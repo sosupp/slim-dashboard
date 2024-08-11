@@ -7,10 +7,13 @@ trait WithDateFormat
 {
     protected $selectedDate = [];
     protected $selectedDateEnd;
+    protected $dateColumn = 'created_at';
 
-    public function forDate(string|array $date = 'today')
+    public function forDate(string|array $date = 'today', string $dateColumn = 'created_at')
     {
         // dd($date);
+        $this->dateColumn = $dateColumn;
+
         if(is_array($date)){
             $this->selectedDate = $date;
             return $this;
