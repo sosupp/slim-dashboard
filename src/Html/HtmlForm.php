@@ -206,6 +206,67 @@ class HtmlForm
         return $this;
     }
 
+    
+    public function searchInput(
+        string $name,
+        string $type = 'search',
+        string $value = '',
+        string $id = '',
+        string|null $label = null,
+        string $placeholder = '',
+        string $class = '',
+        string $message = '',
+        bool|string $wireLive = false,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
+        string $resultView = '',
+
+    )
+    {
+        $setLabel = is_null($label) ? $name : $label;
+        $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
+
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+
+        $resultWrapper = '<div class="input-result-wrapper" x-data="{
+            openResult: false
+
+        }">';
+        $input = <<<INPUT
+        <div class="$wrapperCss">
+            <label for="$id" class="$labelCss">$setLabel</label>
+            <input type="$type"
+                id="$id"
+                class="$inputCss $class @error('$name') is-error @enderror"
+                wire:model$setState="$name"
+                value="$value"
+                placeholder="$placeholder"
+                x-on:click="openResult=true"
+                />
+
+
+        </div>
+        INPUT;
+
+        $resultWrapper .= $input;
+
+        $resultWrapper .= view($resultView);
+        $resultWrapper .= '</div>';
+        // $error = $this->error($name);
+
+        // $input .= $this->error($name);
+
+        // if($type === 'file' && !empty($value)){
+
+        // }
+
+        $this->form .= $resultWrapper;
+        return $this;
+    }
+
     public function input(
         string $name,
         string $type = 'text',
