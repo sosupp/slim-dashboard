@@ -49,7 +49,13 @@
         {{$this->compositePage()}}
     </div>
 
-    <div class="page-grid-layout">
+    @if ($this->hasCardListing())
+        <div class="for-mobile">
+            @include('slim-dashboard::includes.table.card-listing')
+        </div>
+    @endif
+
+    <div class="page-grid-layout {{$this->hasCardListing() ? 'for-desktop' : ''}}">
         @if (!empty($this->pageSideData()))
         <div class="page-side-data" :class="darkmode ? 'use-dark-theme card-wrapper' : ''">
             {{$this->pageSideData()}}
@@ -126,12 +132,12 @@
                                     @endif
                                 @endforeach
                             </div>
-    
+
                             <div class="table-card-info grid-wrapper">
                                 @foreach ($this->tableCols() as $index => $colHeading)
                                     @if($colHeading['canView'])
                                         @if (isset($colHeading['key']) && $colHeading['key'] === 'info')
-    
+
                                             @if (is_array($colHeading))
                                                 @if ($colHeading['label'] === 'image')
                                                     @include('slim-dashboard::includes.table.table-inline-image')
@@ -154,7 +160,7 @@
                                                         @else
                                                             <div class="card-item-wrapper {{$colHeading['css']}}">
                                                                 <p class="item-value">{{ $record[$colHeading['col']] }}</p>
-    
+
                                                                 @if ($colHeading['showLabel'])
                                                                 <p class="item-label2">{{ $colHeading['label'] }}</p>
                                                                 @endif
@@ -170,13 +176,13 @@
                                                     @endif
                                                 </div>
                                             @endif
-    
+
                                         @endif
                                     @endif
                                 @endforeach
                             </div>
                         </div>
-    
+
                         <div class="table-card-cta">
                             @forelse ($this->tableActions() as $action)
                                 @include('slim-dashboard::includes.table.table-actions')
@@ -185,7 +191,7 @@
                         </div>
                     </div>
                     @empty
-    
+
                     @endforelse
                 </div>
                 @endif
@@ -281,5 +287,7 @@
             @endif
         </div>
     </div>
+
+
 
 </div>

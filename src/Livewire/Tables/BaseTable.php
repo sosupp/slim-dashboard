@@ -208,6 +208,11 @@ abstract class BaseTable extends Component
         return true;
     }
 
+    public function hasCardListing()
+    {
+        return false;
+    }
+
     public function showTableToCards()
     {
         return false;
@@ -217,6 +222,12 @@ abstract class BaseTable extends Component
     {
         return '';
     }
+
+    public function listAsCards()
+    {
+        return '';
+    }
+
 
     public function compositePage()
     {
@@ -259,8 +270,6 @@ abstract class BaseTable extends Component
 
     public function render()
     {
-        // dd($this->breadcrumbData());
-        // dd('yes');
         return view('slim-dashboard::livewire.tables.base-table')
         ->layoutData(['breadcrumb' => $this->breadcrumbData()])
         ->title($this->pageTitle);
