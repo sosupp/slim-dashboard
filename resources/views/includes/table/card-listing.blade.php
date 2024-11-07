@@ -73,25 +73,29 @@
 </div>
 @endif
 
-<div class="search-input-and-results" x-data="{openResults: true}">
-    @include('slim-dashboard::includes.platform.search-input')
-    @include('slim-dashboard::includes.table.page-cta')
+<div class="search-and-listing">
 
-    @if ($this->hasSearchResultDropdown)
-    <div x-show="openResults" @click.outside="openResults=!openResults">
-        @if (!empty($this->search))
-            @includeIf($this->searchResultDropdownView)
+    <div class="search-input-and-results" x-data="{openResults: true}">
+        @include('slim-dashboard::includes.platform.search-input')
+        @include('slim-dashboard::includes.table.page-cta')
+    
+        @if ($this->hasSearchResultDropdown)
+        <div x-show="openResults" @click.outside="openResults=!openResults">
+            @if (!empty($this->search))
+                @includeIf($this->searchResultDropdownView)
+            @endif
+        </div>
         @endif
     </div>
+    
+    @if ($this->showPagination())
+    <div class="record-count">
+        <span x-cloak x-show="mobileFilterLabel" x-text="mobileFilterLabel"></span>
+        <span class="total-record-count">({{$this->tableRecords->total()}})</span>
+    </div>
     @endif
-</div>
-
-@if ($this->showPagination())
-<div class="record-count">
-    <span x-cloak x-show="mobileFilterLabel" x-text="mobileFilterLabel"></span>
-    <span class="total-record-count">({{$this->tableRecords->total()}})</span>
-</div>
-@endif
-<div class="item-listings-wrapper">
-    {!! $this->listAsCards() !!}
+    
+    <div class="item-listings-wrapper">
+        {!! $this->listAsCards() !!}
+    </div>
 </div>

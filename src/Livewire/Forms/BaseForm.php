@@ -2,6 +2,7 @@
 
 namespace Sosupp\SlimDashboard\Livewire\Forms;
 
+use Illuminate\Validation\Rules\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
@@ -46,7 +47,11 @@ abstract class BaseForm extends Component
     {
         // dd("yes");
         $this->validate([
-            'image' => 'nullable|max:3024',
+            'image' => [
+                'nullable',
+                File::image()
+                ->max('10mb')
+            ],
         ]);
 
         $this->imagePath = $this->uploadImage(

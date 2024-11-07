@@ -178,11 +178,13 @@ abstract class BaseTable extends Component
 
     public function updatedInlineImages()
     {
+        $cleanFilename = str($this->selectedImageName)->stripTags()->slug()->value();
+
         // dd($this->inlineImagesNames, $this->inlineImages, $this->selectedImageName);
         $image = $this->uploadInlineImage(
             data: [
                 'image' => $this->inlineImages[$this->modelImageId][0],
-                'filename' => $this->selectedImageName
+                'filename' => $cleanFilename
             ]
         );
 
@@ -194,6 +196,11 @@ abstract class BaseTable extends Component
     }
 
     public function showPagination()
+    {
+        return false;
+    }
+
+    public function showRecordCount()
     {
         return false;
     }
