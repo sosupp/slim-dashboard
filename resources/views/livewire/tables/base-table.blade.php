@@ -52,6 +52,9 @@
     @if ($this->hasCardListing())
         <div class="for-mobile">
             @include('slim-dashboard::includes.table.card-listing')
+            @if ($this->useSideModal())
+                @include('slim-dashboard::includes.table.side-panel')
+            @endif
         </div>
     @endif
 

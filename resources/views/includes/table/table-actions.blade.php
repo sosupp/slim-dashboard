@@ -21,7 +21,7 @@
             <button type="button" class="cta-btn as-pointer"
                 wire:click="{{$action['wireAction'].'('.$record.')'}}"
                 :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
-                >
+                {{$action['confirm'] ? 'wire:confirm' : ''}}>
                 {{ $action['label'] }}
 
             </button>

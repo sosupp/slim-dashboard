@@ -29,5 +29,13 @@
             </div>
 
         </template>
+
+        <div wire:loading>
+            <div class="full-table-loading">
+                <div class="loading-spinner">
+                    <x-icons.bars-spinner-fade w="50" h="50" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>
