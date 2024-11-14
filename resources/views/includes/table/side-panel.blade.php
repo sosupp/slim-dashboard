@@ -3,7 +3,7 @@
     <div class="table-form {{$this->useSideModal() ? 'side-modal-panel' : ''}}">
         {{-- @includeIf($this->tableForm()) --}}
         <div class="side-modal-heading-wrapper">
-            <p class="side-modal-heading" x-text="sidePanelTitle">Side Modal Heading</p>
+            <p class="side-modal-heading" x-html="sidePanelTitle">Side Modal Heading</p>
             <span class="close-modal as-pointer" x-on:click="closePanel">
                 <x-icons.close />
             </span>
