@@ -2,68 +2,7 @@
 <div class="custom-pagination-wrapper">
 
     <div class="mobile-page-filters">
-        <div class="mobile-filter-modal" x-data="{
-            filterModal: false,
-            toggleFilter() {
-                this.desktop = !this.desktop;
-                this.filterModal = !this.filterModal;
-                console.log('effect')
-            },
-            filterResult(label, call = null){
-                this.mobileFilterLabel = label
-                this.toggleFilter()
-            }
-        }">
-
-            <button type="button" class="filter-wrapper filter-trigger as-pointer"
-                x-on:click="toggleFilter">
-                Filter
-                <x-icons.chevron />
-            </button>
-
-            <div x-cloak x-show="filterModal" x-on:keydown.escape.window="filterModal = false">
-                <div class="action-modal" style="">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span class="modal-title"><h3>Filters</h3></span>
-                            <span id="modalClose" class="as-pointer" x-on:click="filterModal=false">
-                                &times;
-                            </span>
-                        </div>
-                        <div class="modal-body" x-data="{
-                            openSection: null
-                        }">
-                            <div class="modal-filter-wrapper">
-                                @foreach ($this->pageFilters() as $filter)
-                                    <div class="modal-filter-item-wrapper">
-                                        <button type="button" class="as-pointer modal-filter-item-label"
-                                        x-on:click="openSection = (openSection === '{{$filter['label']}}' ? null : '{{$filter['label']}}')">
-                                            {{$filter['label']}}
-
-                                            <span x-show="openSection!=='{{$filter['label']}}'"><x-icons.chevron-right /></span>
-                                            <span x-show="openSection==='{{$filter['label']}}'"><x-icons.chevron /></span>
-
-                                        </button>
-                                    </div>
-
-                                    <div x-cloak x-show="openSection==='{{$filter['label']}}'" class="modal-filter-items">
-                                        @if ($filter['options'])
-                                            @foreach ($filter['options'] as $key => $option)
-                                                <div class="modal-filter-item-wrapper">
-                                                    <button class="modal-filter-item as-pointer" type="button"
-                                                        wire:click="{{$filter['wireAction'] . "('".  $option[$filter['optionId']] ."')" }}"
-                                                        x-on:click="filterResult('{{$option[$filter['optionKey']]}}')">{{$option[$filter['optionKey']]}}</button>
-                                                </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('slim-dashboard::includes.table.mobile.record-filters')
 
         @if ($this->showPagination())
         @include('slim-dashboard::includes.table.table-navs')
@@ -73,12 +12,14 @@
 </div>
 @endif
 
-<div class="search-and-listing">
+<div class="search-and-listing" x-data="{
+        statsPanel: false
+    }">
 
     <div class="search-input-and-results" x-data="{openResults: true}">
         @include('slim-dashboard::includes.platform.search-input')
         @include('slim-dashboard::includes.table.page-cta')
-    
+
         @if ($this->hasSearchResultDropdown)
         <div x-show="openResults" @click.outside="openResults=!openResults">
             @if (!empty($this->search))
@@ -87,15 +28,54 @@
         </div>
         @endif
     </div>
-    
-    @if ($this->showPagination())
-    <div class="record-count">
-        <span x-cloak x-show="mobileFilterLabel" x-text="mobileFilterLabel"></span>
-        <span class="total-record-count">({{$this->tableRecords->total()}})</span>
+
+    <div class="mobile-stats-wrapper">
+        @if ($this->showPagination())
+        <div class="record-count">
+            <span x-cloak x-show="mobileFilterLabel" x-text="mobileFilterLabel"></span>
+            <span class="total-record-count">({{$this->tableRecords->total()}})</span>
+        </div>
+        @endif
+
+
+        <div class="mobile-record-stats" id="statsContent" x-ref="statsContent">
+            @forelse (collect($this->inlineTableStatistics) as $card)
+                @if (is_array($card))
+                    @if ($card['canView'])
+                    <p class="mobile-record-stat-item {{$card['css'] ?? ''}}">
+                        {{$card['label']}}: {{$card['value']}}
+                    </p>
+                    @endif
+
+                @endif
+                @empty
+            @endforelse
+
+            <span id="mobileMoreStats" class="as-pointer" x-on:click="statsPanel = true;sidePanelTitle='{!! __($this->inlineTableStatistics['description'] ?? '') !!}'">
+                <x-icons.open w="28" color="limegreen"/>
+            </span>
+        </div>
+
     </div>
-    @endif
-    
+
+    <div x-cloak x-show="statsPanel" id="mobileStatPanel" class="side-modal-panel">
+        <div class="side-modal-heading-wrapper">
+            <p class="side-modal-heading" x-html="sidePanelTitle">Side Modal Heading</p>
+            <span class="close-modal as-pointer" x-on:click="statsPanel=false">
+                <x-icons.close />
+            </span>
+        </div>
+        <template x-for="paragraph in [...$refs.statsContent.querySelectorAll('p')]" :key="paragraph.textContent">
+            <p class="mobile-record-stat-overview" x-text="paragraph.textContent"></p>
+        </template>
+
+
+    </div>
+
     <div class="item-listings-wrapper">
         {!! $this->listAsCards() !!}
     </div>
 </div>
+
+
+
