@@ -73,7 +73,15 @@
     </div>
 
     <div class="item-listings-wrapper">
+
+
+        @if ($this->listAsCards())
         {!! $this->listAsCards() !!}
+        @else
+        @include('slim-dashboard::includes.table.mobile.card-list')
+        @endif
+
+
     </div>
 </div>
 

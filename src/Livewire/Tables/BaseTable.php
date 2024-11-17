@@ -2,6 +2,7 @@
 
 namespace Sosupp\SlimDashboard\Livewire\Tables;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
@@ -220,6 +221,39 @@ abstract class BaseTable extends Component
         return false;
     }
 
+    public function listAsCards(): string|View|null
+    {
+        return null;
+    }
+
+    public function withListCardImage(): string|View
+    {
+        return 'editable';
+    }
+
+    public function mobileEditImageName($record): string
+    {
+        return '';
+    }
+
+    /**
+     * return collection with keys: form and title
+     */
+    public function withListCardEdit($record): Collection|false
+    {
+        return false;
+    }
+
+    public function withCardModalData($record): Collection
+    {
+        return collect([]);
+    }
+
+    public function withCardModalView(): string|View
+    {
+        return '';
+    }
+
     public function showTableToCards()
     {
         return false;
@@ -230,10 +264,7 @@ abstract class BaseTable extends Component
         return '';
     }
 
-    public function listAsCards()
-    {
-        return '';
-    }
+
 
 
     public function compositePage()
