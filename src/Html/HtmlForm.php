@@ -2,11 +2,12 @@
 namespace Sosupp\SlimDashboard\Html;
 
 use Sosupp\SlimDashboard\Concerns\HtmlForms\Icons;
+use Sosupp\SlimDashboard\Concerns\HtmlForms\InputDataTransform;
 
 
 class HtmlForm
 {
-    use Icons;
+    use Icons, InputDataTransform;
 
     public $form = '';
     public $tabWrapper = '';
@@ -206,7 +207,7 @@ class HtmlForm
         return $this;
     }
 
-    
+
     public function searchInput(
         string $name,
         string $type = 'search',
@@ -378,6 +379,52 @@ class HtmlForm
         return $this;
     }
 
+
+    public function selectSearch(
+        string $name,
+        string $id = '',
+        string|null $label = null,
+        string $placeholder = '',
+        string $action = '',
+        array|null $options = [],
+        string $optionKey = 'name',
+        string $optionId = 'id',
+        string $class = '',
+        bool|string $wireLive = false,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
+        bool $customPlaceholder = false,
+    )
+    {
+        $setLabel = is_null($label) ? $name : $label;
+        // $wireIgnore = $action = 'multiple' ? 'wire:ignore' : '';
+        $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
+        $usePlaceholder = $customPlaceholder ? $label : '';
+
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+
+        $this->form .= view('slim-dashboard::components.inputs.select-search', [
+            'name' => $name,
+            'id' => $id,
+            'label' => $setLabel,
+            'placeholder' => $usePlaceholder,
+            'action' => $action,
+            'options' => $this->selectSearchData($options),
+            'optionKey' => $optionKey,
+            'optionId' => $optionId,
+            'class' => $class,
+            'inputCss' => $inputCss,
+            'wireState' => $setState,
+            'wrapperCss' => $wrapperCss,
+            'labelCss' => $labelCss,
+        ]);
+
+        return $this;
+    }
+
     public function textarea(
         string $name,
         string $id = 'customEditor',
@@ -393,7 +440,7 @@ class HtmlForm
     )
     {
         $setLabel = is_null($label) ? $name : $label;
-        
+
         $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;

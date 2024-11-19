@@ -81,6 +81,11 @@ abstract class BaseTable extends Component
         return [];
     }
 
+    public function formatDate($record, $dateCol = 'created_at')
+    {
+        return euroDate($record->$dateCol);
+    }
+
     public function relation($model, $relation, $col, $callback = null)
     {
         // dd($callback);
