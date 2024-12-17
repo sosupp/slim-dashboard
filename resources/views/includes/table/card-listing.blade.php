@@ -65,9 +65,26 @@
                 <x-icons.close />
             </span>
         </div>
-        <template x-for="paragraph in [...$refs.statsContent.querySelectorAll('p')]" :key="paragraph.textContent">
-            <p class="mobile-record-stat-overview" x-text="paragraph.textContent"></p>
-        </template>
+
+        <div>
+            @include('slim-dashboard::includes.table.mobile.record-filters', [
+                'filterWrapper'=> 'mobile-filter-modal', 'filterTriggerCss' => 'as-absolute'
+            ])
+            @forelse (collect($this->inlineTableStatistics) as $card)
+                @if (is_array($card))
+                    @if ($card['canView'])
+                    <p class="mobile-record-stat-overview {{$card['css'] ?? ''}}">
+                        @if ($card['label'])
+                        <span class="stat-item-label">{{$card['label']}}: </span>
+                        @endif
+                        <span class="stat-item-value">{{$card['value']}}</span>
+                    </p>
+                    @endif
+
+                @endif
+                @empty
+            @endforelse
+        </div>
 
 
     </div>

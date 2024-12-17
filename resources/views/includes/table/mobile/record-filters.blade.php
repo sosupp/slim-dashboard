@@ -1,4 +1,5 @@
-<div class="mobile-filter-modal" x-data="{
+@props(['filterWrapper' => '', 'filterTriggerCss' => ''])
+<div class="{{$filterWrapper}}" x-data="{
         filterModal: false,
         toggleFilter() {
             this.desktop = !this.desktop;
@@ -10,7 +11,7 @@
         }
     }">
 
-    <button type="button" class="filter-wrapper filter-trigger as-pointer"
+    <button type="button" class="filter-wrapper filter-trigger {{$filterTriggerCss}} as-pointer"
         x-on:click="toggleFilter">
         Filter
         <x-icons.chevron />

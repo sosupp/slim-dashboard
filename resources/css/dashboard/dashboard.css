@@ -4,6 +4,9 @@
 body{
     font-family: Calibri;
 }
+.overflow-hidden {
+    overflow: hidden;
+}
 .for-mobile{
     display: none !important;
 }
@@ -29,11 +32,11 @@ body{
     border-right: 1px solid whitesmoke;
 }
 .logo-section {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
     gap: 1rem;
+    justify-content: space-between;
 }
-
 
 .dashboard-main-content{
     width: 100%;
@@ -103,10 +106,16 @@ body{
 #brandLogo {
 	width: 69%;
 }
+#platformLogo {
+    width: 55%;
+}
 .subheading {
 	font-weight: normal;
 }
-
+.afquick-platform-logo {
+    border-bottom: 1px solid whitesmoke;
+    height: 57px;
+}
 
 .record-preview-wrapper {
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -333,12 +342,12 @@ body{
     width: 100%;
     background: aquamarine;
 }
-.order-number-and-date {
+.new-order-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+}
+.order-number-and-date {
     font-weight: bold;
-    flex-wrap: wrap;
 }
 .new-order-total {
     font-size: 17px;
@@ -357,6 +366,11 @@ body{
     gap: 15px;
     align-items: center;
 }
+.new-order-delivery-pickup {
+    color: orangered;
+    font-weight: bold;
+}
+
 .timeline-review-wrapper {
     padding: 14px;
     margin: 10px auto;
@@ -403,6 +417,8 @@ body{
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px;
 }
 .live-orders-wrapper {
     display: flex;
@@ -417,7 +433,9 @@ body{
 /* .order-types-wrapper{
     margin: 0 auto;
 } */
-
+.pill-switch-all-screen{
+    display: flex !important;
+}
 .pill-switch-wrapper {
     display: none;
     background: whitesmoke;
@@ -442,6 +460,96 @@ body{
     margin: 10px 0;
     border-radius: 5px;
 }
+.addTrash {
+    background: #ff450017;
+    padding: 14px;
+    border-radius: 10px;
+}
+.text-decription {
+    margin: 10px 0;
+    font-size: 18px;
+    color: cornflowerblue;
+}
+#addOption {
+    padding: 14px;
+    border-radius: 5px;
+    background: #0080002b;
+    color: green;
+}
+
+.mobile-close-cta{
+    position: absolute;
+    top: 16px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 10px;
+}
+#mobileCtaClose {
+    left: 10px;
+}
+#rightClose {
+    right: 10px;
+}
+
+.mobile-page-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.scheduled-order-label {
+    background: #ca1717ba;
+    color: #fff;
+}
+.pill-wrapper{
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    width: fit-content;
+    padding: 1px 11px;
+}
+.item-heading {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.reset-sepcial-margin {
+    margin: 11px 0 0 0 !important;
+}
+
+.size-prices-table {
+    width: 100%;
+    table-layout: fixed;
+}
+.size-price-col{
+    width: 20%;
+}
+
+.mobile-filter-modal {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 5px;
+}
+.mobile-record-stat-overview {
+    padding: 6px 0;
+    border-bottom: 1px solid #ddd;
+    line-height: 1;
+}
+.stat-item-label,
+.first-span {
+    display: block;
+    color: #333333a1;
+    text-transform: uppercase;
+}
+.stat-item-value {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.as-absolute{
+    position: absolute !important;
+}
 
 /* MEDIA QUERIES */
 @media(max-width: 350px){
@@ -461,6 +569,9 @@ body{
     }
     .live-orders-heading{
         display: none;
+    }
+    .size-price-col {
+        width: 60px;
     }
 }
 @media(max-width: 768px){
@@ -501,22 +612,25 @@ body{
         width: 100%;
         height: fit-content;
         position: relative;
-        padding: 0.5rem 1rem;
+        padding: 16px;
         border-bottom: 1px solid #efefef;
     }
     .mobile-menu-overlay{
-        position: absolute;
+        position: fixed;
+        top: 0;
         right: 0;
         left: 0;
         background: #00000040;;
         height: 100vh;
         width: 100%;
-        z-index: 100;
+        z-index: 95;
     }
     .nav-items-wrapper {
-        width: 90%;
+        width: 80%;
         height: 100vh;
         background-color: #fff;
+        overflow-y: auto;
+        padding-bottom: 20px;
     }
     .dashboard-main-content {
         width: 100%;

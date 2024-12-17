@@ -1,0 +1,23 @@
+.for-mobile{
+    display: none !important;
+}
+.for-mobile-2{
+    display: none;
+}
+
+@media(max-width:520px){
+    .for-desktop-2{
+        display: none !important;
+    }
+    .for-mobile-2{
+        display: block !important;
+    }
+}
+@media(max-width:991px){
+    .for-desktop{
+        display: none !important;
+    }
+    .for-mobile{
+        display: block !important;
+    }
+}

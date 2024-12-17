@@ -1,0 +1,409 @@
+body{
+    background-color: #fff;
+}
+#riderLogo {
+    line-height: 0;
+    padding: 10px 0;
+}
+#riderLogo img {
+    width: 75px;
+}
+.rider-top-navigation-wrapper {
+    background: aliceblue;
+}
+.rider-nav-items-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-and-auth-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.rider-user-icon {
+    background: #fff;
+    padding: 5px;
+    border-radius: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.rider-nav-bg,
+.rider-home-hero{
+    background-color: #f0f8ff !important;
+}
+.rider-mobile-menu-wrapper {
+	padding: 1rem 1.3rem;
+}
+.rider-mobile-link {
+	display: block;
+	margin-bottom: 1rem;
+    font-size: 17px;
+}
+#logoutBtn {
+	margin: 0;
+	padding: 0;
+}
+.quick-nav-item.rider-active-menu {
+	background: white;
+}
+
+.tab-content-wrapper{
+
+}
+.order-pool-item {
+	background: #fff;
+	padding: 0.5rem;
+	border-radius: 5px;
+    background-color: #f5f5f5b0;
+    margin-bottom: 1rem;
+}
+.order-pool-label {
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.cadetblue{
+    color: cadetblue;
+}
+.order-pool-pickup,
+.order-pool-delivery {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 0 0.5rem;
+}
+.order-pool-delivery{
+    margin-top: 4px;
+}
+
+.pool-item-cta {
+	display: flex;
+	align-items: center;
+	padding: 0.3rem 0;
+	justify-content: space-between;
+}
+.assign-me,
+.cancel-assign,
+.mark-completed {
+	border-radius: 5px;
+	border: none;
+	padding: 10px;
+    cursor: pointer;
+}
+
+.assign-me{
+    background: black;
+	color: white;
+}
+.cancel-assign{
+    background-color: orange;
+}
+.mark-completed{
+    background-color: #7fffd4;
+}
+.buyer-info-label {
+	color: brown;
+}
+.order-pool-item.rider-pending-order {
+	border: 1.8px solid orange;
+}
+
+.tab-content-heading {
+	margin-bottom: 0.5rem;
+}
+.to-address {
+    text-decoration: underline;
+    color: darkcyan;
+}
+.rider-completed-order {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+#quickActive,
+.quick-active {
+    background: #000;
+    color: #fff;
+}
+
+.user-quick-navs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    overflow: auto;
+}
+
+.quick-nav-item {
+    display: inline-block;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 0.1rem 1rem;
+}
+.user-quick-nav-item {
+    display: inline-block;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 7px 29px;
+}
+.rider-auth-items a {
+    display: block;
+    /* border: 1px solid; */
+    padding: 5px 10px;
+    margin: 0 -10px 0 -10px;
+}
+#riderLogout {
+    background: black;
+    color: #fff !important;
+    display: block;
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin-top: 12px;
+}
+.rider-auth-dropdown{
+    position: absolute;
+    background: #fff;
+    top: 100%;
+    right: 0;
+    z-index: 5;
+    padding: 10px 13px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    /* width: -moz-max-content; */
+    width: max-content;
+}
+.mobile-logout-wrapper {
+    position: absolute;
+    bottom: 16px;
+    border-top: 1px solid #ddd;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+}
+
+.rider-order-item {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+.order-destination-info {
+    background: #008b8b0a;
+    margin: 9px -10px -10px;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+}
+.order-item-number {
+    border-bottom: 1px solid #f5f5f57a;
+    margin: -10px -10px 0 -10px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.start-task {
+    background: aquamarine;
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: initial;
+}
+.assign-order-wrapper {
+    border: 2px solid crimson;
+}
+.assign-label {
+    background: #dc143c30;
+    color: crimson;
+    font-weight: bold;
+}
+.ongoing-order-modal-top-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+.ongoing-order-modal-info {
+    margin-top: 20px;
+}
+.departure-to-destination {
+    width: 100%;
+    border-left: 1px dotted;
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
+}
+#start,
+#finish{
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: -5px;
+}
+#start {
+    background: #000;
+    border-radius: 50px;
+    bottom: -9px;
+
+}
+#finish {
+    background: crimson;
+    top: -4px;
+}
+
+.destination-info {
+    position: relative;
+    top: -22px;
+}
+.departure-info {
+    margin-top: 5px;
+    position: relative;
+    bottom: -27px;
+}
+.ongoing-order-bottom-cta {
+    position: absolute;
+    bottom: 15px;
+}
+.ongoing-address {
+    font-size: 19px;
+    color: darkcyan;
+    font-weight: bold;
+}
+.ongoing-owner {
+    color: #00000085;
+    font-size: 17px;
+}
+
+#mapModalBody {
+    height: 34vh;
+}
+.delivery-time-label {
+    position: relative;
+    background: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 61px auto;
+    border: 2px solid crimson;
+    font-weight: bold;
+}
+#mapModalClose{
+    font-size: 34px;
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    background: #fff;
+    border-radius: 50px;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ongoing-order-bottom-cta {
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+#abortRide {
+    background: crimson;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.call-cta {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+#chatCta,
+#callCta {
+    border-radius: 50px;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.dark-body-theme {
+    background-color: #262A33;
+    color: #fff !important;
+}
+.use-dark-theme {
+    background: #D5CED91C;
+    color: #fff !important;
+}
+.mask-content-overlay {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    z-index: 94;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.by-postcode-label {
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: crimson;
+    padding: 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+@media(max-width: 768px){
+    .rider-nav-items-wrapper {
+        display: block;
+        background: #fff;
+        width: 80%;
+        height: 100%;
+        position: fixed;
+        overflow-y: auto;
+        padding-bottom: 20px;
+    }
+    .rider-top-navigation-wrapper {
+        padding: 13px 0;
+    }
+    .afquick-platform-logo {
+        padding: 10px 16px;
+    }
+    .nav-and-auth-wrapper {
+        padding: 0 16px;
+    }
+    .user-quick-navs {
+        display: block;
+    }
+    .quick-nav-item {
+        border-radius: 5px;
+        padding: 0;
+        display: block;
+        margin: 10px 0;
+        border: none;
+    }
+
+}
+
+@media(min-width: 992px){
+    .order-pool-item {
+        display: grid;
+        grid-template-columns: 300px auto;
+        gap: 1rem;
+    }
+    .order-pool-delivery{
+        margin-top: 0;
+    }
+
+}

@@ -30,7 +30,7 @@ class SlimDashboardServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('slim-dashboard.php'),
-            ], 'config');
+            ], 'slim-dashboard-config');
 
             // Publishing the views.
             /*$this->publishes([
@@ -40,7 +40,7 @@ class SlimDashboardServiceProvider extends ServiceProvider
             // Publishing assets.
             $this->publishes([
                 __DIR__.'/../public' => public_path('vendor/slim-dashboard'),
-            ], 'slim-assets');
+            ], 'slim-dashboard-assets');
 
             // Publishing the translation files.
             /*$this->publishes([
