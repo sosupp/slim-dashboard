@@ -18,6 +18,7 @@ class Rows
         string $wireAction = null,
         bool $isVisible = true,
         bool $confirm = false,
+        bool $isAuthorize = false,
     )
     {
 
@@ -35,6 +36,7 @@ class Rows
         static::$columnActions[$name]['wireAction'] = $wireAction;
         static::$columnActions[$name]['isVisible'] = $isVisible;
         static::$columnActions[$name]['confirm'] = $useConfirm;
+        static::$columnActions[$name]['isAuthorize'] = $isAuthorize;
         return new static;
     }
 

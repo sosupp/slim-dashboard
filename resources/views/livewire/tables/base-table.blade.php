@@ -66,7 +66,7 @@
         @endif
 
         <div class="page-table-section" :class="darkmode ? 'use-dark-theme card-wrapper' : '{{$this->tableWrapperCss}}'">
-
+            @if ($this->showTableCta())
             <div class="table-cta-wrapper {{$this->tableHeadingCss}}">
                 @if (!empty($this->tableHeading()))
                 <h2 class="table-heading">{!! $this->tableHeading() !!}</h2>
@@ -87,6 +87,7 @@
                 @include('slim-dashboard::includes.table.page-cta')
 
             </div>
+            @endif
 
             <div class="">
                 @if ($this->useSideModal())

@@ -107,7 +107,14 @@ abstract class BaseTable extends Component
     public function getOneModel(string|int $id){}
     public function updateImageColumn(string|int $modelId, string $image){}
     public function breadcrumbData(){}
-    public function setCustomRoute($model){}
+
+    public function setCustomRoute($model, $callback = null)
+    {
+        if(!is_null($callback) && is_string($callback)){
+            return call_user_func([$this, $callback], $model);
+        }
+    }
+    
     public function useSideModal(){}
     public function panelCustomView(){}
 
@@ -200,7 +207,11 @@ abstract class BaseTable extends Component
             session()->flash('inline-upload-success'.$this->modelImageId);
         }
     }
-
+    public function showTableCta()
+    {
+        return true;
+    }
+    
     public function showPagination()
     {
         return false;

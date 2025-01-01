@@ -27,7 +27,7 @@
                 <span class="{{$this->headingItemCss()}} as-pointer"
                     wire:key="{{$tab['key']}}"
                     :class="selectedTab == '{{$tab['key']}}' ? '{{$this->activeItemCss()}}' : ''"
-                    x-on:click="$dispatch('toggle-tab-component', {component: '{{$tab['component']}}', url: '{{$tab['url']}}', view: '{{$tab['view']}}' }), toggleSelected('{{$tab['key']}}')">
+                    x-on:click="$dispatch('toggle-tab-component', {component: '{{$tab['component']}}', url: '{{$tab['url']}}', view: '{{$tab['view']}}', tab: '{{$tab['key']}}' }), toggleSelected('{{$tab['key']}}')">
                     {{$tab['heading']}}
                 </span>
                 @endif

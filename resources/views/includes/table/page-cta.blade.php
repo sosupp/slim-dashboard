@@ -68,7 +68,7 @@
 
     </div>
     <span class="as-pointer mobile-more-trigger" x-on:click="openMobileCta" x-show="isMobile()" x-cloak>
-        <x-icons.more w="32" color="#000"/>
+        <x-icons.more w="32" color="#fff"/>
     </span>
 </div>
 @endif

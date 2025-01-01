@@ -4,6 +4,7 @@ namespace Sosupp\SlimDashboard\Livewire\Tabs;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Sosupp\SlimDashboard\Concerns\Html\WithBreadcrumb;
 
 abstract class TabWrapper extends Component
@@ -16,7 +17,8 @@ abstract class TabWrapper extends Component
     public $selectedUrl = '';
     public $selectedTab = '';
 
-    public $tab;
+    #[Url()]
+    public ?string $tab = null;
 
 
     public abstract function pageTitle();
@@ -27,7 +29,6 @@ abstract class TabWrapper extends Component
         // dd($this->tab);
         $this->configureSelected();
         $this->withMount();
-        // $this->switchComponent('')
     }
 
     public function withMount(){}
@@ -36,15 +37,17 @@ abstract class TabWrapper extends Component
 
     public function configureSelected()
     {
-
+        // dd($this->tab);
         if($this->tab !== null){
             // dd($this->tab);
             $component = collect($this->tabHeadings())->where('key', $this->tab)->first();
             $this->selectedTab = $component['key'];
 
             $this->switchComponent(
-                component: $component['component'], url: $component['url'],
-                view: $component['view']
+                component: $component['component'],
+                url: $component['url'],
+                view: $component['view'],
+                tab: $this->tab
             );
             return;
         }
@@ -68,14 +71,12 @@ abstract class TabWrapper extends Component
     }
 
     #[On('toggle-tab-component')]
-    public function switchComponent($component, $url, $view)
+    public function switchComponent($component, $url, $view, $tab = null)
     {
-        // dd(route('platform.settings.product_unit'));
-        // dd($component, $url);
         $this->componentName = $component;
         $this->selectedUrl = $url;
         $this->useViewFile = $view;
-        // $this->dispatch('update-url', url: $url);
+        $this->tab = $tab;
     }
 
     public function passExtraData(): array

@@ -62,13 +62,22 @@
                         <x-icons.chevron-right w="32" color="#535151" stroke="1"/>
 
                         @if ($this->withListCardEdit($record))
-                        <span class="card-inline-edit" x-on:click.stop="toggleSidePanel(
-                            '{{$this->withListCardEdit($record)['form']}}',
-                            '{{$this->withListCardEdit($record)['title']}}',
-                            '{{$record->id}}'
-                        )">
-                            <x-icons.edit w="21" color="green"/>
-                        </span>
+                            @if (!empty($this->withListCardEdit($record)->navigate))
+                                <a wire:navigate href="{{$this->withListCardEdit($record)->navigate}}"
+                                    class="card-inline-edit"
+                                    x-on:click.stop>
+                                    <x-icons.edit w="21" color="green"/>
+                                </a>
+                            @else
+
+                                <span class="card-inline-edit" x-on:click.stop="toggleSidePanel(
+                                    '{{$this->withListCardEdit($record)->form}}',
+                                    '{{$this->withListCardEdit($record)->title}}',
+                                    '{{$record->id}}'
+                                )">
+                                    <x-icons.edit w="21" color="green"/>
+                                </span>
+                            @endif
                         @endif
                     </div>
                 </div>

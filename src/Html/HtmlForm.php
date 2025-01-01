@@ -445,27 +445,30 @@ class HtmlForm
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
-        $textarea = <<<TEXTAREA
-        <div class="$wrapperCss">
-            <label for="$id" class="$labelCss">$setLabel</label>
-            <div wire:ignore wire:key="custom_editor_$name">
-                <textarea
-                    id="$id"
-                    rows="$rows"
-                    wire:model.defer="$name"
-                    data-content="@this"
-                    class="$inputCss hero-textarea"
-                    placeholder="$placeholder"
-                    $action></textarea>
-            </div>
-        </div>
-        TEXTAREA;
+        $this->form .= $this->ckEditor(id: $id, model: $name);
 
-        $this->form .= $textarea;
+        // $textarea = <<<TEXTAREA
+        // <div class="$wrapperCss">
+        //     <label for="$id" class="$labelCss">$setLabel</label>
+        //     <div wire:key="custom_editor_$name">
+        //         <textarea
+        //             id="$id"
+        //             rows="$rows"
+        //             wire:model.blur="$name"
+        //             data-description="@this"
+        //             class="$inputCss hero-textarea"
+        //             placeholder="$placeholder"
+        //             $action></textarea>
+        //     </div>
+        // </div>
+        // TEXTAREA;
+
+        // $this->form .= $textarea;
 
         // if($withEditor){
-        //     $this->form .= $this->ckEditor(id: $id, model: $name);
+        //     $this->form .= $this->ckEditor(id: '#'.$id, model: $name);
         // }
+
         return $this;
     }
 
@@ -685,46 +688,7 @@ class HtmlForm
 
     private function ckEditor(string $id, string $model)
     {
-        // dd($id);
-        return view('components.utils.forms.ckeditor', compact('id', 'model'));
-
-        // $useId = '#'.$id;
-        // $scripts = <<< BLADE
-        //     <script>
-        //         var ready = (callback) => {
-        //             if (document.readyState != "loading") callback();
-        //             else document.addEventListener("DOMContentLoaded", callback);
-        //         }
-
-        //         ready(() =>{
-        //             ClassicEditor
-        //                 .create(document.querySelector("#customEditor"), {
-        //                     simpleUpload: {
-        //                         uploadUrl: "{{route('editor.image.upload').'?_token='.csrf_token() }}",
-        //                     },
-        //                     removePlugins: [
-
-        //                     ],
-        //                     fontSize: {
-        //                         options: [
-        //                             'default'
-        //                         ]
-        //                     }
-        //                 })
-        //                 .then(editor => {
-        //                     editor.model.document.on('change:data', () => {
-        //                         '@'+this.set('content', editor.getData())
-        //                     })
-        //                 })
-        //                 .catch(error => {
-        //                     console.error(error);
-        //                 });
-        //         })
-
-        //     </script>
-        // BLADE;
-
-        // return $scripts;
+        return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model'));
     }
 
 

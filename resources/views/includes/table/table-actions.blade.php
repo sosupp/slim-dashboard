@@ -2,7 +2,7 @@
     @if ($action['label'] === 'delete')
         <button class="cta-btn delete as-pointer"
             :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
-            wire:click="delete({{ $record->id }})"
+            wire:click="delete({{ $record->id }}, {{$action['isAuthorize']}})"
             wire:confirm="Are you sure you want to delete?">delete</button>
     @else
         @if (isset($action['customRoute']) && ($action['customRoute']))
