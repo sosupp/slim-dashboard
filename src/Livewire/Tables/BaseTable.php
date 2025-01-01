@@ -2,7 +2,6 @@
 
 namespace Sosupp\SlimDashboard\Livewire\Tables;
 
-use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
@@ -12,7 +11,9 @@ use Livewire\Attributes\Session;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
 use Livewire\WithoutUrlPagination;
+use Illuminate\Contracts\View\View;
 use Sosupp\SlimDashboard\Concerns\UploadImages;
+use Sosupp\SlimDashboard\ValueObjects\CardEdit;
 use Sosupp\SlimDashboard\Concerns\AddsSessionData;
 use Sosupp\SlimDashboard\Concerns\ModelDeleteable;
 use Sosupp\SlimDashboard\Concerns\Html\WithDefaultCss;
@@ -255,7 +256,7 @@ abstract class BaseTable extends Component
     /**
      * return collection with keys: form and title
      */
-    public function withListCardEdit($record): Collection|false
+    public function withListCardEdit($record): CardEdit|Collection|false
     {
         return false;
     }
