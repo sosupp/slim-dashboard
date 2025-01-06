@@ -19,6 +19,18 @@ trait HandlesImageUploads
         return '';
     }
 
+    abstract function uploadImageOnSave(): bool;
+
+    public function uploadImageNow()
+    {
+        $this->imagePath = $this->uploadImage(
+            data: [
+                'image' => $this->image,
+                'filename' => $this->colForImageName()
+            ],
+        );
+    }
+
     public function updatedImage()
     {
         // dd("yes");
@@ -30,12 +42,9 @@ trait HandlesImageUploads
             ],
         ]);
 
-        $this->imagePath = $this->uploadImage(
-            data: [
-                'image' => $this->image,
-                'filename' => $this->colForImageName()
-            ],
-        );
+        if($this->uploadImageOnSave()){
+            return $this->uploadImageNow();
+        }
 
     }
 

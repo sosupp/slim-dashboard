@@ -155,13 +155,34 @@ class HtmlForm
 
     public function imageInput(
         $imagePath = null,
+        $wrapperCss= "image-preview"
     )
     {
-        $imageWrapper = <<<'BLADE'
-        <div class="image-preview">
-            <label for="">Image</label>
-            <div class="overlay-preview">
-        BLADE;
+        $useLoader = $this->loaderIcon();
+        $successIcon = $this->successIcon();
+
+        $progress = '$event.detail.progress';
+        $imageWrapper = <<<WRAPPER
+        <div class="$wrapperCss"
+            x-data="{
+                progress: 0,
+                uploading: false,
+                isSuccess: false,
+            }"
+            x-on:livewire-upload-start="uploading = true"
+            x-on:livewire-upload-finish="uploading = false;isSuccess=true"
+            x-on:livewire-upload-cancel="uploading = false"
+            x-on:livewire-upload-error="uploading = false"
+            x-on:livewire-upload-progress="progress = $progress">
+
+            <div class="upload-indicators" x-cloak x-show="uploading">
+                <span class="upload-indicator">$useLoader</span>
+            </div>
+
+            <div class="upload-indicators" x-cloak x-show="isSuccess">
+                <span class="upload-indicator">$successIcon</span>
+            </div>
+        WRAPPER;
 
         if ($imagePath) {
             $useImage = asset($imagePath);
@@ -191,15 +212,14 @@ class HtmlForm
                         <input type="file" id="uploadImage"
                             wire:model="image"
                             x-ref="uploadedImage"
-                            x-on:change="previewImage()">
+                            x-on:change="previewImage(),isSuccess=false">
 
                         $useIcon
                         <div class="add-image-icon">
-                            Add one or multiple images
+                            Add image
                         </div>
                     </label>
                 </div>
-            </div>
         </div>
         IMAGE;
 
