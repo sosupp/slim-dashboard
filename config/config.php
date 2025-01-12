@@ -25,4 +25,7 @@ return [
         ],
 
     ],
+
+    'prefix' => 'slimdashboard',
+    'middleware' => ['web'], // You can change or add middleware 
 ];

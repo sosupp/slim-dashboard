@@ -3,6 +3,7 @@
 namespace Sosupp\SlimDashboard;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -19,7 +20,9 @@ class SlimDashboardServiceProvider extends ServiceProvider
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'slim-dashboard');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'slim-dashboard');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        // $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->registerRoutes();
 
         // $this->loadViewComponentsAs('slim-dashboard', [
 
@@ -64,5 +67,20 @@ class SlimDashboardServiceProvider extends ServiceProvider
         $this->app->singleton('slim-dashboard', function () {
             return new SlimDashboard;
         });
+    }
+
+    protected function registerRoutes()
+    {
+        Route::group($this->routeConfiguration(), function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        });
+    }
+
+    protected function routeConfiguration()
+    {
+        return [
+            'prefix' => config('slim-dashboard.prefix'),
+            'middleware' => config('slim-dashboard.middleware'),
+        ];
     }
 }
