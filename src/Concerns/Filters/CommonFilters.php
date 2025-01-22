@@ -9,18 +9,26 @@ trait CommonFilters
     protected $inActive = false;
     protected $active = true;
 
-    protected $searchType = 'search';
+    protected $searchType = 'contain';
     protected $searchTerm = '';
     protected $searchCol = '';
 
     protected $orderByDirection = 'asc';
     protected $orderByColumn = 'created_at';
 
+    protected $selectedDate = null;
+    protected $selectedDateColumn = 'created_at';
+
     public function limit(int $qty = 12)
     {
         $this->recordLimit = $qty;
-        // $this->products->limit($qty);
-        // dd($qty, $this->recordLimit, $this->products->get());
+        return $this;
+    }
+
+    public function date(string|array|null $date = null, string $col = 'created_at')
+    {
+        $this->selectedDate = $date;
+        $this->selectedDateColumn = $col;
         return $this;
     }
 
@@ -33,7 +41,6 @@ trait CommonFilters
 
     public function matchSearch(string $term = '', string $col = 'name')
     {
-        // dd("yes");
         $this->searchType = 'matchSearch';
         $this->searchCol = $col;
         $this->searchTerm = $term;

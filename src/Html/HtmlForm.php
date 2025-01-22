@@ -364,7 +364,7 @@ class HtmlForm
         $selectInput = <<<SELECT
         <div class="$wrapperCss">
             <label for="$id" class="$labelCss">$setLabel</label>
-            <select class="$inputCss $class @error('$name') is-error @enderror"
+            <select class="$inputCss @error('$name') is-error @enderror"
                 id="$id"
                 wire:model$setState="$name"
                 wire:key="$name"
@@ -498,7 +498,7 @@ class HtmlForm
         $this->form .= <<<BUTTON
         <button type="$type"
             id="$id"
-            class="$class"
+            class="$class as-pointer"
             wire:$useWire
             wire:loading.attr="disabled"
             $action>$useLabel</button>

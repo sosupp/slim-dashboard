@@ -20,8 +20,9 @@ abstract class BaseForm extends Component
     public $pageTitle;
     public $isUpdate = false;
     
-    #[Validate()]
+    #[Validate(rule: 'nullable')]
     public $imagePath;
+
     public $image;
 
     public $modelId;
@@ -37,6 +38,10 @@ abstract class BaseForm extends Component
     public abstract function save();
     public abstract function isUpdateDetails();
 
+    public function pageHeading(): string
+    {
+        return '';
+    }
 
     public function colForImageName(): string
     {

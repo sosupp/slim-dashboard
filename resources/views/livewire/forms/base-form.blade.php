@@ -21,14 +21,18 @@
             console.log('yes image')
         }
     }">
-    <div class="dashboard-errors-wrapper">
-        @forelse ($errors->all() as $message)
-            <p class="error">{{$message}}</p>
-        @empty
 
-        @endforelse
-    </div>
     <div class="{{$this->wrapperCss()}}" :class="darkmode ? 'use-dark-theme dmode-wrapper' : 'form-wrapper'">
+        
+        {!! $this->pageHeading() !!}
+
+        <div class="dashboard-errors-wrapper">
+            @forelse ($errors->all() as $message)
+                <p class="error">{{$message}}</p>
+            @empty
+
+            @endforelse
+        </div>
 
         @includeIf($this->extraView())
 

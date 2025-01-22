@@ -16,32 +16,35 @@ trait CommonScopes
         $query->orWhere('status', 'inactive');
     }
 
-    public function scopeDated(Builder $query, string|array $date, string $col = 'created_at'): void
+    public function scopeDated(Builder $query, string|array|null $date = null, string $col = 'created_at'): void
     {
         // dd($date);
-        $query->when(is_string($date) && !empty($date) && $date !== null, function($query) use($date, $col){
-            $query->whereDate($col, '=', $date);
-        })
-        ->when(is_array($date) && !empty($date), function($query) use($date, $col){
-            // dd($date);
-            $date = collect($date)->reject(function($date){
-                return empty($date) || is_null($date);
-            });
-
-            if($date->count() == 1){
+        if(!is_null($date)){
+            $query->when(is_string($date) && !empty($date) && $date !== null, function($query) use($date, $col){
                 $query->whereDate($col, '=', $date);
-                return;
-            }
+            })
+            ->when(is_array($date) && !empty($date), function($query) use($date, $col){
+                // dd($date);
+                $date = collect($date)->reject(function($date){
+                    return empty($date) || is_null($date);
+                });
 
-            $useDate = [
-                $date['start'] . ' 00:00:00',
-                $date['end'] . ' 23:59:59',
-            ];
+                if($date->count() == 1){
+                    $query->whereDate($col, '=', $date);
+                    return;
+                }
+
+                $useDate = [
+                    $date['start'] . ' 00:00:00',
+                    $date['end'] . ' 23:59:59',
+                ];
 
 
-            $query->whereBetween($col, $useDate);
-        });
+                $query->whereBetween($col, $useDate);
+            });
+        }
     }
+
 
 
     public function scopeMatchSearch(Builder $query, string $col, string $search): void
