@@ -155,7 +155,8 @@ class HtmlForm
 
     public function imageInput(
         $imagePath = null,
-        $wrapperCss= "image-preview"
+        $wrapperCss= "image-preview",
+        $labelCss = 'custom-add-input'
     )
     {
         $useLoader = $this->loaderIcon();
@@ -301,6 +302,7 @@ class HtmlForm
         string $wrapperCss = 'custom-input-wrapper',
         string $labelCss = '',
         string $inputCss = 'custom-input',
+        bool $canView = true,
 
     )
     {
@@ -311,25 +313,21 @@ class HtmlForm
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
-        $input = <<<INPUT
-        <div class="$wrapperCss">
-            <label for="$id" class="$labelCss">$setLabel</label>
-            <input type="$type"
-                id="$id"
-                class="$inputCss $class @error('$name') is-error @enderror"
-                wire:model$setState="$name"
-                value="$value"
-                placeholder="$placeholder" />
-        </div>
-        INPUT;
+        $input = '';
 
-        // $error = $this->error($name);
-
-        // $input .= $this->error($name);
-
-        // if($type === 'file' && !empty($value)){
-
-        // }
+        if($canView){
+            $input = <<<INPUT
+            <div class="$wrapperCss">
+                <label for="$id" class="$labelCss">$setLabel</label>
+                <input type="$type"
+                    id="$id"
+                    class="$inputCss $class @error('$name') is-error @enderror"
+                    wire:model$setState="$name"
+                    value="$value"
+                    placeholder="$placeholder" />
+            </div>
+            INPUT;
+        }
 
         $this->form .= $input;
         return $this;

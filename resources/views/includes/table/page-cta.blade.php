@@ -1,11 +1,21 @@
 @if (is_array($this->pageCta()))
 <div x-data="{
     mobileCta: false,
+    canShow: '',
     dropdownAction(){
         console.log('selected')
     },
     openMobileCta(){
         this.mobileCta = !this.mobileCta
+        if(this.canShow == '' || this.canShow =='none'){
+            this.canShow = 'block'
+            return;
+        }
+
+        if(this.canShow='block'){
+            this.canShow = 'none'
+        }
+
     },
     isMobile(){
         return window.innerWidth <= 768 ? true : false;
@@ -13,9 +23,9 @@
     isDesktop(){
         return window.innerWidth > 768 ? true : false;
     }
-}" class="page-cta-wrapper" x-init="isDesktop() ? mobileCta = true : mobileCta = false">
+}" class="page-cta-wrapper">
 
-    <div class="page-cta-wrapper-items mobile-cta" x-show="mobileCta" x-cloak>
+    <div class="page-cta-wrapper-items mobile-cta" :style="{display: canShow}">
         @foreach ($this->pageCta() as $key => $cta)
             @if (isset($cta['show']) && $cta['show'])
                 @if (isset($cta['type']))
@@ -59,14 +69,14 @@
                 @endif
             @endif
         @endforeach
-
     </div>
+
     <div class="mobile-menu-overlay" x-show="mobileCta" x-cloak x-on:click="openMobileCta">
         <span class="as-pointer mobile-close-cta" id="mobileCtaClose" x-show="isMobile()" x-cloak>
             <x-icons.close />
         </span>
-
     </div>
+
     <span class="as-pointer mobile-more-trigger" x-on:click="openMobileCta" x-show="isMobile()" x-cloak>
         <x-icons.more w="32" color="#fff"/>
     </span>

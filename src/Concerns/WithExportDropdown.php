@@ -34,9 +34,9 @@ trait WithExportDropdown
         return $name .'_' .now()->format('y-m-d-m-s').'.'.$extension;
     }
 
-    // public function updatedSelectedExportType($value)
-    // {
-    //     $this->handleExport($this->getExportType());
-    // }
+    public function updatedSelectedExportType($value)
+    {
+        $this->handleExport($this->getExportType());
+    }
 
 }

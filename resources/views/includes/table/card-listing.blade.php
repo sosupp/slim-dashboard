@@ -89,7 +89,7 @@
 
     </div>
 
-    <div class="item-listings-wrapper">
+    <div class="item-listings-wrapper {{$this->cardListingWrapper()}}">
 
 
         @if ($this->listAsCards())

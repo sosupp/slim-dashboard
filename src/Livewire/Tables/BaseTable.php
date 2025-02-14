@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\Attributes\Lazy;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Session;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
@@ -87,6 +88,11 @@ abstract class BaseTable extends Component
         return euroDate($record->$dateCol);
     }
 
+    public function customDateFormat(string $date)
+    {
+        return Carbon::parse($date)->format('d M Y, H:i');
+    }
+
     public function relation($model, $relation, $col, $callback = null)
     {
         // dd($callback);
@@ -141,6 +147,10 @@ abstract class BaseTable extends Component
         return 'table-inline-stats-summary';
     }
 
+    public function cardListingWrapper(): string
+    {
+        return '';
+    }
 
     public function configureCustomRelation($model, $relation, $col)
     {

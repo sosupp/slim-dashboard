@@ -4,7 +4,7 @@
         @if ($filter['type'] == 'select')
 
         <select wire:model.live="{{$filter['wireProperty']}}" id="externalFilter"
-            class="filter-wrapper select-filter as-pointer {{$filter['wrapperCss']}}" :class="darkmode ? 'dmode-input-bg' : ''">
+            class="filter-wrapper select-filter as-pointer {{$filter['wrapperCss']}}" :class="darkmode ? 'dmode-input-bg' : ''" x-on:change="selectFilterLabel = $event.target.options[$event.target.selectedIndex].text">
             <option class="as-pointer filter-label" value="all">{{$filter['label']}}</option>
 
             @if ($filter['options'])
@@ -22,7 +22,7 @@
         @if ($filter['type'] == 'dropdown')
 
         <div x-data="{
-                triggerLabel: 'Today'
+                triggerLabel: $wire.entangle('dateLabel')
             }">
             <x-dropdown>
                 <x-slot:trigger>

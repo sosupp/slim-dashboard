@@ -2,11 +2,17 @@
 namespace Sosupp\SlimDashboard\Concerns\Filters;
 
 use Illuminate\Support\Carbon;
+use Livewire\Attributes\Session;
 use Illuminate\Support\Collection;
 
 trait WithDateFilters
 {
+    #[Session(key: 'selected_date')]
     public $selectedDate = 'today';
+
+    #[Session(key: 'selected_date_label')]
+    public $dateLabel = 'today';
+    
     public $selectedStartDate;
     public $selectedEndDate;
 

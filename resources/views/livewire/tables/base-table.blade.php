@@ -5,6 +5,9 @@
         subnav: $wire.entangle('subnav').live,
         useComponent: false,
         componentName: $wire.entangle('sidePanelComponent').live,
+        selectFilterLabel: $wire.entangle('selectFilterLabel'),
+        dateLabel: $wire.entangle('dateLabel'),
+        searchFilters: false,
         subActive(key){
             this.subnav = key
         },
@@ -74,6 +77,13 @@
 
                 <div class="search-input-and-results" x-data="{openResults: true}">
                     @include('slim-dashboard::includes.platform.search-input')
+
+                    <template x-if="searchFilters">
+                        <span>Searching:
+                            <small class="active-pill" x-text="selectFilterLabel">all branches</small>
+                            <small class="active-pill" x-text="dateLabel"></small>
+                        </span>
+                    </template>
 
                     @if ($this->hasSearchResultDropdown)
                     <div x-show="openResults" @click.outside="openResults=!openResults">
@@ -161,6 +171,9 @@
                                                                     {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
                                                                 <span class="slider round"></span>
                                                             </label>
+                                                        
+                                                        @elseif(isset($colHeading['type']) && $colHeading['type'] === 'date')
+                                                        {{euroDate($record[$colHeading])}}
                                                         @else
                                                             <div class="card-item-wrapper {{$colHeading['css']}}">
                                                                 <p class="item-value">{{ $record[$colHeading['col']] }}</p>
@@ -243,6 +256,10 @@
                                                                             {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
                                                                         <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
                                                                     </label>
+                                                                @elseif (isset($colHeading['type']) && $colHeading['type'] === 'date')
+                                                                    {{ $this->customDateFormat($record[$colHeading['col']])}}
+                                                                @elseif ($colHeading['col'] == 'created_at' || $colHeading['col'] == 'updated_at' || $colHeading['col'] == 'deleted_at' || $colHeading['col'] == 'date')
+                                                                    {{$this->customDateFormat($record[$colHeading['col']])}}
                                                                 @else
                                                                     @if ($colHeading['inlineEdit'])
                                                                         <div class="inline-edit-wrapper">

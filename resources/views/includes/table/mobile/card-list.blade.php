@@ -44,6 +44,10 @@
 
                                         <span class="{{$rowItem['valueCss']}}">{!! $this->relation($record, $rowItem['relation'], $rowItem['name'], $rowItem['callback'] ?? null) !!}</span>
                                     </p>
+                                    @elseif (isset($colHeading['type']) && $colHeading['type'] === 'date')
+                                        <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
+                                    @elseif ($rowItem['name'] == 'created_at' || $rowItem['name'] == 'updated_at' || $rowItem['name'] == 'deleted_at' || $rowItem['name'] == 'date')
+                                        <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
                                     @else
                                     <p class="card-item-name item-heading">
                                         @if ($rowItem['label'] !== null)
@@ -101,7 +105,7 @@
         <div class="action-modal" style="">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="modal-title"><h3 x-html="cardItem[0]"></h3></span>
+                    <span class="modal-title"><h3 x-html="cardItem['title'] ?? cardItem[0]"></h3></span>
                     <span id="modalClose" class="as-pointer" x-on:click="cardModal=false">
                         &times;
                     </span>

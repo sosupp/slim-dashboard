@@ -5,6 +5,7 @@ trait WithTableFilters
 {
     public $multiSelectFilterKeys = [];
     public $valuesForFilterColumn = [];
+    public $selectFilterLabel;
 
     public function applyFilter()
     {
