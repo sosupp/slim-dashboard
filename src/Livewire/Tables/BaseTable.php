@@ -149,7 +149,7 @@ abstract class BaseTable extends Component
 
     public function cardListingWrapper(): string
     {
-        return '';
+        return 'white-list-wrapper';
     }
 
     public function configureCustomRelation($model, $relation, $col)
