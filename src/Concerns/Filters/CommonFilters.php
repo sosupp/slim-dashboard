@@ -16,7 +16,7 @@ trait CommonFilters
     protected $orderByDirection = 'asc';
     protected $orderByColumn = 'created_at';
 
-    protected $selectedDate = null;
+    protected $selectedDate = [];
     protected $selectedDateColumn = 'created_at';
 
     public function limit(int $qty = 12)
