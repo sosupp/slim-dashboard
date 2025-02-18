@@ -1,7 +1,7 @@
 @if (is_array($this->pageCta()))
 <div x-data="{
     mobileCta: false,
-    canShow: '',
+    canShow: 'none',
     dropdownAction(){
         console.log('selected')
     },
