@@ -3,10 +3,12 @@ namespace Sosupp\SlimDashboard\Livewire\Pages;
 
 use Livewire\Component;
 use Sosupp\SlimDashboard\Concerns\Html\WithBreadcrumb;
+use Sosupp\SlimDashboard\Livewire\Traits\HandleUserAlerts;
 
 abstract class BasePage extends Component
 {
-    use WithBreadcrumb;
+    use WithBreadcrumb,
+        HandleUserAlerts;
 
     public $pageTitle;
 

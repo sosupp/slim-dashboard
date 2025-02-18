@@ -6,10 +6,12 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Sosupp\SlimDashboard\Concerns\Html\WithBreadcrumb;
+use Sosupp\SlimDashboard\Livewire\Traits\HandleUserAlerts;
 
 abstract class TabWrapper extends Component
 {
-    use WithBreadcrumb;
+    use WithBreadcrumb, 
+        HandleUserAlerts;
 
     public $pageTitle;
     public $componentName = '';

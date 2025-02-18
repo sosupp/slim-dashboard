@@ -19,6 +19,7 @@ use Sosupp\SlimDashboard\Concerns\AddsSessionData;
 use Sosupp\SlimDashboard\Concerns\ModelDeleteable;
 use Sosupp\SlimDashboard\Concerns\Html\WithDefaultCss;
 use Sosupp\SlimDashboard\Concerns\HtmlForms\WithTableFilters;
+use Sosupp\SlimDashboard\Livewire\Traits\HandleUserAlerts;
 
 #[Lazy(isolate: false)]
 abstract class BaseTable extends Component
@@ -30,7 +31,8 @@ abstract class BaseTable extends Component
         WithFileUploads,
         WithPagination,
         WithoutUrlPagination,
-        UploadImages;
+        UploadImages,
+        HandleUserAlerts;
 
     public $pageHeading;
     public $pageTitle;
@@ -261,6 +263,11 @@ abstract class BaseTable extends Component
     public function mobileEditImageName($record): string
     {
         return '';
+    }
+
+     public function mobileMoreCtaCss(): string
+    {
+        return 'bg-goldrod';
     }
 
     /**

@@ -77,7 +77,7 @@
         </span>
     </div>
 
-    <span class="as-pointer mobile-more-trigger" x-on:click="openMobileCta" x-show="isMobile()" x-cloak>
+    <span class="as-pointer mobile-more-trigger {{$this->mobileMoreCtaCss()}}" x-on:click="openMobileCta" x-show="isMobile()" x-cloak>
         <x-icons.more w="32" color="#fff"/>
     </span>
 </div>

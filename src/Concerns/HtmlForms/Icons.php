@@ -30,4 +30,20 @@ trait Icons
             'stroke' => '2'
         ]);
     }
+
+    public function useIcon(
+        string $path = '',
+        string $width = '24',
+        string $color = '',
+        string|null $fill = null,
+        string|null $stroke = null,
+    )
+    {
+        return view('slim-dashboard::components.'.$path, [
+            'w' => $width,
+            'color' => $color,
+            'fill' => $fill,
+            'stroke' => $stroke
+        ]);
+    }
 }

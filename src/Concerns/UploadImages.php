@@ -1,8 +1,8 @@
 <?php
 namespace Sosupp\SlimDashboard\Concerns;
 
-use Intervention\Image\Facades\Image;
 use Livewire\Attributes\Validate;
+use Intervention\Image\Facades\Image;
 
 trait UploadImages
 {

@@ -228,6 +228,88 @@ class HtmlForm
         return $this;
     }
 
+    public function inlineImageInput(
+        string $name,
+        string $type = 'file',
+        string $value = '',
+        string $id = '',
+        string|null $label = null,
+        string $placeholder = '',
+        string $class = '',
+        string $message = '',
+        bool|string $wireLive = false,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
+        bool $canView = true,
+    )
+    {
+        $setLabel = is_null($label) ? $name : $label;
+        $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
+
+        $uploadIcon = $this->useIcon(path: 'icons.upload', color: 'currentColor');
+        $successMark = $this->useIcon(path: 'utils.alerts.success');
+        $useLoader = $this->loaderIcon();
+
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+
+        $input = '';
+
+        $progress = '$event.detail.progress';
+        $input = <<<WRAPPER
+            <div x-data="{
+                    imagePreview: null,
+                    progress: 0,
+                    uploading: false,
+                    isSuccess: false,
+                }"
+                x-on:livewire-upload-start="uploading = true"
+                x-on:livewire-upload-finish="uploading = false;isSuccess=true"
+                x-on:livewire-upload-cancel="uploading = false"
+                x-on:livewire-upload-error="uploading = false"
+                x-on:livewire-upload-progress="progress = $progress"
+                class="image-upload-wrapper">
+                    <input type="file"
+                        style="display: none;"
+                        id="imageInput"
+                        class="image-input-file"
+                        x-on:change="file => {
+                                isSuccess=false;
+                                const reader = new FileReader();
+                                reader.onload = e => imagePreview = e.target.result;
+                                reader.readAsDataURL(file.target.files[0]);
+                        }"
+                        wire:model$setState="$name">
+
+                    <label for="imageInput"
+                        class="image-upload-label as-pointer">
+                        $setLabel
+                    </label>
+
+                    <div class="image-preview-container">
+                        <img :src="imagePreview"
+                            alt="Selected Image"
+                            class="selected-image-preview">
+                        <div class="image-upload-icon">
+                            $uploadIcon
+                        </div>
+                    </div>
+
+                <div class="progress-indicator">
+                    <div x-show="uploading" x-cloak>$useLoader</div>
+                    <div x-show="isSuccess" x-cloak>$successMark</div>
+                </div>
+
+            </div>
+        WRAPPER;
+
+        $this->form .= $input;
+
+        return $this;
+    }
+
 
     public function searchInput(
         string $name,
