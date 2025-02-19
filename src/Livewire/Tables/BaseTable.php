@@ -265,7 +265,7 @@ abstract class BaseTable extends Component
         return '';
     }
 
-     public function mobileMoreCtaCss(): string
+    public function mobileMoreCtaCss(): string
     {
         return 'bg-goldrod';
     }

@@ -19,6 +19,11 @@ abstract class BasePage extends Component
         return '';
     }
 
+    public function mobileMoreCtaCss(): string
+    {
+        return 'bg-goldrod';
+    }
+
     // public function render()
     // {
     //     return view('livewire.base-page')

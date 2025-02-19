@@ -106,6 +106,11 @@ abstract class TabWrapper extends Component
         return 'dark-active-bottom';
     }
 
+    public function mobileMoreCtaCss(): string
+    {
+        return 'bg-goldrod';
+    }
+
     public function useWireNavigate(): bool
     {
         return false;

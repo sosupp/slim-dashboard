@@ -3,6 +3,7 @@ namespace Sosupp\SlimDashboard\Livewire\Traits;
 
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rules\File;
+use Livewire\Attributes\Session;
 use Sosupp\SlimDashboard\Concerns\UploadImages;
 
 trait HandlesImageUploads
@@ -12,9 +13,18 @@ trait HandlesImageUploads
 
     public $imagePath;
     public $image;
+
+    #[Session()]
     public $previewImagePath;
 
+    public $customImageProperty;
+
     public function colForImageName()
+    {
+        return '';
+    }
+
+    public function customImagePropertyName()
     {
         return '';
     }
@@ -29,6 +39,15 @@ trait HandlesImageUploads
                 'filename' => $this->colForImageName()
             ],
         );
+
+        if(!empty($this->customImagePropertyName())){
+            $this->customImageProperty = $this->customImagePropertyName();
+            $useImageName = $this->customImageProperty;
+            $this->$useImageName = $this->imagePath;
+
+            // To persit state of image preview before save
+            $this->previewImagePath = $this->image->temporaryUrl();
+        }
     }
 
     public function updatedImage()
