@@ -9,6 +9,8 @@ trait CommonFilters
     protected $inActive = false;
     protected $active = true;
 
+    protected $withTrashed = false;
+
     protected $searchType = 'contain';
     protected $searchTerm = '';
     protected $searchCol = '';
@@ -66,6 +68,18 @@ trait CommonFilters
         $this->orderByDirection = $direction;
         $this->orderByColumn = $col;
 
+        return $this;
+    }
+
+    public function withTrashed()
+    {
+        $this->withTrashed = true;
+        return $this;
+    }
+
+    public function withoutTrashed()
+    {
+        $this->withTrashed = false;
         return $this;
     }
 }

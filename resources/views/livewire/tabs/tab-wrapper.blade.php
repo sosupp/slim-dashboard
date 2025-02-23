@@ -1,9 +1,11 @@
 <div>
+    @if (!empty($this->tabPageHeading()))
     <h3 class="tab-pageheading">{!! $this->tabPageHeading() !!}</h3>
+    @endif
 
     @includeIf($this->viewBeforeTabs())
 
-    <div class="tab-content-wrapper"
+    <div class="{{$this->tabContentWrapper()}}"
         x-data="{
             selectedTab: $wire.entangle('selectedTab').live,
             tabItems: $wire.tabHeadings(),
@@ -13,7 +15,7 @@
         }">
 
         @persist('tabheadings')
-        <div class="tab-heading-wrapper {{$this->headingCss()}}">
+        <div class="{{$this->headingCss()}}">
             @foreach ($this->tabHeadings() as $tab)
             @if ($tab['isVisible'])
                 @if ($this->useWireNavigate())

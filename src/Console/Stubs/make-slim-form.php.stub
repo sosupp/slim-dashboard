@@ -1,0 +1,69 @@
+<?php
+namespace {{ namespace }};
+
+use Livewire\WithFileUploads;
+use Sosupp\SlimDashboard\Concerns\HtmlForms\HandlesTabContent;
+use Sosupp\SlimDashboard\Html\Breadcrumb;
+use Sosupp\SlimDashboard\Livewire\Forms\BaseForm;
+use Sosupp\SlimDashboard\Html\HtmlForm;
+
+class {{ class }} extends BaseForm
+{
+    use WithFileUploads,
+        HandlesTabContent;
+
+    public $isUpdate = false;
+
+    public function relation() { }
+
+    public function mount()
+    {
+        $this->pageTitle = 'change me';
+    }
+
+    public function wrapperCss()
+    {
+        return '';
+    }
+
+    public function colForImageName(): string
+    {
+        return '';
+    }
+
+    public function buildForm()
+    {
+        return HtmlForm::make()
+        ->tabs(
+            name: 'details',
+            content: HtmlForm::make()
+            ->specialInput()
+            ->input(name: 'name', id: '', placeholder: '')
+            ->textarea(name: 'description', id: 'description', withEditor: false)
+            ->build(),
+        )
+        ->selectedTab(name: $this->selectedTab)
+        ->button(label: $this->isUpdate ? 'Update' : 'Save', class: 'standard-btn')
+        ->build();
+
+        return  HtmlForm::make()
+        ->input(name: 'name', label: '', placeholder: '')
+        ->button();
+    }
+
+    public function extraView(){}
+
+    public function isUpdateDetails() { }
+
+    public function save()
+    {
+        // Your save logic here: eg. validate, call a service or repository to save record, etc.
+    }
+
+    public function breadcrumbData()
+    {
+        return Breadcrumb::nav(name: 'change me', url: null, isBase: true)
+        ->make();
+    }
+
+}

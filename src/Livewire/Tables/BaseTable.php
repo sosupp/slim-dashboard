@@ -97,7 +97,7 @@ abstract class BaseTable extends Component
 
     public function relation($model, $relation, $col, $callback = null)
     {
-        // dd($callback);
+        // dd($callback, $model->$relation->$col());
         $this->callback = $callback;
 
         // Use this to handle relations that are not one-to-one
@@ -106,9 +106,33 @@ abstract class BaseTable extends Component
             return $this->configureCustomRelation($model, $relation, $col);
         }
 
-        // dd($relation);
-        // $this->valuesForFilterColumn[] = $model->$relation->pluck('id')->all();
-        // dd($this->valuesForFilterColumn);
+        // We want to call a method/accessor on distance(nested) relation
+        if(str($col)->startsWith('.') && str($relation)->contains('.')){
+            $distanceRelation = str($relation)->after('.')->value;
+            $firstRelation = str($relation)->before('.')->value;
+            $method = str($col)->after('.')->value;
+
+            // dd("yes", $distanceRelation->value);
+            return $model->$firstRelation->$distanceRelation->$method();
+        }
+
+        // if true we want to call a method or accessor on the relation
+        if(str($col)->startsWith('.')){
+            $method = str($col)->after('.')->value;
+            return $model->$relation->$method();
+        }
+
+        // Here, we want to return the value on a distant(nested) relation
+        if(str($relation)->contains('.')){
+            $distanceRelation = str($relation)->after('.')->value;
+            $firstRelation = str($relation)->before('.')->value;
+            // dd("yes", $distanceRelation->value);
+            // return '';
+            return $model->$firstRelation->$distanceRelation->$col ?? '';
+            // return $account->user->employee->fullname();
+        }
+
+
         return $model->$relation->$col ?? ''; // Gets one-to-one relation
     }
 
@@ -123,7 +147,7 @@ abstract class BaseTable extends Component
             return call_user_func([$this, $callback], $model);
         }
     }
-    
+
     public function useSideModal(){}
     public function panelCustomView(){}
 
@@ -224,7 +248,7 @@ abstract class BaseTable extends Component
     {
         return true;
     }
-    
+
     public function showPagination()
     {
         return false;

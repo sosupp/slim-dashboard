@@ -10,7 +10,7 @@ use Sosupp\SlimDashboard\Livewire\Traits\HandleUserAlerts;
 
 abstract class TabWrapper extends Component
 {
-    use WithBreadcrumb, 
+    use WithBreadcrumb,
         HandleUserAlerts;
 
     public $pageTitle;
@@ -89,6 +89,11 @@ abstract class TabWrapper extends Component
     public function tabPageHeading(): string
     {
         return '';
+    }
+
+    public function tabContentWrapper()
+    {
+        return 'tab-content-wrapper';
     }
 
     public function headingCss(): string

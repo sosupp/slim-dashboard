@@ -171,7 +171,7 @@
                                                                     {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
                                                                 <span class="slider round"></span>
                                                             </label>
-                                                        
+
                                                         @elseif(isset($colHeading['type']) && $colHeading['type'] === 'date')
                                                         {{euroDate($record[$colHeading])}}
                                                         @else
@@ -233,7 +233,7 @@
                                     @endif
                                     @foreach ($this->tableCols() as $colHeading)
                                         @if($colHeading['canView'])
-                                            <td class="{{$colHeading['css']}}">
+                                            <td class="">
                                                 @if ($colHeading === 'image')
                                                     <img src="{{ asset($record[$colHeading]) }}" width="50">
                                                 @else
@@ -243,7 +243,9 @@
                                                         @else
                                                             @if (isset($colHeading['relation']))
                                                             <div class="inline-edit-wrapper">
-                                                                {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null) !!}
+                                                                <div class="{{$colHeading['css']}}">
+                                                                    {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null) !!}
+                                                                </div>
                                                                 @if ($colHeading['inlineEdit'])
                                                                 @include('slim-dashboard::includes.table.table-inline-edit')
                                                                 @endif
@@ -263,17 +265,17 @@
                                                                 @else
                                                                     @if ($colHeading['inlineEdit'])
                                                                         <div class="inline-edit-wrapper">
-                                                                            {{ $record[$colHeading['col']] }}
+                                                                            <div class="{{$colHeading['css']}}">{{ $record[$colHeading['col']] }}</div>
                                                                             @include('slim-dashboard::includes.table.table-inline-edit')
                                                                         </div>
                                                                     @else
-                                                                        {{ $record[$colHeading['col']] }}
+                                                                        <div class="{{$colHeading['css']}}">{{ $record[$colHeading['col']] }}</div>
                                                                     @endif
                                                                 @endif
                                                             @endif
                                                         @endif
                                                     @else
-                                                        {{ $record[$colHeading] }}
+                                                        <div class="{{$colHeading['css']}}">{{ $record[$colHeading] }}</div>
                                                     @endif
                                                 @endif
                                             </td>

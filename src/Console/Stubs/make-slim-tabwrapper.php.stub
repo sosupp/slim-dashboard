@@ -1,0 +1,45 @@
+<?php
+
+namespace {{ namespace }};
+
+use Sosupp\SlimDashboard\Html\Tabs;
+use Sosupp\SlimDashboard\Html\Breadcrumb;
+use Sosupp\SlimDashboard\Livewire\Tabs\TabWrapper;
+
+class {{ class }} extends TabWrapper
+{
+
+    public function withMount()
+    {
+
+    }
+
+    public function pageTitle()
+    {
+        return 'Accounts';
+    }
+
+    public function tabHeadings()
+    {
+        return Tabs::content(heading: 'Accounts List', component: '', route: '', key: 'account-list')
+        ->make();
+    }
+
+    public function viewBeforeTabs()
+    {
+        return '';
+    }
+
+    public function passExtraData(): array
+    {
+        return [
+
+        ];
+    }
+
+    public function breadcrumbData()
+    {
+        return Breadcrumb::nav(name: 'change me', url: null, isBase: false, isCurrent: true)
+        ->make();
+    }
+}

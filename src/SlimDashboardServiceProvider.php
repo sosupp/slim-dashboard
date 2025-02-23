@@ -5,7 +5,10 @@ namespace Sosupp\SlimDashboard;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-
+use Sosupp\SlimDashboard\Console\MakeFormCommand;
+use Sosupp\SlimDashboard\Console\MakePageCommand;
+use Sosupp\SlimDashboard\Console\MakeTableCommand;
+use Sosupp\SlimDashboard\Console\MakeTabWrapperCommand;
 
 class SlimDashboardServiceProvider extends ServiceProvider
 {
@@ -50,8 +53,7 @@ class SlimDashboardServiceProvider extends ServiceProvider
                 __DIR__.'/../resources/lang' => resource_path('lang/vendor/slim-dashboard'),
             ], 'lang');*/
 
-            // Registering package commands.
-            // $this->commands([]);
+            $this->customCommands();
         }
     }
 
@@ -82,5 +84,17 @@ class SlimDashboardServiceProvider extends ServiceProvider
             'prefix' => config('slim-dashboard.prefix'),
             'middleware' => config('slim-dashboard.middleware'),
         ];
+    }
+
+    protected function customCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MakeTableCommand::class,
+                MakeFormCommand::class,
+                MakePageCommand::class,
+                MakeTabWrapperCommand::class,
+            ]);
+        }
     }
 }

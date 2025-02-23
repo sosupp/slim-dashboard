@@ -1,0 +1,123 @@
+<?php
+namespace {{ namespace }};
+
+use Sosupp\SlimDashboard\Concerns\StatusToggleable;
+use Sosupp\SlimDashboard\Html\Breadcrumb;
+use Sosupp\SlimDashboard\Html\ListCard;
+use Sosupp\SlimDashboard\Html\PageCtas;
+use Sosupp\SlimDashboard\Html\Tables\Columns;
+use Sosupp\SlimDashboard\Html\Tables\Rows;
+use Sosupp\SlimDashboard\Livewire\Tables\BaseTable;
+use Sosupp\SlimDashboard\ValueObjects\CardEdit;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
+
+class {{ class }} extends BaseTable
+{
+    use StatusToggleable;
+
+    public function mount()
+    {
+        $this->subnav = 'change me';
+    }
+
+    public function useModel()
+    {
+        return {{ model }}::class;
+    }
+
+    public function useCustomTable() { }
+
+    public function tableCols()
+    {
+        return Columns::make()
+        ->column(name: 'name', label: 'name')
+        ->build();
+    }
+
+    #[Computed]
+    public function tableRecords()
+    {
+        return (new {{ service }})
+        ->search(term: $this->search)
+        ->withTrashed()
+        ->orderBy(direction: 'desc')
+        ->paginate(limit: $this->recordPerPage);
+    }
+
+    public function tableActions()
+    {
+        return Rows::action(name: 'manage', link: '')
+        ->action(name: 'edit', link: '')
+        ->action(name: 'delete', link: '')
+        ->make();
+    }
+
+    public function pageCta()
+    {
+        return PageCtas::cta(type: 'link', label: 'Add', route: null)
+        ->make();
+    }
+
+    public function defineSearch() { }
+
+    public function showPagination()
+    {
+        return true;
+    }
+
+    public function breadcrumbData()
+    {
+        return Breadcrumb::nav(name: 'Change me', url: '', isBase: false, isCurrent: true)
+        ->make();
+    }
+
+    // Mobile listings
+    public function hasCardListing()
+    {
+        return true;
+    }
+
+    public function cardContents()
+    {
+        return ListCard::content()
+        ->row(name: 'id', label: '#', key: 'id')
+        ->make();
+    }
+
+    public function withListCardEdit($record): CardEdit|Collection|false
+    {
+        return false;
+        return (new CardEdit(
+            title: 'EDIT: ',
+            form: ''
+        ));
+    }
+
+    public function mobileEditImageName($record): string
+    {
+        return '';
+    }
+
+    public function withCardModalData($record): Collection
+    {
+        return collect([
+            'title' => '',
+            'image' => '',
+            'edit' => '',
+        ]);
+    }
+
+    public function withCardModalView(): string|View
+    {
+        return '';
+    }
+
+    public function withListCardImage(): string|View
+    {
+        // return 'editable' to make image uploadable inline
+        return '';
+    }
+
+}

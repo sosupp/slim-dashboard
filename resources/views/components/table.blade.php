@@ -5,10 +5,10 @@
                 @if ($withCheckbox)
                 <th><input type="checkbox" wire:model.live="selectAll"></th>
                 @endif
-                
+
                 @forelse ($theadings as $heading)
-                    @if ($heading['canView'])    
-                    <th class="{{$heading['css']}}">
+                    @if ($heading['canView'])
+                    <th class="">
                         {{-- @if ($heading['filter'])
                             <select name="" id="">
                                 <option value="#">Filter</option>
