@@ -90,8 +90,12 @@ abstract class BaseTable extends Component
         return euroDate($record->$dateCol);
     }
 
-    public function customDateFormat(string $date)
+    public function customDateFormat(string|null $date)
     {
+        if(is_null($date)){
+            return;
+
+        }
         return Carbon::parse($date)->format('d M Y, H:i');
     }
 
