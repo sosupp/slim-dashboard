@@ -6,7 +6,7 @@
             wire:confirm="Are you sure you want to delete?">delete</button>
     @else
         @if (isset($action['customRoute']) && ($action['customRoute']))
-            <a wire:navigate href="{{ $this->setCustomRoute($record) ?: '#' }}"
+            <a wire:navigate href="{{ $this->setCustomRoute($record, $action['customRoute']) ?: '#' }}"
             class="cta-btn"
             :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">{{ $action['label'] }}</a>
         @elseif ($action['sidePanel'])

@@ -385,11 +385,13 @@ class HtmlForm
         string $labelCss = '',
         string $inputCss = 'custom-input',
         bool $canView = true,
+        bool $lock = false,
 
     )
     {
         $setLabel = is_null($label) ? $name : $label;
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
+        $setLocked = $lock ? 'disabled' : '';
 
         $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
@@ -406,7 +408,7 @@ class HtmlForm
                     class="$inputCss $class @error('$name') is-error @enderror"
                     wire:model$setState="$name"
                     value="$value"
-                    placeholder="$placeholder" />
+                    placeholder="$placeholder" $setLocked />
             </div>
             INPUT;
         }
@@ -430,6 +432,7 @@ class HtmlForm
         string $labelCss = '',
         string $inputCss = 'custom-input',
         bool $customPlaceholder = true,
+        bool $canView = true
     )
     {
         $setLabel = is_null($label) ? $name : $label;
@@ -441,37 +444,42 @@ class HtmlForm
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
-        $selectInput = <<<SELECT
-        <div class="$wrapperCss">
-            <label for="$id" class="$labelCss">$setLabel</label>
-            <select class="$inputCss @error('$name') is-error @enderror"
-                id="$id"
-                wire:model$setState="$name"
-                wire:key="$name"
-                $action>
-        SELECT;
+        $selectInput = '';
 
-        $selectInput .= <<<DEFAULT
-        <option>$usePlaceholder</option>
-        DEFAULT;
+        if($canView){
+            $selectInput = <<<SELECT
+            <div class="$wrapperCss">
+                <label for="$id" class="$labelCss">$setLabel</label>
+                <select class="$inputCss @error('$name') is-error @enderror"
+                    id="$id"
+                    wire:model$setState="$name"
+                    wire:key="$name"
+                    $action>
+            SELECT;
 
-        // dd($options);
-        $opts = '';
-        foreach($options as $index => $option){
-            if(!empty($optionKey) && is_array($option)){
-                $opts .= <<<OPTION
-                <option value="$option[$optionId]">$option[$optionKey]</option>
-                OPTION;
-            } else{
-                $opts .= <<<OPTION
-                <option value="$option">$option</option>
-                OPTION;
+            $selectInput .= <<<DEFAULT
+            <option>$usePlaceholder</option>
+            DEFAULT;
+
+            // dd($options);
+            $opts = '';
+            foreach($options as $index => $option){
+                if(!empty($optionKey) && is_array($option)){
+                    $opts .= <<<OPTION
+                    <option value="$option[$optionId]">$option[$optionKey]</option>
+                    OPTION;
+                } else{
+                    $opts .= <<<OPTION
+                    <option value="$option">$option</option>
+                    OPTION;
+                }
             }
+
+            // dd($opts);
+            $selectInput .= $opts;
+            $selectInput .= '</select></div>';
         }
 
-        // dd($opts);
-        $selectInput .= $opts;
-        $selectInput .= '</select></div>';
 
         $this->form .= $selectInput;
 
