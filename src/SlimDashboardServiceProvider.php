@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Sosupp\SlimDashboard\Console\MakeFormCommand;
 use Sosupp\SlimDashboard\Console\MakePageCommand;
 use Sosupp\SlimDashboard\Console\MakeTableCommand;
+use Sosupp\SlimDashboard\Console\MakeServiceCommand;
 use Sosupp\SlimDashboard\Console\MakeTabWrapperCommand;
 
 class SlimDashboardServiceProvider extends ServiceProvider
@@ -94,6 +95,7 @@ class SlimDashboardServiceProvider extends ServiceProvider
                 MakeFormCommand::class,
                 MakePageCommand::class,
                 MakeTabWrapperCommand::class,
+                MakeServiceCommand::class
             ]);
         }
     }

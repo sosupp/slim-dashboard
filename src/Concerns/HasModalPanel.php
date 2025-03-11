@@ -9,5 +9,12 @@ trait HasModalPanel
     use WithSideModal, HasCustomPanelView;
 
     abstract function sidePanelModel($id);
-    
+
+    public function hasCustomDatePanel()
+    {
+        return false;
+    }
+
+    public function tableForm(){}
+
 }

@@ -1,7 +1,7 @@
 <div x-data="{
         isOpen: false,
         search: '',
-        selected: $wire.entangle('{{$name}}'),
+        selected: $wire.entangle('{{$name}}'){{$wireState}},
         options: @js($options),
         toggle() {
         this.isOpen = !this.isOpen;

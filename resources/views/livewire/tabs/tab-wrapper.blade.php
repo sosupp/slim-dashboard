@@ -17,23 +17,23 @@
         @persist('tabheadings')
         <div class="{{$this->headingCss()}}">
             @foreach ($this->tabHeadings() as $tab)
-            @if ($tab['isVisible'])
-                @if ($this->useWireNavigate())
-                <a class="{{$this->headingItemCss()}} as-pointer" wire:key="{{$tab['key']}}"
-                    wire:navigate.hover href="{{$tab['url']}}"
-                    :class="selectedTab == '{{$tab['key']}}' ? '{{$this->activeItemCss()}}' : ''"
-                    x-on:click="toggleSelected('{{$tab['key']}}')">
-                    {{$tab['heading']}}
-                </a>
-                @else
-                <span class="{{$this->headingItemCss()}} as-pointer"
-                    wire:key="{{$tab['key']}}"
-                    :class="selectedTab == '{{$tab['key']}}' ? '{{$this->activeItemCss()}}' : ''"
-                    x-on:click="$dispatch('toggle-tab-component', {component: '{{$tab['component']}}', url: '{{$tab['url']}}', view: '{{$tab['view']}}', tab: '{{$tab['key']}}' }), toggleSelected('{{$tab['key']}}')">
-                    {{$tab['heading']}}
-                </span>
+                @if ($tab['isVisible'])
+                    @if ($this->useWireNavigate())
+                    <a class="{{$this->headingItemCss()}} as-pointer" wire:key="{{$tab['key']}}"
+                        wire:navigate.hover href="{{$tab['url']}}"
+                        :class="selectedTab == '{{$tab['key']}}' ? '{{$this->activeItemCss()}}' : ''"
+                        x-on:click="toggleSelected('{{$tab['key']}}')">
+                        {{$tab['heading']}}
+                    </a>
+                    @else
+                    <span class="{{$this->headingItemCss()}} as-pointer"
+                        wire:key="{{$tab['key']}}"
+                        :class="selectedTab == '{{$tab['key']}}' ? '{{$this->activeItemCss()}}' : ''"
+                        x-on:click="$dispatch('toggle-tab-component', {component: '{{$tab['component']}}', url: '{{$tab['url']}}', view: '{{$tab['view']}}', tab: '{{$tab['key']}}' }), toggleSelected('{{$tab['key']}}')">
+                        {{$tab['heading']}}
+                    </span>
+                    @endif
                 @endif
-            @endif
             @endforeach
         </div>
         @endpersist

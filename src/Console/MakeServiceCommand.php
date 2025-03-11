@@ -4,7 +4,7 @@ namespace Sosupp\SlimDashboard\Console;
 use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
 
-class MakeTabWrapperCommand extends GeneratorCommand
+class MakeServiceCommand extends GeneratorCommand
 {
     protected $signature = 'make:slim-service
                             {name : The name of the service class to generate}
