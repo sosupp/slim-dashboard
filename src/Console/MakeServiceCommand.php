@@ -32,7 +32,6 @@ class MakeServiceCommand extends GeneratorCommand
         // Get input arguments
         $name = $this->argument('name');
         $model = $this->option('model') ?: 'YourModel';
-        $service = $this->option('service') ?: 'YourService';
 
         $namespace = $this->qualifyClass($name);
         $getClassName = str(str($name)->explode('\\')->last())->studly()->value;
@@ -43,8 +42,8 @@ class MakeServiceCommand extends GeneratorCommand
 
         // Replace basic placeholders
         $content = str_replace(
-            ['{{ namespace }}', '{{ class }}', '{{ model }}', '{{ service }}'],
-            [$namespace, $getClassName, $model, $service],
+            ['{{ namespace }}', '{{ class }}', '{{ model }}'],
+            [$namespace, $getClassName, $model],
             $stub
         );
 

@@ -153,6 +153,27 @@ class HtmlForm
         return $this;
     }
 
+    public function div(
+        string $id = '',
+        string $content = '',
+        string $wrapperCss = 'custom-input-wrapper',
+        bool $canView = true,
+    )
+    {
+        $emptyDiv = '';
+
+        if($canView){
+            $emptyDiv = <<<EMPTY
+                <div class="$wrapperCss" id="$id">
+                    $content
+                </div>
+            EMPTY;
+        }
+
+        $this->form .= $emptyDiv;
+        return $this;
+    }
+
     public function imageInput(
         $imagePath = null,
         $wrapperCss= "image-preview",
@@ -329,6 +350,7 @@ class HtmlForm
     )
     {
         $setLabel = is_null($label) ? $name : $label;
+        $setId = empty($id) ? $setLabel : $id;
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
 
         $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
@@ -341,9 +363,9 @@ class HtmlForm
         }">';
         $input = <<<INPUT
         <div class="$wrapperCss">
-            <label for="$id" class="$labelCss">$setLabel</label>
+            <label for="$setId" class="$labelCss">$setLabel</label>
             <input type="$type"
-                id="$id"
+                id="$setId"
                 class="$inputCss $class @error('$name') is-error @enderror"
                 wire:model$setState="$name"
                 value="$value"
@@ -359,13 +381,6 @@ class HtmlForm
 
         $resultWrapper .= view($resultView);
         $resultWrapper .= '</div>';
-        // $error = $this->error($name);
-
-        // $input .= $this->error($name);
-
-        // if($type === 'file' && !empty($value)){
-
-        // }
 
         $this->form .= $resultWrapper;
         return $this;
@@ -390,6 +405,7 @@ class HtmlForm
     )
     {
         $setLabel = is_null($label) ? $name : $label;
+        $setId = empty($id) ? $setLabel : $id;
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
         $setLocked = $lock ? 'disabled' : '';
 
@@ -402,13 +418,14 @@ class HtmlForm
         if($canView){
             $input = <<<INPUT
             <div class="$wrapperCss">
-                <label for="$id" class="$labelCss">$setLabel</label>
+                <label for="$setId" class="$labelCss">$setLabel</label>
                 <input type="$type"
-                    id="$id"
+                    id="$setId"
                     class="$inputCss $class @error('$name') is-error @enderror"
                     wire:model$setState="$name"
                     value="$value"
-                    placeholder="$placeholder" $setLocked />
+                    placeholder="$placeholder" $setLocked required
+                    wire:key="$setId"/>
             </div>
             INPUT;
         }
@@ -436,7 +453,7 @@ class HtmlForm
     )
     {
         $setLabel = is_null($label) ? $name : $label;
-        // $wireIgnore = $action = 'multiple' ? 'wire:ignore' : '';
+        $setId = empty($id) ? $setLabel : $id;
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
         $usePlaceholder = $customPlaceholder ? $label : '';
 
@@ -449,9 +466,9 @@ class HtmlForm
         if($canView){
             $selectInput = <<<SELECT
             <div class="$wrapperCss">
-                <label for="$id" class="$labelCss">$setLabel</label>
+                <label for="$setId" class="$labelCss">$setLabel</label>
                 <select class="$inputCss @error('$name') is-error @enderror"
-                    id="$id"
+                    id="$setId"
                     wire:model$setState="$name"
                     wire:key="$name"
                     $action>
@@ -506,7 +523,7 @@ class HtmlForm
     )
     {
         $setLabel = is_null($label) ? $name : $label;
-        // $wireIgnore = $action = 'multiple' ? 'wire:ignore' : '';
+        $setId = empty($id) ? $setLabel : $id;
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
         $usePlaceholder = $customPlaceholder ? $label : '';
 
@@ -516,7 +533,7 @@ class HtmlForm
 
         $this->form .= view('slim-dashboard::components.inputs.select-search', [
             'name' => $name,
-            'id' => $id,
+            'id' => $setId,
             'label' => $setLabel,
             'placeholder' => $usePlaceholder,
             'action' => $action,
@@ -549,20 +566,20 @@ class HtmlForm
     )
     {
         $setLabel = is_null($label) ? $name : $label;
-
+        $setId = empty($id) ? $setLabel : $id;
         $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
         if($withEditor === false){
-            $this->form .= $this->plainEditor(id: $id, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss);
+            $this->form .= $this->plainEditor(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss);
             return $this;
         }
 
         if($withImageUpload){
-            $this->form .= $this->ckEditor(id: $id, model: $name);
+            $this->form .= $this->ckEditor(id: $setId, model: $name);
         }else{
-            $this->form .= $this->ckEditorWithoutUpload(id: $id, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss);
+            $this->form .= $this->ckEditorWithoutUpload(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss);
         }
 
         return $this;

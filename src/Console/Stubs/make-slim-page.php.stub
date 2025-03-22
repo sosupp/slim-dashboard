@@ -30,7 +30,7 @@ class {{ class }} extends BasePage
     }
 
 
-    public function render()
+    public function withRender()
     {
         return view('{{ view }}');
     }

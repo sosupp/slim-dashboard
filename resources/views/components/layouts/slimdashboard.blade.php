@@ -100,7 +100,5 @@
             }
         </script>
 
-
-        @include('includes.scripts.store-pusher')
     </body>
 </html>
