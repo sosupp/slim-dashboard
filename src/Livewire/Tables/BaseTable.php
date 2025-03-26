@@ -54,6 +54,7 @@ abstract class BaseTable extends Component
 
     public $modelImageId;
     public $selectedImageName;
+    public $previewImagePath;
 
     public $hasSidePanel = false;
 

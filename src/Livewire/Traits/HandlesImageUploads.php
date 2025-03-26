@@ -10,7 +10,8 @@ trait HandlesImageUploads
 {
     use WithFileUploads,
         UploadImages;
-
+        
+    #[Session()]
     public $imagePath;
     public $image;
 

@@ -10,22 +10,24 @@ trait StatusToggleable
 
     public abstract function useModel();
 
-    public function toggleStatus($modelId)
+    public function toggleStatus($modelId, $col = 'status')
     {
         if($this->useModel() == null){
             throw new Exception("No model defined for delete action. Return an object or string for model.", 1);
             return;
         }
-        
+
         return $this->useModel()::where('id', $modelId)
         ->update([
-            'status' => $this->setStatus($modelId)
+            $col => $this->setStatus($modelId, $col)
         ]);
     }
 
-    protected function setStatus($modelId)
+    protected function setStatus($modelId, $col)
     {
-        return $this->tableRecords()->where('id', $modelId)->first()->status === 'active'
+        // dd((string) $col);
+
+        return $this->tableRecords()->where('id', $modelId)->first()->$col === 'active'
         ? 'inactive'
         : 'active';
     }

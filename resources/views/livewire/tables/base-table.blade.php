@@ -8,6 +8,9 @@
         selectFilterLabel: $wire.entangle('selectFilterLabel'),
         dateLabel: $wire.entangle('dateLabel'),
         searchFilters: false,
+        imagePreview: null,
+        imgsrc: null,
+        imagePath: null,
         subActive(key){
             this.subnav = key
         },
@@ -28,7 +31,7 @@
         closePanel(){
             this.sidePanel = !this.sidePanel
         }
-    }">
+    }" x-init="imagePreview = '{{asset($previewImagePath)}}'">
 
     @persist('pagesubnavs')
         @if (!empty($this->pageSubNavs))
@@ -167,7 +170,7 @@
                                                         @if (isset($colHeading['type']) && $colHeading['type'] === 'toggle')
                                                             <label class="switch">
                                                                 <input type="checkbox" value="{{ $record[$colHeading['col']] }}"
-                                                                    wire:click="toggleStatus({{ $record->id }})"
+                                                                    wire:click="toggleStatus({{ $record->id }}, '{{$colHeading['col']}}')"
                                                                     {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
                                                                 <span class="slider round"></span>
                                                             </label>
@@ -254,7 +257,7 @@
                                                                 @if (isset($colHeading['type']) && $colHeading['type'] === 'toggle')
                                                                     <label class="switch">
                                                                         <input type="checkbox" value="{{ $record[$colHeading['col']] }}"
-                                                                            wire:click="toggleStatus({{ $record->id }})"
+                                                                            wire:click="toggleStatus({{ $record->id }}, '{{$colHeading['col']}}')"
                                                                             {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
                                                                         <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
                                                                     </label>

@@ -279,12 +279,25 @@ class HtmlForm
         $input = '';
 
         $progress = '$event.detail.progress';
+        $setFile = 'this.$refs.uploadedImage.files[0]';
         $input = <<<WRAPPER
             <div x-data="{
-                    imagePreview: null,
                     progress: 0,
                     uploading: false,
                     isSuccess: false,
+                    previewImage(){
+                        let file = $setFile;
+                        filename = file.name;
+                        if (!file || file.type.indexOf('image/') === -1) return;
+                        this.imagePreview = null;
+
+                        let reader = new FileReader();
+                        reader.onload = e => {
+                            this.imagePreview = e.target.result
+                        }
+
+                        reader.readAsDataURL(file);
+                    }
                 }"
                 x-on:livewire-upload-start="uploading = true"
                 x-on:livewire-upload-finish="uploading = false;isSuccess=true"
@@ -296,12 +309,8 @@ class HtmlForm
                         style="display: none;"
                         id="imageInput"
                         class="image-input-file"
-                        x-on:change="file => {
-                                isSuccess=false;
-                                const reader = new FileReader();
-                                reader.onload = e => imagePreview = e.target.result;
-                                reader.readAsDataURL(file.target.files[0]);
-                        }"
+                        x-ref="uploadedImage"
+                        x-on:change="previewImage()"
                         wire:model$setState="$name">
 
                     <label for="imageInput"
@@ -572,14 +581,14 @@ class HtmlForm
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
         if($withEditor === false){
-            $this->form .= $this->plainEditor(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss);
+            $this->form .= $this->plainEditor(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel);
             return $this;
         }
 
         if($withImageUpload){
-            $this->form .= $this->ckEditor(id: $setId, model: $name);
+            $this->form .= $this->ckEditor(id: $setId, model: $name, label: $setLabel);
         }else{
-            $this->form .= $this->ckEditorWithoutUpload(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss);
+            $this->form .= $this->ckEditorWithoutUpload(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel);
         }
 
         return $this;
@@ -799,19 +808,19 @@ class HtmlForm
         BLADE;
     }
 
-    private function plainEditor(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss)
+    private function plainEditor(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label)
     {
-        return view('slim-dashboard::components.utils.forms.plain-editor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss'));
+        return view('slim-dashboard::components.utils.forms.plain-editor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss', 'label'));
     }
 
-    private function ckEditor(string $id, string $model)
+    private function ckEditor(string $id, string $model, string $label)
     {
-        return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model'));
+        return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model', 'label'));
     }
 
-    private function ckEditorWithoutUpload(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss)
+    private function ckEditorWithoutUpload(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label)
     {
-        return view('slim-dashboard::components.utils.forms.no-upload-ckeditor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss'));
+        return view('slim-dashboard::components.utils.forms.no-upload-ckeditor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss', 'label'));
     }
 
 
