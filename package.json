@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "[![Latest Version on Packagist](https://img.shields.io/packagist/v/sosupp/slim-dashboard.svg?style=flat-square)](https://packagist.org/packages/sosupp/slim-dashboard) [![Total Downloads](https://img.shields.io/packagist/dt/sosupp/slim-dashboard.svg?style=flat-square)](https://packagist.org/packages/sosupp/slim-dashboard) ![GitHub Actions](https://github.com/sosupp/slim-dashboard/actions/workflows/main.yml/badge.svg)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run development",
     "development": "mix",
     "watch": "mix watch",

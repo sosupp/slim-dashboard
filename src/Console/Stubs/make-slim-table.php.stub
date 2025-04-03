@@ -12,10 +12,19 @@ use Sosupp\SlimDashboard\ValueObjects\CardEdit;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
+// {{if:inlineForm}}
+use Sosupp\SlimDashboard\Concerns\HasModalPanel;
+use Sosupp\SlimDashboard\Html\HtmlForm;
+use Sosupp\SlimDashboard\Livewire\Traits\HandlesImageUploads;
+// {{endif}}
 
 class {{ class }} extends BaseTable
 {
-    use StatusToggleable;
+    use StatusToggleable // {{if:inlineForm}}, HasModalPanel, HandlesImageUploads // {{endif}};
+
+    // {{if:inlineForm}}
+    public $selectedModelId;
+    // {{endif}}
 
     public function mount()
     {
@@ -119,5 +128,53 @@ class {{ class }} extends BaseTable
         // return 'editable' to make image uploadable inline
         return '';
     }
+
+    // {{if:inlineForm}}
+    // Inline form CRUD
+    public function sidePanelModel($id)
+    {
+        // Below is the selected model to use
+        $this->selectedModelId = $id; // You can change property name
+        $model = $this->tableRecords->where('id', $id)->first();
+
+        // More code here
+  
+    }
+
+    public function panelExtraView(): string|View
+    {
+        return HtmlForm::make()
+        ->specialInput()
+        ->input(name: 'name', label: 'Name')
+        ->inlineImageInput(name: 'image', label: 'Image')
+        ->button(label: 'save')
+        ->build();
+    }
+
+    public function save()
+    {
+        $validated = $this->validate(
+            rules: []
+        );
+
+        // dd($validated);
+
+        $result = (new {{ service }})->make(
+            id: $this->selectedModelId,
+            data: $validated,
+        );
+
+        if($result){
+            $this->reset('selectedModelId');
+
+            $this->successAlert(message: 'Testimonial added...');
+        }
+    }
+
+    public function updateForm()
+    {
+        return $this->panelExtraView();
+    }
+    // {{endif}}
 
 }

@@ -1,10 +1,15 @@
 {
-    "/js/app.js": "/js/app.js?id=b3811adec8ec008dcef95087e4c5f0c9",
-    "/css/dashboard/table.css": "/css/dashboard/table.css?id=01e8d527136c0b278576326df3fbe714",
-    "/css/dashboard/modal.css": "/css/dashboard/modal.css?id=85c5267b0977445b489207bd640e287c",
-    "/css/dashboard/inputs.css": "/css/dashboard/inputs.css?id=e3b5768eb7b7d790b708b9216079515d",
-    "/css/dashboard/form.css": "/css/dashboard/form.css?id=0c9752f3eb0f4524e35fe7edaad66000",
-    "/css/dashboard/dashboard.css": "/css/dashboard/dashboard.css?id=db5fbc4fff638ced71ea5b295492ed4e",
-    "/css/dashboard/wrappers.css": "/css/dashboard/wrappers.css?id=9b05a3ec646633f6a0ee69bc704eec06",
-    "/css/dashboard/utilities.css": "/css/dashboard/utilities.css?id=1ebb2a24902e108b26bc48a697d251ed"
+    "/js/app.js": "/js/app.js?id=4d43613b6eb639459e530d3263f54762",
+    "/js/dashboard.js": "/js/dashboard.js?id=f6969a0499a6d3a208f264c58608a1d5",
+    "/css/dashboard/inputs.css": "/css/dashboard/inputs.css?id=2f388641e99e1539620fd23f8dff08ae",
+    "/css/dashboard/form.css": "/css/dashboard/form.css?id=2f0ca0859ded1a712b21cd657c5591d0",
+    "/css/dashboard/dashboard.css": "/css/dashboard/dashboard.css?id=b8210e7086c0e98ca033e38c427800e2",
+    "/css/register.css": "/css/register.css?id=a425c094cc50deee9dd6cb36749cb01d",
+    "/css/modal.css": "/css/modal.css?id=08d91cf21accf6bbdbd0d0e76f481674",
+    "/css/dashboard/accounting.css": "/css/dashboard/accounting.css?id=575f3959dadd38d733bc5281ec56a3eb",
+    "/css/dashboard/accounts.css": "/css/dashboard/accounts.css?id=9ced18f9faa250114566d42871247740",
+    "/css/dashboard/wrappers.css": "/css/dashboard/wrappers.css?id=e401a3ceb02dfcae2f7465a34b8b38b8",
+    "/css/dashboard/utilities.css": "/css/dashboard/utilities.css?id=62fb134f215362fdf2c1d6c6ab8bfecb",
+    "/css/dashboard/table.css": "/css/dashboard/table.css?id=2e32264cbdf83096f86dd3ccd4723e52",
+    "/css/dashboard/modal.css": "/css/dashboard/modal.css?id=b9bde4d9cbafbd9f605639023fd52862"
 }

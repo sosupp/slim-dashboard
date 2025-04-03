@@ -1,6 +1,9 @@
 <div x-data="{
         imgsrc: null,
         modelImageId: '',
+        imagePreview: null,
+        imgsrc: null,
+        imagePath: null,
         previewImage(modelId) {
 
             this.modelImageId = modelId;

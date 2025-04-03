@@ -1,0 +1,253 @@
+/* accounting tab */
+.special-slide-icon{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 0;
+}
+.special-slide-icon span{
+    font-size: 1.6rem;
+    display: none;
+    height: 14px;
+    line-height: 14px;
+}
+.accounting-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.accounting-wrapper a{
+    cursor: pointer;
+}
+.accounting-wrapper p{
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+#aLanding{
+    text-decoration: underline;
+    color: blue;
+}
+.accounting-tab-wrapper a,
+.accounting-tab-wrapper select,
+.dropdown-wrapper button{
+    border: 1px solid #dddddd;
+    padding: 0 1rem;
+    display: inline-block;
+    margin: 0 !important;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.accounting-tab-wrapper a:hover{
+    background-color: #dddddd;
+}
+.accounting-tab-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap:  0.5rem;
+}
+.accounting-tab-wrapper a:visited{
+    background-color: pink;
+}
+
+/* MEDIA QUERIES */
+@media(max-width: 768px){
+    .accounting-wrapper{
+        flex-wrap: wrap;
+    }
+
+    .accounting-tab-wrapper{
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        padding: 1rem 0;
+    }
+
+    .special-slide-icon span{
+        display: block;
+    }
+}
+
+.expenses-wrapper{
+    background-color: rgb(255, 192, 203, .15);
+}
+.other-revenue{
+    background-color: rgba(0, 128, 0, .08);
+}
+
+
+.ledger-wrapper{
+    width: 100%;
+    min-height: 300px;
+    padding: 1rem 1rem;
+}
+.ledger-table{
+    /* width: 100%; */
+}
+.ledger-table-actions{
+    width: 100%;
+    margin: 1rem 0;
+}
+.ledger-table-actions p{
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 1.2rem;
+}
+.ledger-table-actions p span{
+    font-weight: bold;
+}
+.this-month{
+    font-size: 14px !important;
+    width: fit-content;
+    background: #dddddd;
+    padding: 0.3rem;
+}
+.ledger-wrapper table{
+    width: 100%;
+    border-spacing:0;
+    border-collapse: collapse;
+}
+.ledger-wrapper table thead tr{
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 95%;
+}
+.ledger-wrapper table,
+.ledger-wrapper th,
+.ledger-wrapper td{
+    border: 1px solid #dddddd;
+    padding: 0.5rem;
+}
+.ledger-wrapper td{
+    padding: 0;
+}
+.ledger-action-link{
+    padding: 0.5rem !important;
+}
+.tdSpecial{
+    padding: 0 0.5rem;
+}
+.ledger-wrapper tbody tr{
+    font-size: 15px;
+    cursor: pointer;
+}
+.accounting-form-wrapper input,
+.accounting-form-wrapper select{
+    border: 1px solid purple;
+    outline: none;
+    padding: 0.3rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+#addBtn{
+    background-color: rgb(128, 0, 128, 0.5);
+    padding: 0.3rem 1rem;
+    color: white;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+#addBtn:hover{
+    background-color: purple;
+}
+
+/* table input */
+.table-input{
+    width: 100%;
+    margin: 0;
+    border: none;
+    background: inherit;
+    padding: 0.5rem;
+}
+
+
+/* Widget */
+.accounting-widget{
+    background-color: rgba(255, 255, 255, 0.663);
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.accounting-widget p{
+    margin: 0;
+    border-radius: 8px 8px 0 0;
+    font-size: 90%;
+}
+.accounting-widget
+.widget-heading{
+    background-color: white;
+    padding: 0.3rem 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.accounting-widget
+.widget-value{
+    padding: 1rem;
+}
+.widget-value p{
+    font-size: 2.3rem;
+}
+
+/* accounting landing page */
+.accounting-landing{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 1rem 0;
+    /* color: #80008014; */
+}
+
+/* Income Statement */
+.statement-wrapper{
+    width: 1024px;
+    max-width: 100%;
+    min-height: 300px;
+    background-color: rgb(255, 192, 203, .15);
+    padding: 1rem 1rem;
+    /* margin: 2rem 0; */
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.statement-wrapper p{
+    margin: 0;
+    font-weight: bold;
+}
+.statement-wrapper ul li{
+    text-transform: capitalize;
+}
+.statement-wrapper span{
+    display: block;
+}
+
+.table-heading{
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0;
+}
+.table-heading p{
+    text-transform: uppercase;
+}
+
+
+/* MEDIA QUERIES */
+@media(max-width: 768px){
+    .expense-wrapper input,
+    .expense-wrapper select{
+        width: 100%;
+    }
+
+    .accounting-landing{
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 1rem;
+    }
+}

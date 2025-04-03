@@ -32,7 +32,7 @@ class {{ class }} implements Crudable
         return {{ model }}::query()
         ->withTrashed()
         ->when(!empty($this->searchTerm), function($q){
-            $q->search($this->searchTerm);
+            $q->{$this->searchType}($this->searchCol, $this->searchTerm);
         })
         ->dated($this->selectedDate)
         ->orderBy($this->orderByColumn, $this->orderByDirection)
@@ -43,9 +43,12 @@ class {{ class }} implements Crudable
     {
         return {{ model }}::query()
         ->withTrashed()
+        ->when(!empty($this->searchTerm), function($q){
+            $q->{$this->searchType}($this->searchCol, $this->searchTerm);
+        })
         ->dated($this->selectedDate)
         ->orderBy($this->orderByColumn, $this->orderByDirection)
-        ->paginate(perPage: $limit);
+        ->paginate(perPage: $limit, columns: $cols);
     }
 
     public function remove(int|string $id) 

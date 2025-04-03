@@ -1,20 +1,20 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
+/***/ "./resources/assets/js/app.js":
+/*!************************************!*\
+  !*** ./resources/assets/js/app.js ***!
+  \************************************/
 /***/ (() => {
 
 
 
 /***/ }),
 
-/***/ "./resources/css/dashboard/utilities.css":
-/*!***********************************************!*\
-  !*** ./resources/css/dashboard/utilities.css ***!
-  \***********************************************/
+/***/ "./resources/assets/css/dashboard/modal.css":
+/*!**************************************************!*\
+  !*** ./resources/assets/css/dashboard/modal.css ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -24,10 +24,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/dashboard/wrappers.css":
-/*!**********************************************!*\
-  !*** ./resources/css/dashboard/wrappers.css ***!
-  \**********************************************/
+/***/ "./resources/assets/css/dashboard/table.css":
+/*!**************************************************!*\
+  !*** ./resources/assets/css/dashboard/table.css ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37,10 +37,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/dashboard/dashboard.css":
-/*!***********************************************!*\
-  !*** ./resources/css/dashboard/dashboard.css ***!
-  \***********************************************/
+/***/ "./resources/assets/css/dashboard/utilities.css":
+/*!******************************************************!*\
+  !*** ./resources/assets/css/dashboard/utilities.css ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -50,10 +50,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/dashboard/form.css":
-/*!******************************************!*\
-  !*** ./resources/css/dashboard/form.css ***!
-  \******************************************/
+/***/ "./resources/assets/css/dashboard/wrappers.css":
+/*!*****************************************************!*\
+  !*** ./resources/assets/css/dashboard/wrappers.css ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -63,10 +63,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/dashboard/inputs.css":
-/*!********************************************!*\
-  !*** ./resources/css/dashboard/inputs.css ***!
-  \********************************************/
+/***/ "./resources/assets/css/dashboard/accounts.css":
+/*!*****************************************************!*\
+  !*** ./resources/assets/css/dashboard/accounts.css ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -76,9 +76,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/dashboard/modal.css":
+/***/ "./resources/assets/css/dashboard/accounting.css":
+/*!*******************************************************!*\
+  !*** ./resources/assets/css/dashboard/accounting.css ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/modal.css":
+/*!****************************************!*\
+  !*** ./resources/assets/css/modal.css ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/register.css":
 /*!*******************************************!*\
-  !*** ./resources/css/dashboard/modal.css ***!
+  !*** ./resources/assets/css/register.css ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -89,10 +115,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/dashboard/table.css":
-/*!*******************************************!*\
-  !*** ./resources/css/dashboard/table.css ***!
-  \*******************************************/
+/***/ "./resources/assets/css/dashboard/dashboard.css":
+/*!******************************************************!*\
+  !*** ./resources/assets/css/dashboard/dashboard.css ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/form.css":
+/*!*************************************************!*\
+  !*** ./resources/assets/css/dashboard/form.css ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/inputs.css":
+/*!***************************************************!*\
+  !*** ./resources/assets/css/dashboard/inputs.css ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -189,13 +241,17 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/dashboard/table": 0,
-/******/ 			"css/dashboard/modal": 0,
 /******/ 			"css/dashboard/inputs": 0,
 /******/ 			"css/dashboard/form": 0,
 /******/ 			"css/dashboard/dashboard": 0,
+/******/ 			"css/register": 0,
+/******/ 			"css/modal": 0,
+/******/ 			"css/dashboard/accounting": 0,
+/******/ 			"css/dashboard/accounts": 0,
 /******/ 			"css/dashboard/wrappers": 0,
-/******/ 			"css/dashboard/utilities": 0
+/******/ 			"css/dashboard/utilities": 0,
+/******/ 			"css/dashboard/table": 0,
+/******/ 			"css/dashboard/modal": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -245,14 +301,18 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/css/dashboard/dashboard.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/css/dashboard/form.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/css/dashboard/inputs.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/css/dashboard/modal.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/css/dashboard/table.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/css/dashboard/utilities.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/dashboard/table","css/dashboard/modal","css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/dashboard/wrappers","css/dashboard/utilities"], () => (__webpack_require__("./resources/css/dashboard/wrappers.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/modal.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/register.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/dashboard.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/form.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/inputs.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/modal.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/table.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/utilities.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/wrappers.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/accounts.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/accounting.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

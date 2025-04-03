@@ -594,6 +594,32 @@ class HtmlForm
         return $this;
     }
 
+    public function textEditor(
+        string $name,
+        string $id = 'customEditor',
+        string|null $label = null,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
+        bool $customPlaceholder = true,
+        bool $withImageUpload = true,
+    )
+    {
+        $setLabel = is_null($label) ? $name : $label;
+        $setId = empty($id) ? $setLabel : $id;
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+
+        $this->form .= view('slim-dashboard::components.utils.editors.quill', [
+            'model' => $name,
+            'id' => $setId,
+            'class' => $wrapperCss
+        ]);
+
+        return $this;
+    }
+
     public function button(
         string $label = '',
         string $type = 'button',
@@ -604,28 +630,35 @@ class HtmlForm
         string $class = 'standard-btn',
         string $defaultSave = 'save',
         bool $isUpdate = false,
+        bool $canView = true,
     )
     {
         $useWire = empty($defaultSave) ? $wire : 'click.prevent='.$defaultSave;
         $useLabel = empty($label) ? ($isUpdate ? 'Update' : 'Save') : $label;
 
-        $this->form .= <<<BUTTON
-        <button type="$type"
-            id="$id"
-            class="$class as-pointer"
-            wire:$useWire
-            wire:loading.attr="disabled"
-            $action>$useLabel</button>
+        if($canView){
 
-        BUTTON;
+            $this->form .= <<<BUTTON
+            <button type="$type"
+                id="$id"
+                class="$class as-pointer"
+                wire:$useWire
+                wire:loading.attr="disabled"
+                $action>$useLabel</button>
 
-        // $useIcon = '';
-        $useIcon = $this->spinnerIcon();
-        $this->form .= <<<LOADER
-            <div wire:loading wire:target="$wireTarget">
-                $useIcon
-            </div>
-        LOADER;
+            BUTTON;
+
+            // $useIcon = '';
+            $useIcon = $this->spinnerIcon();
+            $this->form .= <<<LOADER
+                <div wire:loading wire:target="$wireTarget">
+                    $useIcon
+                </div>
+            LOADER;
+
+        }
+
+
 
         return $this;
     }

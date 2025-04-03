@@ -26,6 +26,8 @@ return [
 
     ],
 
+    'dashboard_navigation' => null,
+
     'prefix' => 'slimdashboard',
-    'middleware' => ['web'], // You can change or add middleware 
+    'middleware' => ['web', 'auth'], // You can change or add middleware 
 ];

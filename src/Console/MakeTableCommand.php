@@ -9,7 +9,8 @@ class MakeTableCommand extends GeneratorCommand
     protected $signature = 'make:slim-table
                             {name : The name of the table class to generate}
                             {--model= : The model class to associate with the file}
-                            {--service= : The service or repository class to associate with the file}';
+                            {--service= : The service or repository class to associate with the file}
+                            {--crud= : Include form for inline editing and creating}';
 
     protected $description = 'Create a new slim-dashboard table';
     // protected $type = 'BaseTable';

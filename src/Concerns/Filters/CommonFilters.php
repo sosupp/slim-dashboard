@@ -11,7 +11,7 @@ trait CommonFilters
 
     protected $withTrashed = false;
 
-    protected $searchType = 'contain';
+    protected $searchType = 'containSearch';
     protected $searchTerm = '';
     protected $searchCol = '';
 
@@ -43,7 +43,7 @@ trait CommonFilters
 
     public function matchSearch(string $term = '', string $col = 'name')
     {
-        $this->searchType = 'match';
+        $this->searchType = 'matchSearch';
         $this->searchCol = $col;
         $this->searchTerm = $term;
         return $this;
@@ -51,7 +51,7 @@ trait CommonFilters
 
     public function containSearch(string $term = '', string $col = 'name')
     {
-        $this->searchType = 'contain';
+        $this->searchType = 'containSearch';
         $this->searchCol = $col;
         $this->searchTerm = $term;
         return $this;

@@ -10,6 +10,8 @@ use Sosupp\SlimDashboard\Console\MakePageCommand;
 use Sosupp\SlimDashboard\Console\MakeTableCommand;
 use Sosupp\SlimDashboard\Console\MakeServiceCommand;
 use Sosupp\SlimDashboard\Console\MakeTabWrapperCommand;
+use Sosupp\SlimDashboard\Console\Slimer\MakeSlimerMenus;
+use Sosupp\SlimDashboard\View\Components\Dashboard\Navigations;
 
 class SlimDashboardServiceProvider extends ServiceProvider
 {
@@ -23,36 +25,25 @@ class SlimDashboardServiceProvider extends ServiceProvider
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'slim-dashboard');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'slim-dashboard');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        // $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->registerRoutes();
 
-        // $this->loadViewComponentsAs('slim-dashboard', [
-
-        // ]);
-
         Blade::componentNamespace('SlimDashboard\\Views\\Components', 'slim-dashboard');
+        Blade::component('navigations', Navigations::class, 'slimer');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('slim-dashboard.php'),
-            ], 'slim-dashboard-config');
+            ], 'slimer-config');
 
             // Publishing the views.
-            /*$this->publishes([
+            $this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/slim-dashboard'),
-            ], 'views');*/
+            ], 'slimer-views');
 
             // Publishing assets.
             $this->publishes([
                 __DIR__.'/../public' => public_path('vendor/slim-dashboard'),
-            ], 'slim-dashboard-assets');
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/slim-dashboard'),
-            ], 'lang');*/
+            ], 'slimer-assets');
 
             $this->customCommands();
         }
@@ -95,7 +86,8 @@ class SlimDashboardServiceProvider extends ServiceProvider
                 MakeFormCommand::class,
                 MakePageCommand::class,
                 MakeTabWrapperCommand::class,
-                MakeServiceCommand::class
+                MakeServiceCommand::class,
+                MakeSlimerMenus::class,
             ]);
         }
     }

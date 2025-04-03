@@ -20,7 +20,7 @@ trait HandlesImageUploads
 
     public $customImageProperty;
 
-    public function colForImageName()
+    public function colForImageName(): string
     {
         return '';
     }
