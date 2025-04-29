@@ -34,7 +34,7 @@ class MakePageCommand extends GeneratorCommand
         $model = $this->option('model') ?: 'YourModel';
         $service = $this->option('service') ?: 'YourService';
 
-        $namespace = $this->qualifyClass($name);
+        $namespace = 'App\\Livewire\\'. $this->getNamespace($name);
         $className = Str::studly($name);
         $getClassName = str(str($name)->explode('\\')->last())->studly()->value;
 
@@ -94,12 +94,14 @@ class MakePageCommand extends GeneratorCommand
         // Ensure directory exists
         if (!file_exists(dirname($filePath))) {
             mkdir(dirname($filePath), 0777, true);
+            
+            // Write the file
+            file_put_contents($filePath, $content);
+            $this->info("View file created at: $filePath");
         }
 
-        // Write the file
-        file_put_contents($filePath, $content);
-        $this->info("View file created at: $filePath");
-        // dd($base, $filePath, $viewName);
+        $this->warn('The file exist');
+        return;
     }
 
 }

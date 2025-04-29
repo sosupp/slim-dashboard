@@ -34,7 +34,7 @@ class MakeTabWrapperCommand extends GeneratorCommand
         $model = $this->option('model') ?: 'YourModel';
         $service = $this->option('service') ?: 'YourService';
 
-        $namespace = $this->qualifyClass($name);
+        $namespace = 'App\\Livewire\\'. $this->getNamespace($name);
         $getClassName = str(str($name)->explode('\\')->last())->studly()->value;
 
         // Load the stub

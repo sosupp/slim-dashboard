@@ -168,12 +168,16 @@
                                                     </div>
                                                     @else
                                                         @if (isset($colHeading['type']) && $colHeading['type'] === 'toggle')
+                                                            @if ($record->deleted_at)
+                                                            <p class="deleted-label">Deleted</p>
+                                                            @else
                                                             <label class="switch">
                                                                 <input type="checkbox" value="{{ $record[$colHeading['col']] }}"
                                                                     wire:click="toggleStatus({{ $record->id }}, '{{$colHeading['col']}}')"
                                                                     {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
-                                                                <span class="slider round"></span>
+                                                                <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
                                                             </label>
+                                                            @endif
 
                                                         @elseif(isset($colHeading['type']) && $colHeading['type'] === 'date')
                                                         {{euroDate($record[$colHeading])}}
@@ -255,12 +259,16 @@
                                                             </div>
                                                             @else
                                                                 @if (isset($colHeading['type']) && $colHeading['type'] === 'toggle')
+                                                                    @if ($record->deleted_at)
+                                                                    <p class="deleted-label">Deleted</p>
+                                                                    @else
                                                                     <label class="switch">
                                                                         <input type="checkbox" value="{{ $record[$colHeading['col']] }}"
                                                                             wire:click="toggleStatus({{ $record->id }}, '{{$colHeading['col']}}')"
                                                                             {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
                                                                         <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
                                                                     </label>
+                                                                    @endif
                                                                 @elseif (isset($colHeading['type']) && $colHeading['type'] === 'date')
                                                                     {{ $this->customDateFormat($record[$colHeading['col']])}}
                                                                 @elseif ($colHeading['col'] == 'created_at' || $colHeading['col'] == 'updated_at' || $colHeading['col'] == 'deleted_at' || $colHeading['col'] == 'date')

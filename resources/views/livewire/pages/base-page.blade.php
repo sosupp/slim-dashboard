@@ -1,4 +1,4 @@
-<div x-data="{...sidepanel(), ...image()}">
+<div x-data="{...sidepanel($wire), ...image()}" wire:ignore>
 
     {!! $this->withRender() !!}
 

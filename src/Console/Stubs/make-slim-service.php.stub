@@ -24,6 +24,7 @@ class {{ class }} implements Crudable
     { 
         return {{ model }}::query()
         ->where('id', $id)
+        ->status(status: $this->status)
         ->first();
     }
 
@@ -34,6 +35,7 @@ class {{ class }} implements Crudable
         ->when(!empty($this->searchTerm), function($q){
             $q->{$this->searchType}($this->searchCol, $this->searchTerm);
         })
+        ->status(status: $this->status)
         ->dated($this->selectedDate)
         ->orderBy($this->orderByColumn, $this->orderByDirection)
         ->get($cols);
@@ -46,6 +48,7 @@ class {{ class }} implements Crudable
         ->when(!empty($this->searchTerm), function($q){
             $q->{$this->searchType}($this->searchCol, $this->searchTerm);
         })
+        ->status(status: $this->status)
         ->dated($this->selectedDate)
         ->orderBy($this->orderByColumn, $this->orderByDirection)
         ->paginate(perPage: $limit, columns: $cols);

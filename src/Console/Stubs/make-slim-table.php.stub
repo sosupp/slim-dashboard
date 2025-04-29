@@ -120,7 +120,19 @@ class {{ class }} extends BaseTable
 
     public function withCardModalView(): string|View
     {
-        return '';
+        return <<<HTML
+            <div class="card-item-modal-details">
+                <p><b>Item Count: </b><span x-text="cardItem[1]"></span></p>
+                <p><b>Order Date: </b><span x-text="cardItem[2]"></span></p>
+                <p><b>Delivery Method: </b><span x-text="cardItem[3]"></span></p>
+                <p><b>Current Status: </b><span x-text="cardItem[4]"></span></p>
+            </div>
+
+            <div class="card-item-modal-ctas">
+                <button type="button" class="cta-btn card-item-modal-cta as-pointer"
+                    >Preview</button>
+            </div>
+        HTML;
     }
 
     public function withListCardImage(): string|View

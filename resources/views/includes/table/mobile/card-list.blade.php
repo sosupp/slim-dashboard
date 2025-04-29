@@ -48,6 +48,17 @@
                                         <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
                                     @elseif ($rowItem['name'] == 'created_at' || $rowItem['name'] == 'updated_at' || $rowItem['name'] == 'deleted_at' || $rowItem['name'] == 'date')
                                         <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
+                                    @elseif(isset($rowItem['type']) && $rowItem['type'] === 'toggle')
+                                        @if ($record->deleted_at)
+                                        <p class="deleted-label">Deleted</p>
+                                        @else
+                                        <label class="switch">
+                                            <input type="checkbox" value="{{ $record[$rowItem['name']] }}"
+                                                wire:click="toggleStatus({{ $record->id }}, '{{$rowItem['name']}}')"
+                                                {{ $record[$rowItem['name']] === 'active' ? 'checked' : '' }}>
+                                            <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
+                                        </label>
+                                        @endif
                                     @else
                                     <p class="card-item-name item-heading">
                                         @if ($rowItem['label'] !== null)
@@ -112,6 +123,13 @@
                 </div>
                 <div class="modal-body">
                     {!! $this->withCardModalView() !!}
+
+                    @if ($this->mobileModalCta())
+                        @forelse ($this->tableActions() as $action)
+                            @include('slim-dashboard::includes.table.table-actions')
+                        @empty
+                        @endforelse
+                    @endif
                 </div>
             </div>
         </div>

@@ -1,0 +1,1 @@
+<x-slim-dashboard::layouts.app />

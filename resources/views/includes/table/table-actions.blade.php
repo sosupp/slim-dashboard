@@ -1,9 +1,17 @@
 @if ($action['isVisible'])
     @if ($action['label'] === 'delete')
+        @if ($record->deleted_at)
+        <button class="cta-btn restore-btn as-pointer"
+            :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
+            wire:click="restorable({{ $record->id }}, {{$action['isAuthorize']}})"
+            wire:confirm="Are you sure you want to restore?">Restore</button>
+        @else
         <button class="cta-btn delete as-pointer"
             :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
             wire:click="delete({{ $record->id }}, {{$action['isAuthorize']}})"
-            wire:confirm="Are you sure you want to delete?">delete</button>
+            wire:confirm="Are you sure you want to delete?">Delete</button>
+
+        @endif
     @else
         @if (isset($action['customRoute']) && ($action['customRoute']))
             <a wire:navigate href="{{ $this->setCustomRoute($record, $action['customRoute']) ?: '#' }}"

@@ -15,12 +15,13 @@ class ListCard
         string $name,
         string|null $label = null,
         string $key,
-        string $relation = null,
+        string|null $relation = null,
         $callback = null,
         string $css = '',
         string $labelCss = '',
         string $valueCss = '',
-        bool $canView = true
+        bool $canView = true,
+        string $type = ''
 
     ){
 
@@ -33,7 +34,8 @@ class ListCard
             'css',
             'labelCss',
             'valueCss',
-            'canView'
+            'canView',
+            'type',
         );
         return $this;
     }

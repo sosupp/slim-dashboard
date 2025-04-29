@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 trait CommonScopes
 {
     // Scopes
+    public function scopeStatus(Builder $query, string|null $status = null): void
+    {
+        $query->when($status !== null, function($q) use($status){
+            $q->where('status', $status);
+        });
+    }
+
     public function scopeActive(Builder $query): void
     {
         $query->where('status', 'active');

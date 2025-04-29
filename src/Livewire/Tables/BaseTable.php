@@ -317,6 +317,11 @@ abstract class BaseTable extends Component
         return '';
     }
 
+    public function mobileModalCta(): bool
+    {
+        return false;
+    }
+    
     public function showTableToCards()
     {
         return false;

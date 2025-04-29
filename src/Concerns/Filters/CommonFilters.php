@@ -8,6 +8,7 @@ trait CommonFilters
 
     protected $inActive = false;
     protected $active = true;
+    protected $status = null;
 
     protected $withTrashed = false;
 
@@ -60,6 +61,13 @@ trait CommonFilters
     public function withInactive()
     {
         $this->inActive = true;
+        return $this;
+    }
+
+    public function withActive()
+    {
+        $this->active = true;
+        $this->status = 'active';
         return $this;
     }
 

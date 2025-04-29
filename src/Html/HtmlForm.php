@@ -603,6 +603,7 @@ class HtmlForm
         string $inputCss = 'custom-input',
         bool $customPlaceholder = true,
         bool $withImageUpload = true,
+        string $uploadEndpoint = '/slimdashboard/editor/image/adaptor'
     )
     {
         $setLabel = is_null($label) ? $name : $label;
@@ -611,10 +612,11 @@ class HtmlForm
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
-        $this->form .= view('slim-dashboard::components.utils.editors.quill', [
+        $this->form .= view('slim-dashboard::includes.platform.editors.quill', [
             'model' => $name,
             'id' => $setId,
-            'class' => $wrapperCss
+            'class' => $wrapperCss,
+            'uploadEndpoint' => $uploadEndpoint
         ]);
 
         return $this;

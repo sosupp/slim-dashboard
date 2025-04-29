@@ -10,6 +10,7 @@ use Sosupp\SlimDashboard\Console\MakePageCommand;
 use Sosupp\SlimDashboard\Console\MakeTableCommand;
 use Sosupp\SlimDashboard\Console\MakeServiceCommand;
 use Sosupp\SlimDashboard\Console\MakeTabWrapperCommand;
+use Sosupp\SlimDashboard\Console\Slimer\MakeSlimerAuth;
 use Sosupp\SlimDashboard\Console\Slimer\MakeSlimerMenus;
 use Sosupp\SlimDashboard\View\Components\Dashboard\Navigations;
 
@@ -88,6 +89,7 @@ class SlimDashboardServiceProvider extends ServiceProvider
                 MakeTabWrapperCommand::class,
                 MakeServiceCommand::class,
                 MakeSlimerMenus::class,
+                MakeSlimerAuth::class,
             ]);
         }
     }

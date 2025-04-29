@@ -1,6 +1,6 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('accordion', () => ({
-        isOpen: window.innerWidth >= 768,
+        isOpen: false,
         toggle() {
             this.isOpen = !this.isOpen;
         },
@@ -9,11 +9,11 @@ document.addEventListener('alpine:init', () => {
         }
     }))
 
-    Alpine.data('sidepanel', () => ({
+    Alpine.data('sidepanel', (useWire) => ({
         sidePanel: '',
         sidePanelTitle: '',
         useComponent: false,
-        componentName: '',
+        componentName: $wire.entangle('sidePanelComponent').live,
         dateLabel: '',
         toggleSidePanel(component = '', title = '', record = null) {
             console.log('yes panrel')
@@ -25,10 +25,11 @@ document.addEventListener('alpine:init', () => {
             }else {
                 this.useComponent = false
             }
-            if(record !== null){
-                $wire.sidePanelModel(record)
-                $wire.resolvePanelModel(record)
-                console.log(record)
+
+            if (record !== null) {
+                console.log(record, useWire);
+                this.$wire.sidePanelModel(record)
+                this.$wire.resolvePanelModel(record)
             }
         },
         closePanel(){

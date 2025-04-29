@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
+
 if(! function_exists('subdomain')){
     function subdomain()
     {
@@ -26,5 +28,25 @@ if (!function_exists('mix_vendor')) {
         }
 
         return asset("vendor/{$package}" . $manifest[$path]);
+    }
+}
+
+if(!function_exists('cacheLife')){
+    function cacheLife(int $hours = 24)
+    {
+        return 3600*$hours;
+    }
+}
+
+if(!function_exists('withCacheData')){
+    function withCacheData(bool $cache, callable $callback, string|null $key = null, int|null $minutes = null)
+    {
+        if($cache && $key !== null){
+            return Cache::remember($key, $minutes ?? cacheLife(), function () use($callback) {
+                return $callback();
+            });
+        }
+
+        return $callback();
     }
 }
