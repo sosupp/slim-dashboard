@@ -572,6 +572,7 @@ class HtmlForm
         string $inputCss = 'custom-input',
         bool $customPlaceholder = true,
         bool $withImageUpload = true,
+        string $state = '.blur'
     )
     {
         $setLabel = is_null($label) ? $name : $label;
@@ -581,7 +582,7 @@ class HtmlForm
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
         if($withEditor === false){
-            $this->form .= $this->plainEditor(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel);
+            $this->form .= $this->plainEditor(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel, state: $state);
             return $this;
         }
 
@@ -603,7 +604,8 @@ class HtmlForm
         string $inputCss = 'custom-input',
         bool $customPlaceholder = true,
         bool $withImageUpload = true,
-        string $uploadEndpoint = '/slimdashboard/editor/image/adaptor'
+        string $uploadEndpoint = '/slimdashboard/editor/image/adaptor',
+        string $state = '.blur'
     )
     {
         $setLabel = is_null($label) ? $name : $label;
@@ -843,14 +845,14 @@ class HtmlForm
         BLADE;
     }
 
-    private function plainEditor(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label)
+    private function plainEditor(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label, string $state)
     {
-        return view('slim-dashboard::components.utils.forms.plain-editor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss', 'label'));
+        return view('slim-dashboard::components.utils.forms.plain-editor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss', 'label', 'state'));
     }
 
     private function ckEditor(string $id, string $model, string $label)
     {
-        return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model', 'label'));
+        return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model', 'label', 'state'));
     }
 
     private function ckEditorWithoutUpload(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label)

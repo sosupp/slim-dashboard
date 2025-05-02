@@ -245,7 +245,7 @@
                                                     <img src="{{ asset($record[$colHeading]) }}" width="50">
                                                 @else
                                                     @if (is_array($colHeading))
-                                                        @if ($colHeading['label'] === 'image')
+                                                        @if (isset($colHeading['key']) && $colHeading['key'] === 'image')
                                                             @include('slim-dashboard::includes.table.table-inline-image')
                                                         @else
                                                             @if (isset($colHeading['relation']))
