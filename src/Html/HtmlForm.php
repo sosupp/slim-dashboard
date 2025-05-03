@@ -559,6 +559,53 @@ class HtmlForm
         return $this;
     }
 
+    public function multiSelectSearch(
+        string $name,
+        string $id = '',
+        string|null $label = null,
+        string $placeholder = '',
+        string $action = '',
+        array|null $options = [],
+        string $optionKey = 'name',
+        string $optionId = 'id',
+        string $class = '',
+        bool|string $wireLive = false,
+        string $wrapperCss = 'custom-input-wrapper',
+        string $labelCss = '',
+        string $inputCss = 'custom-input',
+        bool $customPlaceholder = false,
+        array $selectedOptions = [],
+    )
+    {
+        $setLabel = is_null($label) ? $name : $label;
+        $setId = empty($id) ? $setLabel : $id;
+        $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
+        $usePlaceholder = $customPlaceholder ? $label : '';
+
+        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
+        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
+        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+
+        $this->form .= view('slim-dashboard::components.inputs.multi-select-search', [
+            'name' => $name,
+            'id' => $setId,
+            'label' => $setLabel,
+            'placeholder' => $usePlaceholder,
+            'action' => $action,
+            'options' => $this->selectSearchData($options),
+            'optionKey' => $optionKey,
+            'optionId' => $optionId,
+            'class' => $class,
+            'inputCss' => $inputCss,
+            'wireState' => $setState,
+            'wrapperCss' => $wrapperCss,
+            'labelCss' => $labelCss,
+            'selectedOptions' => $selectedOptions,
+        ]);
+
+        return $this;
+    }
+
     public function textarea(
         string $name,
         string $id = 'customEditor',
@@ -572,7 +619,7 @@ class HtmlForm
         string $inputCss = 'custom-input',
         bool $customPlaceholder = true,
         bool $withImageUpload = true,
-        string $state = '.blur'
+        string $state = ''
     )
     {
         $setLabel = is_null($label) ? $name : $label;

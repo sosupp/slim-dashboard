@@ -15,14 +15,14 @@ class Columns
         string $name,
         string $label = '',
         string $subLabel = '',
-        string $relation = null,
+        string|null $relation = null,
         $callback = null,
         $type = '',
         $filter = false,
         $filterCols = [],
         bool $hasCustomColKeys = false,
         $wireFilterProperty = null,
-        string $key = null,
+        string|null $key = null,
         string $css = '',
         bool $showLabel = false,
         string $filterModel = '',
@@ -30,10 +30,11 @@ class Columns
         string $inlineEditMethod = '',
         bool $sidePanel = false,
         string $panelHeading = '',
-        string $sideView = null,
+        string|null $sideView = null,
         string|null $colForImageName = null,
         bool $hasButton = false,
         bool $canView = true,
+        string $valueCss = 'many-pills'
     )
     {
         $useLabel = $label == '' ? $name : $label;
@@ -60,6 +61,7 @@ class Columns
         $this->columnNames[$label]['colForImageName'] = $colForImageName;
         $this->columnNames[$label]['hasButton'] = $hasButton;
         $this->columnNames[$label]['canView'] = $canView;
+        $this->columnNames[$label]['valueCss'] = $valueCss;
         return $this;
     }
 

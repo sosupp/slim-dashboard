@@ -161,7 +161,7 @@
                                                 @else
                                                     @if (isset($colHeading['relation']))
                                                     <div class="card-item-wrapper {{$colHeading['css']}}">
-                                                        {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null) !!}
+                                                        {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null, $colHeading['valueCss']) !!}
                                                         @if ($colHeading['showLabel'])
                                                         <p class="item-label2">{{ $colHeading['label'] }}</p>
                                                         @endif
@@ -251,7 +251,7 @@
                                                             @if (isset($colHeading['relation']))
                                                             <div class="inline-edit-wrapper">
                                                                 <div class="{{$colHeading['css']}}">
-                                                                    {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null) !!}
+                                                                    {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null, $colHeading['valueCss']) !!}
                                                                 </div>
                                                                 @if ($colHeading['inlineEdit'])
                                                                 @include('slim-dashboard::includes.table.table-inline-edit')

@@ -1,6 +1,9 @@
 <?php
 namespace {{ namespace }};
 
+// {{if:model}}
+use App\Models\{{ model }};
+// {{if:model}}
 use Livewire\WithFileUploads;
 use Sosupp\SlimDashboard\Concerns\HtmlForms\HandlesTabContent;
 use Sosupp\SlimDashboard\Html\Breadcrumb;
@@ -11,6 +14,10 @@ class {{ class }} extends BaseForm
 {
     use WithFileUploads,
         HandlesTabContent;
+
+    // {{if:model}}
+    public ?{{ model }} ${{ modelLower }} = null;
+    // {{if:model}}
 
     public $isUpdate = false;
 
@@ -53,11 +60,30 @@ class {{ class }} extends BaseForm
 
     public function extraView(){}
 
-    public function isUpdateDetails() { }
+    public function isUpdateDetails()
+    {
+        // {{if:model}}
+        if($this->{{ model }}){
+            $this->isUpdate = true;
+
+        }
+        // {{if:model}}
+    }
 
     public function save()
     {
         // Your save logic here: eg. validate, call a service or repository to save record, etc.
+
+        $validated = $this->validate(
+            rules: []
+        );
+
+        // dd($validated);
+
+        $result = (new {{ service }})->make(
+            id: // {{if:model}} $this->{{ modelLower }}->id // {{if:model}},
+            data: $validated,
+        );
     }
 
     public function breadcrumbData()

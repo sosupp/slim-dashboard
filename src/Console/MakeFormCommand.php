@@ -26,16 +26,16 @@ class MakeFormCommand extends GeneratorCommand
 
     public function handle()
     {
-        parent::handle();
-
-
+        // parent::handle();
         // Get input arguments
         $name = $this->argument('name');
         $model = $this->option('model') ?: 'YourModel';
+        $modelLower = str($this->option('model'))->lower()->value ?: str('YourModel')->lower()->value;
         $service = $this->option('service') ?: 'YourService';
 
         $namespace = 'App\\Livewire\\'. $this->getNamespace($name);
         $getClassName = str(str($name)->explode('\\')->last())->studly()->value;
+
 
         // Load the stub
         $stubPath = $this->getStub();
@@ -43,16 +43,27 @@ class MakeFormCommand extends GeneratorCommand
 
         // Replace basic placeholders
         $content = str_replace(
-            ['{{ namespace }}', '{{ class }}', '{{ model }}', '{{ service }}'],
-            [$namespace, $getClassName, $model, $service],
+            ['{{ namespace }}', '{{ class }}', '{{ model }}', '{{ modelLower }}', '{{ service }}', '// {{if:model}}'],
+            [$namespace, $getClassName, $model, $modelLower, $service, ''],
             $stub
         );
+
 
         $class = $this->qualifyClass($this->getNameInput());
         $path = $this->getPath($class);
 
+        // $exists = file_exists($path);
+        // dd($path, $exists, $class);
+
+        if(file_exists($path)){
+            $this->error($path.' exist');
+            return;
+        }
          // Write the file
         file_put_contents($path, $content);
+
+        $info = $this->type;
+        $this->components->info(sprintf('%s [%s] created successfully.', $info, $path));
     }
 
     protected function replaceClass($stub, $name)

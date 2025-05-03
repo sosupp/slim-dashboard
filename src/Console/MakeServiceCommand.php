@@ -33,7 +33,7 @@ class MakeServiceCommand extends GeneratorCommand
         $name = $this->argument('name');
         $model = $this->option('model') ?: 'YourModel';
 
-        $namespace = $this->qualifyClass($name);
+        $namespace = $this->getNamespace($name);
         $getClassName = str(str($name)->explode('\\')->last())->studly()->value;
 
         // Load the stub

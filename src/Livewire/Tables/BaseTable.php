@@ -100,12 +100,27 @@ abstract class BaseTable extends Component
         return Carbon::parse($date)->format('d M Y, H:i');
     }
 
-    public function relation($model, $relation, $col, $callback = null)
+    public function relation($model, $relation, $col, $callback = null, $valueCss = '')
     {
         // dd($callback, $model->$relation->$col());
+        // $this->callback = $callback;
+        if($callback){
+            return call_user_func($callback, $model);
+        }
+
         $this->callback = $callback;
 
-        // Use this to handle relations that are not one-to-one
+        // Handles many-to-many relation
+        if(str($relation)->contains('.many')){
+            $useRelation = str($relation)->before('.many')->value;
+            $result = '';
+            foreach ($model->{$useRelation} as $key => $value) {
+                $result .="<p class='$valueCss'>{$value->$col}</p>";
+            }
+            return $result;
+        }
+
+        // Use this to handle relations that are not covered
         if($relation === 'custom'){
             // dd($relation);
             return $this->configureCustomRelation($model, $relation, $col);
@@ -131,12 +146,11 @@ abstract class BaseTable extends Component
         if(str($relation)->contains('.')){
             $distanceRelation = str($relation)->after('.')->value;
             $firstRelation = str($relation)->before('.')->value;
-            // dd("yes", $distanceRelation->value);
+            dd("yes", $distanceRelation);
             // return '';
             return $model->$firstRelation->$distanceRelation->$col ?? '';
             // return $account->user->employee->fullname();
         }
-
 
         return $model->$relation->$col ?? ''; // Gets one-to-one relation
     }

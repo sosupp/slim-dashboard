@@ -27,7 +27,7 @@ class MakeTableCommand extends GeneratorCommand
 
     public function handle()
     {
-        parent::handle();
+        // parent::handle();
 
 
         // Get input arguments
@@ -36,19 +36,12 @@ class MakeTableCommand extends GeneratorCommand
         $service = $this->option('service') ?: 'YourService';
         $crud = $this->option('crud')?: false;
 
-        $crudReplaceStart = '';
-        $crudReplaceEnd = '';
         $emptyReplacer = '';
-
-        if($crud){
-            $crudReplaceStart = '// {{if:inlineForm}}';
-            $crudReplaceEnd = '// {{endif}}';
-        }
 
         $namespace = 'App\\Livewire\\'. $this->getNamespace($name);
         $getClassName = str(str($name)->explode('\\')->last())->studly()->value;
 
-        dd($namespace);
+        // dd($namespace, $crud);
 
         // Load the stub
         $stubPath = $this->getStub();
@@ -57,18 +50,29 @@ class MakeTableCommand extends GeneratorCommand
         // if()
         // Replace basic placeholders
         $content = str_replace(
-            ['{{ namespace }}', '{{ class }}', '{{ model }}', '{{ service }}', $crudReplaceStart, $crudReplaceEnd],
-            [$namespace, $getClassName, $model, $service, $emptyReplacer, $emptyReplacer],
+            ['{{ namespace }}', '{{ class }}', '{{ model }}', '{{ service }}', '// {{if:inlineForm}}'],
+            [$namespace, $getClassName, $model, $service, $crud ? $emptyReplacer : '// {{if:inlineForm}}'],
             $stub
         );
 
-        
+        if(!$crud){
+            // Remove the entire conditional section
+            $content = preg_replace('/\s*\/\/ {{if:inlineForm}}.*?\/\/ {{if:inlineForm}}/s', '', $content);
+        }
+
 
         $class = $this->qualifyClass($this->getNameInput());
         $path = $this->getPath($class);
 
+        if(file_exists($path)){
+            $this->error($path.' exist');
+            return;
+        }
+
          // Write the file
         file_put_contents($path, $content);
+        $info = $this->type;
+        $this->components->info(sprintf('%s [%s] created successfully.', $info, $path));
     }
 
     protected function replaceClass($stub, $name)

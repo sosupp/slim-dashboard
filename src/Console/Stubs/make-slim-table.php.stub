@@ -1,6 +1,7 @@
 <?php
 namespace {{ namespace }};
 
+use App\Models\{{ model }};
 use Sosupp\SlimDashboard\Concerns\StatusToggleable;
 use Sosupp\SlimDashboard\Html\Breadcrumb;
 use Sosupp\SlimDashboard\Html\ListCard;
@@ -16,15 +17,20 @@ use Livewire\Attributes\Computed;
 use Sosupp\SlimDashboard\Concerns\HasModalPanel;
 use Sosupp\SlimDashboard\Html\HtmlForm;
 use Sosupp\SlimDashboard\Livewire\Traits\HandlesImageUploads;
-// {{endif}}
+// {{if:inlineForm}}
 
 class {{ class }} extends BaseTable
 {
-    use StatusToggleable // {{if:inlineForm}}, HasModalPanel, HandlesImageUploads // {{endif}};
+    use StatusToggleable // {{if:inlineForm}}, HasModalPanel, HandlesImageUploads // {{if:inlineForm}};
 
     // {{if:inlineForm}}
     public $selectedModelId;
-    // {{endif}}
+
+    public function uploadImageOnSave(): bool
+    {
+        return true;
+    }
+    // {{if:inlineForm}}
 
     public function mount()
     {
@@ -65,7 +71,10 @@ class {{ class }} extends BaseTable
 
     public function pageCta()
     {
-        return PageCtas::cta(type: 'link', label: 'Add', route: null)
+        return PageCtas::cta(
+            type: 'link', label: 'Add', route: null,
+            // {{if:inlineForm}} withSidePanel: true, component: 'makeForm', // {{if:inlineForm}}
+        )
         ->make();
     }
 
@@ -150,7 +159,7 @@ class {{ class }} extends BaseTable
         $model = $this->tableRecords->where('id', $id)->first();
 
         // More code here
-  
+
     }
 
     public function panelExtraView(): string|View
@@ -183,10 +192,17 @@ class {{ class }} extends BaseTable
         }
     }
 
+    public function makeForm()
+    {
+        // Reset properties that are needed 
+        $this->reset('selectedModelId');
+        return $this->panelExtraView();
+    }
+
     public function updateForm()
     {
         return $this->panelExtraView();
     }
-    // {{endif}}
+    // {{if:inlineForm}}
 
 }
