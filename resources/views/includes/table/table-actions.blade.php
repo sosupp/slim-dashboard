@@ -1,3 +1,4 @@
+@if (@$record)
 @if ($action['isVisible'])
     @if ($action['label'] === 'delete')
         @if ($record->deleted_at)
@@ -40,5 +41,6 @@
             :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">{{ $action['label'] }}</a>
         @endif
     @endif
+@endif
 @endif
 

@@ -231,7 +231,8 @@
                         @if (!empty($this->useCustomTable()))
                             @includeIf($this->useCustomTable())
                         @else
-                            @foreach ($this->tableRecords as $index => $record)
+
+                            @forelse ($this->tableRecords as $index => $record)
                                 <tr>
                                     @if ($this->withCheckbox)
                                     <td scope="row">
@@ -269,10 +270,12 @@
                                                                         <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
                                                                     </label>
                                                                     @endif
-                                                                @elseif (isset($colHeading['type']) && $colHeading['type'] === 'date')
+                                                                @elseif (isset($colHeading['type']) && ($colHeading['type'] === 'date' || $colHeading['format'] === 'date'))
                                                                     {{ $this->customDateFormat($record[$colHeading['col']])}}
                                                                 @elseif ($colHeading['col'] == 'created_at' || $colHeading['col'] == 'updated_at' || $colHeading['col'] == 'deleted_at' || $colHeading['col'] == 'date')
                                                                     {{$this->customDateFormat($record[$colHeading['col']])}}
+                                                                @elseif (isset($colHeading['format']) && $colHeading['format'] === 'number')
+                                                                {!! shortNumberFormat($record[$colHeading['col']]) !!}
                                                                 @else
                                                                     @if ($colHeading['inlineEdit'])
                                                                         <div class="inline-edit-wrapper">
@@ -302,7 +305,9 @@
                                     </td>
                                     @endif
                                 </tr>
-                            @endforeach
+                            @empty
+                                
+                            @endforelse
                         @endif
 
 

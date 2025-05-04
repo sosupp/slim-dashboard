@@ -188,7 +188,7 @@ class {{ class }} extends BaseTable
         if($result){
             $this->reset('selectedModelId');
 
-            $this->successAlert(message: 'Testimonial added...');
+            $this->successAlert(message: 'Record action successful...');
         }
     }
 

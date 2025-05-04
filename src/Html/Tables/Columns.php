@@ -34,7 +34,8 @@ class Columns
         string|null $colForImageName = null,
         bool $hasButton = false,
         bool $canView = true,
-        string $valueCss = 'many-pills'
+        string $valueCss = 'many-pills',
+        string|null $format = null,
     )
     {
         $useLabel = $label == '' ? $name : $label;
@@ -62,6 +63,7 @@ class Columns
         $this->columnNames[$label]['hasButton'] = $hasButton;
         $this->columnNames[$label]['canView'] = $canView;
         $this->columnNames[$label]['valueCss'] = $valueCss;
+        $this->columnNames[$label]['format'] = $format;
         return $this;
     }
 

@@ -102,13 +102,18 @@ abstract class BaseTable extends Component
 
     public function relation($model, $relation, $col, $callback = null, $valueCss = '')
     {
+        // Use this to handle relations that are not covered
+        if($relation === 'custom'){
+            $this->callback = $callback;
+            // dd($relation);
+            return $this->configureCustomRelation($model, $relation, $col);
+        }
+
         // dd($callback, $model->$relation->$col());
         // $this->callback = $callback;
         if($callback){
             return call_user_func($callback, $model);
         }
-
-        $this->callback = $callback;
 
         // Handles many-to-many relation
         if(str($relation)->contains('.many')){
@@ -118,12 +123,6 @@ abstract class BaseTable extends Component
                 $result .="<p class='$valueCss'>{$value->$col}</p>";
             }
             return $result;
-        }
-
-        // Use this to handle relations that are not covered
-        if($relation === 'custom'){
-            // dd($relation);
-            return $this->configureCustomRelation($model, $relation, $col);
         }
 
         // We want to call a method/accessor on distance(nested) relation
@@ -146,13 +145,14 @@ abstract class BaseTable extends Component
         if(str($relation)->contains('.')){
             $distanceRelation = str($relation)->after('.')->value;
             $firstRelation = str($relation)->before('.')->value;
-            dd("yes", $distanceRelation);
+            // dd("yes", $distanceRelation);
             // return '';
             return $model->$firstRelation->$distanceRelation->$col ?? '';
             // return $account->user->employee->fullname();
         }
 
-        return $model->$relation->$col ?? ''; // Gets one-to-one relation
+        // Handles one to one relation
+        return $model->$relation->$col ?? '';
     }
 
     public function useModel(){}

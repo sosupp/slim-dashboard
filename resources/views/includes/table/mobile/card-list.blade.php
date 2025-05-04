@@ -14,8 +14,7 @@
         }
     }">
 
-    @foreach ($this->tableRecords as $record)
-
+    @forelse ($this->tableRecords as $record)
         <div class="as-card-item-plain as-pointer">
 
             <div class="card-item-details">
@@ -100,8 +99,9 @@
 
 
         </div>
-
-    @endforeach
+    @empty
+        
+    @endforelse
 
     <div wire:loading>
         <div class="full-table-loading">
