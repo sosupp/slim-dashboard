@@ -30,6 +30,7 @@ class HtmlForm
     public string|null $wireSelectedComponent = null;
     public string|null $wireBaseView = null;
     public string|null $useExternalView = null;
+    public array $passExtraData = [];
 
     public bool $asTabContent = false;
 
@@ -140,6 +141,7 @@ class HtmlForm
         string|null $externalView = null,
         string|null $view = 'slim-dashboard::livewire.forms.wire-tab-content-switcher',
         bool $asWire = true,
+        array $data = [],
     )
     {
 
@@ -147,6 +149,7 @@ class HtmlForm
         $this->wireSelectedComponent = $component;
         $this->wireBaseView = $view;
         $this->useExternalView = $externalView;
+        $this->passExtraData = $data;
         return $this;
     }
 
@@ -934,6 +937,7 @@ class HtmlForm
             data: [
                 'componentName' => $this->wireSelectedComponent,
                 'externalView' => $this->useExternalView,
+                'passExtraData' => $this->passExtraData,
             ]);
 
         $this->form .= $content;

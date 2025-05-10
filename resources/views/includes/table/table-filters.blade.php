@@ -59,7 +59,7 @@
 
         @if($filter['type'] == 'button')
             <span role="button" class="filter-wrapper select-filter as-pointer {{$filter['wrapperCss']}}" 
-            wire:click="{{$filter['wireAction'] . "('".."')" }}">
+            wire:click="{{$filter['wireAction'] . "('"."')" }}">
                 {{$filter['label']}}
             </span>
         @endif
