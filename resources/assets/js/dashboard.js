@@ -11,6 +11,7 @@ document.addEventListener('alpine:init', () => {
 
     Alpine.data('sidepanel', (useWire) => ({
         sidePanel: '',
+        panelWidth: '',
         sidePanelTitle: '',
         useComponent: false,
         componentName: $wire.entangle('sidePanelComponent').live,

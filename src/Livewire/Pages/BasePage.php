@@ -19,6 +19,11 @@ abstract class BasePage extends Component
     {
         return false;
     }
+
+    public function panelWidth()
+    {
+        return 'inherit';
+    }
     
     public function includePageFilters()
     {

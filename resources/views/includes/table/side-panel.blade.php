@@ -1,6 +1,7 @@
 <div x-cloak x-show="sidePanel">
     <div class="{{$this->useSideModal() ? 'side-modal-overlay' : ''}}" x-on:click="closePanel"></div>
-    <div class="table-form {{$this->useSideModal() ? 'side-modal-panel' : ''}}">
+    <div class="table-form {{$this->useSideModal() ? 'side-modal-panel' : ''}}"
+        :style="{width: '{{$this->panelWidth()}}'}">
         {{-- @includeIf($this->tableForm()) --}}
         <div class="side-modal-heading-wrapper">
             <p class="side-modal-heading" x-html="sidePanelTitle">Side Modal Heading</p>

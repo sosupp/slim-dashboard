@@ -105,6 +105,11 @@ trait WithTable
         $this->editLink = '';
     }
 
+    public function panelWidth()
+    {
+        return 'inherit';
+    }
+
     public function updatedInlineImages()
     {
         $image = $this->uploadInlineImage(data: ['image' => $this->inlineImages[$this->modelImageId][0]] );

@@ -1,5 +1,5 @@
 
-<div x-data="{
+<div key="{{str()->random(20)}}" x-data="{
         sidePanel: $wire.entangle('hasSidePanel'),
         sidePanelTitle: '',
         subnav: $wire.entangle('subnav').live,
@@ -233,7 +233,7 @@
                         @else
 
                             @forelse ($this->tableRecords as $index => $record)
-                                <tr>
+                                <tr wire:key="table_{{$index}}_{{$record->id}}">
                                     @if ($this->withCheckbox)
                                     <td scope="row">
                                         <input type="checkbox" value="{{$record->id}}" wire:model="checkRecords">
@@ -297,7 +297,7 @@
                                     @endforeach
 
                                     @if ($this->hasActions)
-                                    <td>
+                                    <td wire:ignore>
                                         @forelse ($this->tableActions() as $action)
                                             @include('slim-dashboard::includes.table.table-actions')
                                         @empty

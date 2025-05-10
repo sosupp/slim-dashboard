@@ -29,8 +29,8 @@ abstract class TabWrapper extends Component
 
     public function mount(){
         // dd($this->tab);
-        $this->configureSelected();
         $this->withMount();
+        $this->configureSelected();
     }
 
     public function withMount(){}
@@ -84,6 +84,11 @@ abstract class TabWrapper extends Component
     public function passExtraData(): array
     {
         return [];
+    }
+
+    public function panelWidth()
+    {
+        return 'inherit';
     }
 
     public function tabPageHeading(): string

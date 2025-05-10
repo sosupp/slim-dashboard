@@ -58,15 +58,15 @@ trait WithDateFormat
         ][$key];
     }
 
-    private function configureDateRanges($query)
+    private function configureDateRanges($query, string $dateCol = 'created_at')
     {
-        // dd($query, $date);
+        // dump($dateCol, $this->selectedDate);
         $date = collect($this->selectedDate)->reject(function($date){
             return empty($date) || is_null($date);
         });
 
         if($date->count() == 1){
-            $query->whereDate('created_at', '=', $date);
+            $query->whereDate($dateCol, '=', $date);
             return;
         }
 
@@ -75,8 +75,44 @@ trait WithDateFormat
             $this->selectedDate['end'] . ' 23:59:59',
         ];
 
+        // dump($dateCol, $this->selectedDate, $useDate);
+        $query->whereBetween($dateCol, $useDate);
+    }
 
-        $query->whereBetween('created_at', $useDate);
+    private function excludeStartDate($query, string $dateCol = 'created_at')
+    {
+        $date = collect($this->selectedDate)->reject(function($date){
+            return empty($date) || is_null($date);
+        });
+
+
+        // dd($this->selectedDate, $date, $date['start'], $this->dateColumn);
+        if($date->count() == 1){
+            $query->whereDate($dateCol, '<', $date['start']);
+            return;
+        }
+
+        $useDate = $date['start'] . ' 00:00:00';
+
+        $query->whereDate($dateCol, '<', $useDate);
+    }
+
+    private function fromEndDate($query, string $dateCol = 'created_at')
+    {
+        $date = collect($this->selectedDate)->reject(function($date){
+            return empty($date) || is_null($date);
+        });
+
+        // dd($this->selectedDate, $date, $date['start']);
+
+        if($date->count() == 1){
+            $query->whereDate($dateCol, '<=', $date['start']);
+            return;
+        }
+
+        $useDate = $date['end'] . ' 23:59:59';
+
+        $query->whereDate($dateCol, '<', $useDate);
     }
 
 }

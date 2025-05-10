@@ -76,7 +76,7 @@ if(!function_exists('selectedSearchValues')){
     }
 }
 
-if (!function_exists('format_number_short')) {
+if (!function_exists('shortNumberFormat')) {
     function shortNumberFormat($number, $precision = 1)
     {
         if ($number < 900) {

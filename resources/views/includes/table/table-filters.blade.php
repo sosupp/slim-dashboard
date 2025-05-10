@@ -56,6 +56,13 @@
             </x-dropdown>
         </div>
         @endif
+
+        @if($filter['type'] == 'button')
+            <span role="button" class="filter-wrapper select-filter as-pointer {{$filter['wrapperCss']}}" 
+            wire:click="{{$filter['wireAction'] . "('".."')" }}">
+                {{$filter['label']}}
+            </span>
+        @endif
     @endif
 
     @empty

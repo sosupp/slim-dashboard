@@ -1,7 +1,6 @@
 <?php
 namespace Sosupp\SlimDashboard\Concerns\Filters;
 
-use Illuminate\Support\Carbon;
 use Livewire\Attributes\Session;
 use Illuminate\Support\Collection;
 

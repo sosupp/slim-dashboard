@@ -168,6 +168,11 @@ abstract class BaseTable extends Component
     }
 
     public function useSideModal(){}
+    public function panelWidth()
+    {
+        return 'inherit';
+    }
+    
     public function panelCustomView(){}
 
     public function searchModelResults(): array|Collection
