@@ -64,6 +64,13 @@ trait CommonFilters
         return $this;
     }
 
+    public function active()
+    {
+        $this->active = true;
+        $this->status = 'active';
+        return $this;
+    }
+
     public function withActive()
     {
         $this->active = true;
