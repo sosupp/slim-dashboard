@@ -31,7 +31,7 @@
         isMobile: false,
         isMedium: false,
         cardModal: false,
-        mobileFilterLabel: '',
+        mobileFilterLabel: $persist(''),
         appname: null,
         toggleTheme(mode) {
             this.darkmode = !this.darkmode

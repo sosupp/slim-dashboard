@@ -20,6 +20,8 @@ trait WithSideModal
 
     public function resolvePanelModel($id)
     {
-        $this->panelRecord = $this->tableRecords->where('id', $id)->first();
+        if(method_exists($this, 'tableRecords')){
+            $this->panelRecord = $this->tableRecords->where('id', $id)->first();
+        }
     }
 }

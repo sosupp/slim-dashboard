@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
@@ -113,4 +114,107 @@ if (!function_exists('shortNumberFormat')) {
     }
 }
 
+if(!function_exists('getFormattedNumber')){
+    function getFormattedNumber(
+        $value,
+        $locale = "en_GH",
+        $style = NumberFormatter::DECIMAL,
+        $precision = 2,
+        $groupingUsed = true,
+        $currencyCode = 'GHS',
+    )
+    {
+        $formatter = new NumberFormatter($locale, $style);
+        $formatter->setAttribute(
+            NumberFormatter::FRACTION_DIGITS, $precision
+        );
+
+        // if($style == NumberFormatter::CURRENCY_CODE){
+        //     $formatter->setTextAttribute(
+        //         NumberFormatter::CURRENCY_CODE, $currencyCode
+        //     );
+        // }
+
+        return $formatter->format($value);
+    }
+
+}
+
+if(! function_exists('moneyFormat')){
+    function moneyFormat(int|float|null|string $number = 0, int $decimal = 2)
+    {
+        if(is_string($number)){
+            $number = (int) $number;
+        }
+
+        // dump($number);
+        return number_format($number, $decimal);
+    }
+}
+
+if(!function_exists('euroDate')){
+    function euroDate(string $date, bool $withFull = true)
+    {
+        $full = $withFull ? ', H:i' : '';
+        return Carbon::parse($date)->format('d M Y'.$full);
+    }
+}
+
+if(! function_exists('dateFormat')){
+    function dateFormat($date, string $format = 'Y-m-d')
+    {
+        if(is_null($date)){
+            return null;
+        }
+
+        if(is_string($date)){
+            return date($format, strtotime($date));
+        }
+
+        return date_format($date, $format);
+    }
+}
+
+if(! function_exists('numberOfMonths')){
+    function numberOfMonths($startDate, $endDate)
+    {
+
+        // dd($startDate, $endDate);
+        $startDate = Carbon::parse($startDate);
+        $endDate = Carbon::parse($endDate);
+
+        return $startDate->diffInMonths($endDate);
+    }
+}
+
+if(! function_exists('monthsCount')){
+    function monthsCount($startDate, $endDate)
+    {
+        $startDate = Carbon::parse($startDate)->startOfDay();
+        $endDate = Carbon::parse($endDate)->endOfDay();
+
+        $allMonths = [];
+        $currentDate = $startDate->copy();
+
+        while ($currentDate->lte($endDate)) {
+            // Store the month for later selection (if needed for debits)
+            $allMonths[] = $currentDate->copy();
+
+            $currentDate->addMonth(); // Move to the next month
+        }
+
+        return collect($allMonths)->count();
+    }
+}
+
+if(! function_exists('fullDate')){
+    function createFullDate(string|null $date = null)
+    {
+        if(is_null($date)){
+            return;
+        }
+
+        return $date. ' '.now()->format('H:i:s');
+    }
+}
 

@@ -11,6 +11,9 @@ trait CommonFilters
     protected $status = null;
 
     protected $withTrashed = false;
+    protected $withoutRelation = null;
+    protected $withoutRelationCol = null;
+    protected $withoutRelationColValue = null;
 
     protected $searchType = 'containSearch';
     protected $searchTerm = '';
@@ -95,6 +98,14 @@ trait CommonFilters
     public function withoutTrashed()
     {
         $this->withTrashed = false;
+        return $this;
+    }
+
+    public function without(array $colValues, string $col, string $relation)
+    {
+        $this->withoutRelation = $relation;
+        $this->withoutRelationCol = $col;
+        $this->withoutRelationColValue = $colValues;
         return $this;
     }
 }

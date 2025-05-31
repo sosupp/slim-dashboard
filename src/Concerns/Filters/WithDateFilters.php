@@ -11,7 +11,10 @@ trait WithDateFilters
 
     #[Session(key: 'selected_date_label')]
     public $dateLabel = 'today';
-    
+
+    #[Session(key: 'mobile_date_label')]
+    public $mobileDateLabel = 'today';
+
     public $selectedStartDate;
     public $selectedEndDate;
 
@@ -41,6 +44,8 @@ trait WithDateFilters
     public function selectedCustomDateFilter($key)
     {
         $this->selectedDate = $key;
+        $this->dateLabel = $key;
+        $this->mobileDateLabel = $key;
     }
 
     public function selectedDateRange()
@@ -49,6 +54,9 @@ trait WithDateFilters
             'start' => $this->selectedStartDate ,
             'end' => $this->selectedEndDate
         ];
+
+        // $this->dateLabel = 'custom date';
+        $this->mobileDateLabel = $this->setDateLabel();
     }
 
     public function dateDescription()
@@ -65,6 +73,12 @@ trait WithDateFilters
             );
 
         return $description .= '</b>';
+    }
+
+    public function setDateLabel()
+    {
+        return euroDate($this->selectedStartDate, false) .' <b>to</b> '.
+            euroDate($this->selectedEndDate, false) .'<br />';
     }
 
 }

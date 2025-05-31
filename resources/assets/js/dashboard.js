@@ -14,7 +14,7 @@ document.addEventListener('alpine:init', () => {
         panelWidth: '',
         sidePanelTitle: '',
         useComponent: false,
-        componentName: $wire.entangle('sidePanelComponent').live,
+        componentName: '',
         dateLabel: '',
         toggleSidePanel(component = '', title = '', record = null) {
             console.log('yes panrel')

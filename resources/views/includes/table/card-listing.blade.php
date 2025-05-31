@@ -32,7 +32,7 @@
     <div class="mobile-stats-wrapper">
         @if ($this->showPagination())
         <div class="record-count">
-            <span x-cloak x-show="mobileFilterLabel" x-text="mobileFilterLabel"></span>
+            <span x-cloak x-html="mobileDateLabel"></span>
             <span class="total-record-count">({{$this->tableRecords->total()}})</span>
         </div>
         @endif

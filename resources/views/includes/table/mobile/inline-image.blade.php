@@ -1,4 +1,4 @@
-@props(['record' => null, 'imageName' => ''])
+@props(['record' => null, 'image' => null, 'imageName' => ''])
 <form x-data="{
         imgsrc: null,
         modelImageId: @entangle('modelImageId'),
@@ -32,12 +32,12 @@
     </label>
 
     <template x-if="!imgsrc">
-        <img src="{{ asset($record->image) }}" width="50">
+        <img src="{{ $image ? asset($image) : asset($record->image) }}" width="50">
     </template>
 
     <template x-if="imgsrc">
         <p>
-            <img src="{{ asset($record->image) }}" :src="imgsrc" class="imgPreview">
+            <img src="{{ $image ? asset($image) : asset($record->image) }}" :src="imgsrc" class="imgPreview">
         </p>
 
     </template>

@@ -313,6 +313,11 @@ abstract class BaseTable extends Component
         return '';
     }
 
+    public function mobileImageFile($record): string|null
+    {
+        return '';
+    }
+
     public function mobileMoreCtaCss(): string
     {
         return 'bg-goldrod';

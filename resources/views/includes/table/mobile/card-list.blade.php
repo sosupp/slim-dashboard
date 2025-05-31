@@ -22,6 +22,7 @@
                     <div class="card-item-image">
                         @include('slim-dashboard::includes.table.mobile.inline-image', [
                             'record' => $record,
+                            'image' => $this->mobileImageFile($record),
                             'imageName' => $this->mobileEditImageName($record)
                         ])
                     </div>
