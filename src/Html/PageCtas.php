@@ -8,8 +8,8 @@ class PageCtas
     public static function cta(
         string $type = 'link',
         string $label,
-        string $route = null,
-        string $wireAction = null,
+        string|null $route = null,
+        string|null $wireAction = null,
         string $css = '',
         bool $withSidePanel = false,
         bool $shouldConfirm = false,

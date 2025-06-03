@@ -1,7 +1,8 @@
 <div wire:ignore wire:key>
 
-    @props(['id' => '', 'model' => null, 'class' => '', 'button' => 'publishBtn', 'uploadEndpoint' => '/slimdashboard/editor/image/adaptor'])
+    @props(['id' => '', 'model' => null, 'class' => '', 'button' => 'publishBtn', 'uploadEndpoint' => '/slimdashboard/editor/image/adaptor', 'label' => ''])
     <div class="{{$class}}" x-data="{ content: @entangle($model).defer }">
+        <label for="{{$id}}">{{$label}}</label>
         <div id="{{$id}}" style=""></div>
     </div>
 

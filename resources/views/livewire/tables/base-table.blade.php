@@ -7,6 +7,7 @@
         componentName: $wire.entangle('sidePanelComponent').live,
         selectFilterLabel: $wire.entangle('selectFilterLabel'),
         dateLabel: $wire.entangle('dateLabel'),
+        mobileDateLabel: $wire.entangle('mobileDateLabel'),
         searchFilters: false,
         imagePreview: null,
         imgsrc: null,

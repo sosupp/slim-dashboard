@@ -669,7 +669,7 @@ class HtmlForm
         }
 
         if($withImageUpload){
-            $this->form .= $this->ckEditor(id: $setId, model: $name, label: $setLabel);
+            $this->form .= $this->ckEditor(id: $setId, model: $name, label: $setLabel, state: $state);
         }else{
             $this->form .= $this->ckEditorWithoutUpload(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel);
         }
@@ -700,7 +700,8 @@ class HtmlForm
             'model' => $name,
             'id' => $setId,
             'class' => $wrapperCss,
-            'uploadEndpoint' => $uploadEndpoint
+            'uploadEndpoint' => $uploadEndpoint,
+            'label' => $label,
         ]);
 
         return $this;
@@ -949,7 +950,6 @@ class HtmlForm
 
         $items = '<div class="selected-tab-items">';
             $content = '';
-            Log::info('by passing');
 
             foreach ($useContent as $key => $content) {
                 if(!empty($content['externalView'])){
@@ -988,7 +988,7 @@ class HtmlForm
         return view('slim-dashboard::components.utils.forms.plain-editor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss', 'label', 'state'));
     }
 
-    private function ckEditor(string $id, string $model, string $label)
+    private function ckEditor(string $id, string $model, string $label, string $state)
     {
         return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model', 'label', 'state'));
     }

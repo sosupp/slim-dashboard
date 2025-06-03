@@ -70,6 +70,7 @@ if(!function_exists('searchSelector')){
         })->toArray();
     }
 }
+
 if(!function_exists('selectedSearchValues')){
     function selectedSearchValues(Collection|array $options, array|string $key = 'value')
     {

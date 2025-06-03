@@ -81,6 +81,16 @@ abstract class BaseTable extends Component
     public abstract function pageCta();
     public abstract function defineSearch();
 
+    public function updatedSelectAll($key)
+    {
+        if($key===false){
+            $this->checkRecords = [];
+            return;
+        }
+
+        $this->checkRecords = $this->tableRecords->pluck('id')->all();
+    }
+
     public function pageFilters()
     {
         return [];
