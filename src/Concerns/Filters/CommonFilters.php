@@ -9,6 +9,7 @@ trait CommonFilters
     protected $inActive = false;
     protected $active = true;
     protected $status = null;
+    protected $statusCol = 'status';
 
     protected $withTrashed = false;
     protected $withoutRelation = null;
@@ -74,10 +75,11 @@ trait CommonFilters
         return $this;
     }
 
-    public function withActive()
+    public function withActive(string $column = 'status', string|bool $status = 'active')
     {
         $this->active = true;
-        $this->status = 'active';
+        $this->status = $status;
+        $this->statusCol = $column;
         return $this;
     }
 
