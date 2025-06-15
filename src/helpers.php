@@ -154,8 +154,12 @@ if(! function_exists('moneyFormat')){
 }
 
 if(!function_exists('euroDate')){
-    function euroDate(string $date, bool $withFull = true)
+    function euroDate(string|null $date = null, bool $withFull = true)
     {
+        if($date == null){
+            return;
+        }
+
         $full = $withFull ? ', H:i' : '';
         return Carbon::parse($date)->format('d M Y'.$full);
     }
