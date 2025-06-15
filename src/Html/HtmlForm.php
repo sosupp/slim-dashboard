@@ -453,9 +453,9 @@ class HtmlForm
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
         $setLocked = $lock ? 'disabled' : '';
 
-        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
-        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
-        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+        $wrapperCss = $type == 'checkbox' ? $wrapperCss : (empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss);
+        $labelCss = $type == 'checkbox' ? $labelCss : (empty($this->labelCss) ? $labelCss : $this->labelCss);
+        $inputCss = $type == 'checkbox' ? $inputCss : (empty($this->inputCss) ? $inputCss : $this->inputCss);
 
         $input = '';
 
