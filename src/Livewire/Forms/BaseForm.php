@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 use Sosupp\SlimDashboard\Concerns\UploadImages;
 use Sosupp\SlimDashboard\Concerns\Html\WithBreadcrumb;
+use Sosupp\SlimDashboard\Livewire\Traits\HandleUserAlerts;
 use Sosupp\SlimDashboard\Livewire\Traits\PreparesFormEdit;
 
 abstract class BaseForm extends Component
@@ -15,7 +16,8 @@ abstract class BaseForm extends Component
     use WithFileUploads,
         UploadImages,
         PreparesFormEdit,
-        WithBreadcrumb;
+        WithBreadcrumb,
+        HandleUserAlerts;
 
     public $pageTitle;
     public $isUpdate = false;
