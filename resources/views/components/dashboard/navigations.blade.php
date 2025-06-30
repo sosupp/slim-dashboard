@@ -36,7 +36,7 @@
             {!! $navItems['logo']['view'] !!}
         </div>
         @endif
-
+        <span class="leave-empty"></span>
         @if (isset($navItems['action']))
         <div class="quick-links-wrapper" id="globalActionsCta">
             <x-dropdown wrapperCss="" dropdownCss="reset-dropdown">
@@ -64,7 +64,7 @@
         x-on:click="toggleMenu">
         @persist('admin-side-nav')
         <div class="nav-items-wrapper">
-            <div class="{{isset($navItems['css']) ? $navItems['css']['bg'] : 'light-purple-nav'}}">
+            <div class="brand-logo-wrapper">
                 @if (isset($navItems['logo']))
                 {!! $navItems['logo']['view'] !!}
                 @endif
@@ -92,7 +92,7 @@
             @endforelse
 
             @if (isset($navItems['extraView']) && $navItems['extraView']['authorize'])
-            <div class="">
+            <div class="external-view-menu-items">
                 {!! $navItems['extraView']['view'] !!}
             </div>
             @endif

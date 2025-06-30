@@ -313,13 +313,15 @@ class HtmlForm
 
         $input = '';
 
+        $withExisitngImage = asset($value);
         $progress = '$event.detail.progress';
-        $setFile = 'this.$refs.uploadedImage.files[0]';
+        $setFile = 'this.$refs.'.$id.'.files[0]';
         $input = <<<WRAPPER
             <div x-data="{
                     progress: 0,
                     uploading: false,
                     isSuccess: false,
+                    imagePreview: null,
                     previewImage(){
                         let file = $setFile;
                         filename = file.name;
@@ -334,6 +336,7 @@ class HtmlForm
                         reader.readAsDataURL(file);
                     }
                 }"
+                x-init="imagePreview='$withExisitngImage'"
                 x-on:livewire-upload-start="uploading = true"
                 x-on:livewire-upload-finish="uploading = false;isSuccess=true"
                 x-on:livewire-upload-cancel="uploading = false"
@@ -342,13 +345,13 @@ class HtmlForm
                 class="image-upload-wrapper">
                     <input type="file"
                         style="display: none;"
-                        id="imageInput"
+                        id="$id"
                         class="image-input-file"
-                        x-ref="uploadedImage"
+                        x-ref="$id"
                         x-on:change="previewImage()"
                         wire:model$setState="$name">
 
-                    <label for="imageInput"
+                    <label for="$id"
                         class="image-upload-label as-pointer">
                         $setLabel
                     </label>

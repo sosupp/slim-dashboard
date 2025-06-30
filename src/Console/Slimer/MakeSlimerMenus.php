@@ -8,14 +8,22 @@ class MakeSlimerMenus extends Command
 {
 
     protected $signature = 'slimer:menus';
-    protected $description = 'Publish a menu class used to add navigation menus 
+    protected $description = 'Publish a menu class used to add navigation menus
                             to slim-dashboard navigations';
 
-    protected Filesystem $files;
+    protected $files;
+
+    public function __construct(Filesystem $files)
+    {
+        parent::__construct();
+        $this->files = $files;
+    }
 
     public function handle()
     {
         $componentClassPath = app_path("View/Components/Slimer/Menus.php");
+
+        // dd($componentClassPath);
 
         // Ensure directories exist
         $this->makeDirectory($componentClassPath);
@@ -32,6 +40,7 @@ class MakeSlimerMenus extends Command
 
     protected function makeDirectory($path)
     {
+
         $directory = dirname($path);
         if (!$this->files->isDirectory($directory)) {
             $this->files->makeDirectory($directory, 0755, true);
@@ -62,7 +71,7 @@ class MakeSlimerMenus extends Command
                 )
                 ->logo(
                     name: 'susu', key: '', route: null,
-                    view: 'logo name or pass a view
+                    view: 'logo name or pass a view'
                 )
                 ->globalActions(
                     name: 'Action 1', key: 'action-1'
@@ -80,6 +89,6 @@ class MakeSlimerMenus extends Command
         }
         PHP;
     }
-    
+
 
 }

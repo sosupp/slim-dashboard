@@ -1266,7 +1266,9 @@
     top: 4px;
     display: flex;
 }
-
+.external-view-menu-items {
+	padding: 0.5rem 1rem;
+}
 /* MEDIA QUERIES */
 @media(max-width: 300px) {
     .nav-items-wrapper {
