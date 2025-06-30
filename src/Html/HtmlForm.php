@@ -288,7 +288,7 @@ class HtmlForm
         string $name,
         string $type = 'file',
         string $value = '',
-        string $id = '',
+        string $id = 'defaultImageInput',
         string|null $label = null,
         string $placeholder = '',
         string $class = '',
