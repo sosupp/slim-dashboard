@@ -287,7 +287,7 @@ class HtmlForm
     public function inlineImageInput(
         string $name,
         string $type = 'file',
-        string $value = '',
+        string|null $value = '',
         string $id = 'defaultImageInput',
         string|null $label = null,
         string $placeholder = '',
