@@ -492,9 +492,9 @@ class HtmlForm
         string $optionId = 'id',
         string $class = '',
         bool|string $wireLive = true,
-        string $wrapperCss = 'custom-input-wrapper',
+        string $wrapperCss = '',
         string $labelCss = '',
-        string $inputCss = 'custom-input',
+        string $inputCss = '',
         bool $customPlaceholder = true,
         bool $canView = true
     )
@@ -504,9 +504,9 @@ class HtmlForm
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
         $usePlaceholder = $customPlaceholder ? $label : '';
 
-        $wrapperCss = empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss;
-        $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
-        $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
+        $wrapperCss = empty($wrapperCss) ? $this->wrapperCss : $wrapperCss;
+        $labelCss = empty($labelCss) ? $this->labelCss : $labelCss;
+        $inputCss = empty($inputCss) ? $this->inputCss : $inputCss;
 
         $selectInput = '';
 
