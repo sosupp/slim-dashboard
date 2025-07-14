@@ -448,6 +448,7 @@ class HtmlForm
         string $inputCss = 'custom-input',
         bool $canView = true,
         bool $lock = false,
+        string $actions = ''
 
     )
     {
@@ -471,7 +472,8 @@ class HtmlForm
                     class="$inputCss $class @error('$name') is-error @enderror"
                     wire:model$setState="$name"
                     value="$value"
-                    placeholder="$placeholder" $setLocked required
+                    placeholder="$placeholder" $setLocked
+                    $actions
                     wire:key="$setId"/>
             </div>
             INPUT;
@@ -495,7 +497,7 @@ class HtmlForm
         string $wrapperCss = '',
         string $labelCss = '',
         string $inputCss = '',
-        bool $customPlaceholder = true,
+        bool $customPlaceholder = false,
         bool $canView = true
     )
     {

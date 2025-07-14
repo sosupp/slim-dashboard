@@ -51,13 +51,13 @@ class MakeTableCommand extends GeneratorCommand
         // Replace basic placeholders
         $content = str_replace(
             ['{{ namespace }}', '{{ class }}', '{{ model }}', '{{ service }}', '// {{if:inlineForm}}'],
-            [$namespace, $getClassName, $model, $service, $crud ? $emptyReplacer : '// {{if:inlineForm}}'],
+            [$namespace, $getClassName, $model, $service, ''],
             $stub
         );
 
         if(!$crud){
             // Remove the entire conditional section
-            $content = preg_replace('/\s*\/\/ {{if:inlineForm}}.*?\/\/ {{if:inlineForm}}/s', '', $content);
+            $content = preg_replace('/\s*\/\/ {{if:inlineForm}}.*?\/\/ {{if:inlineForm}}/s', ' ', $content);
         }
 
 

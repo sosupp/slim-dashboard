@@ -1,15 +1,15 @@
 {
-    "/js/app.js": "/js/app.js?id=01a2e7cb5881f998482b356a5bcec921",
-    "/js/dashboard.js": "/js/dashboard.js?id=e8acbe851304709ae64f1ecb6f4077d6",
-    "/css/dashboard/inputs.css": "/css/dashboard/inputs.css?id=8cbce47e84701742ce07c95d064afdd0",
-    "/css/dashboard/form.css": "/css/dashboard/form.css?id=887d274f1502f6742da9f2d0a2c6a41e",
-    "/css/dashboard/dashboard.css": "/css/dashboard/dashboard.css?id=40b196a12d085c08dc8edbfbcdabe416",
-    "/css/register.css": "/css/register.css?id=12a854085f272c8380df291e5f037f60",
-    "/css/modal.css": "/css/modal.css?id=bd0e8c243a8f93cca57f719f49153b5a",
-    "/css/dashboard/accounting.css": "/css/dashboard/accounting.css?id=4ee44565a1e1610b8e567594f1c8c191",
-    "/css/dashboard/accounts.css": "/css/dashboard/accounts.css?id=9f1d2f4e61cc0d5885ed20418cca08dd",
-    "/css/dashboard/wrappers.css": "/css/dashboard/wrappers.css?id=e67294ce4a80c3310089e91d4bc45b0e",
-    "/css/dashboard/utilities.css": "/css/dashboard/utilities.css?id=5857b93dc994e74fd2ae1cc23bd6911b",
-    "/css/dashboard/table.css": "/css/dashboard/table.css?id=3a168e74608a73d7d96cbff2ff560cf3",
-    "/css/dashboard/modal.css": "/css/dashboard/modal.css?id=f2005d6c6a0238234325d0aa698f4daa"
+    "/js/app.js": "/js/app.js?id=4d43613b6eb639459e530d3263f54762",
+    "/js/dashboard.js": "/js/dashboard.js?id=2d9cdd5bb22c541d4b71a5e4f9a1e803",
+    "/css/dashboard/inputs.css": "/css/dashboard/inputs.css?id=f9e9694c98ae05bb5e505a9ecb1aeb53",
+    "/css/dashboard/form.css": "/css/dashboard/form.css?id=2f0ca0859ded1a712b21cd657c5591d0",
+    "/css/dashboard/dashboard.css": "/css/dashboard/dashboard.css?id=f7acd2afe1f3983c659b63ac48cbf4c4",
+    "/css/register.css": "/css/register.css?id=a425c094cc50deee9dd6cb36749cb01d",
+    "/css/modal.css": "/css/modal.css?id=08d91cf21accf6bbdbd0d0e76f481674",
+    "/css/dashboard/accounting.css": "/css/dashboard/accounting.css?id=575f3959dadd38d733bc5281ec56a3eb",
+    "/css/dashboard/accounts.css": "/css/dashboard/accounts.css?id=9ced18f9faa250114566d42871247740",
+    "/css/dashboard/wrappers.css": "/css/dashboard/wrappers.css?id=e401a3ceb02dfcae2f7465a34b8b38b8",
+    "/css/dashboard/utilities.css": "/css/dashboard/utilities.css?id=62fb134f215362fdf2c1d6c6ab8bfecb",
+    "/css/dashboard/table.css": "/css/dashboard/table.css?id=74f1b53b7ed34426fd9979950072ca8d",
+    "/css/dashboard/modal.css": "/css/dashboard/modal.css?id=b9bde4d9cbafbd9f605639023fd52862"
 }

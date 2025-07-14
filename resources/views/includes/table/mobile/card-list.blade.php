@@ -36,7 +36,7 @@
                             <div class="card-inline-items">
                             @foreach ($colHeading as $rowItem)
                                 @if ($rowItem['canView'])
-                                    @if (isset($rowItem['relation']))
+                                    @if (isset($rowItem['relation']) || $rowItem['callback'] !== null)
                                     <p class="card-item-name item-heading {{$rowItem['css']}}">
                                         @if ($rowItem['label'] !== null)
                                         <span class="{{$rowItem['labelCss']}}">{{$rowItem['label']}}:</span>
@@ -101,7 +101,7 @@
 
         </div>
     @empty
-        
+
     @endforelse
 
     <div wire:loading>

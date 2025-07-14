@@ -1,1 +1,319 @@
-(()=>{var r,o={606:()=>{},280:()=>{},598:()=>{},165:()=>{},878:()=>{},435:()=>{},631:()=>{},233:()=>{},716:()=>{},89:()=>{},780:()=>{},904:()=>{}},i={};function v(r){var e=i[r];if(void 0!==e)return e.exports;var a=i[r]={exports:{}};return o[r](a,a.exports,v),a.exports}v.m=o,r=[],v.O=(o,i,e,a)=>{if(!i){var d=1/0;for(s=0;s<r.length;s++){for(var[i,e,a]=r[s],O=!0,n=0;n<i.length;n++)(!1&a||d>=a)&&Object.keys(v.O).every((r=>v.O[r](i[n])))?i.splice(n--,1):(O=!1,a<d&&(d=a));if(O){r.splice(s--,1);var t=e();void 0!==t&&(o=t)}}return o}a=a||0;for(var s=r.length;s>0&&r[s-1][2]>a;s--)r[s]=r[s-1];r[s]=[i,e,a]},v.o=(r,o)=>Object.prototype.hasOwnProperty.call(r,o),(()=>{var r={847:0,3:0,694:0,304:0,384:0,698:0,567:0,144:0,540:0,448:0,176:0,743:0};v.O.j=o=>0===r[o];var o=(o,i)=>{var e,a,[d,O,n]=i,t=0;if(d.some((o=>0!==r[o]))){for(e in O)v.o(O,e)&&(v.m[e]=O[e]);if(n)var s=n(v)}for(o&&o(i);t<d.length;t++)a=d[t],v.o(r,a)&&r[a]&&r[a][0](),r[a]=0;return v.O(s)},i=self.webpackChunkslim_dashboard=self.webpackChunkslim_dashboard||[];i.forEach(o.bind(null,0)),i.push=o.bind(null,i.push.bind(i))})(),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(606))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(233))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(716))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(89))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(780))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(904))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(280))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(598))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(165))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(878))),v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(435)));var e=v.O(void 0,[3,694,304,384,698,567,144,540,448,176,743],(()=>v(631)));e=v.O(e)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/assets/js/app.js":
+/*!************************************!*\
+  !*** ./resources/assets/js/app.js ***!
+  \************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/modal.css":
+/*!**************************************************!*\
+  !*** ./resources/assets/css/dashboard/modal.css ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/table.css":
+/*!**************************************************!*\
+  !*** ./resources/assets/css/dashboard/table.css ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/utilities.css":
+/*!******************************************************!*\
+  !*** ./resources/assets/css/dashboard/utilities.css ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/wrappers.css":
+/*!*****************************************************!*\
+  !*** ./resources/assets/css/dashboard/wrappers.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/accounts.css":
+/*!*****************************************************!*\
+  !*** ./resources/assets/css/dashboard/accounts.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/accounting.css":
+/*!*******************************************************!*\
+  !*** ./resources/assets/css/dashboard/accounting.css ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/modal.css":
+/*!****************************************!*\
+  !*** ./resources/assets/css/modal.css ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/register.css":
+/*!*******************************************!*\
+  !*** ./resources/assets/css/register.css ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/dashboard.css":
+/*!******************************************************!*\
+  !*** ./resources/assets/css/dashboard/dashboard.css ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/form.css":
+/*!*************************************************!*\
+  !*** ./resources/assets/css/dashboard/form.css ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/css/dashboard/inputs.css":
+/*!***************************************************!*\
+  !*** ./resources/assets/css/dashboard/inputs.css ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/js/app": 0,
+/******/ 			"css/dashboard/inputs": 0,
+/******/ 			"css/dashboard/form": 0,
+/******/ 			"css/dashboard/dashboard": 0,
+/******/ 			"css/register": 0,
+/******/ 			"css/modal": 0,
+/******/ 			"css/dashboard/accounting": 0,
+/******/ 			"css/dashboard/accounts": 0,
+/******/ 			"css/dashboard/wrappers": 0,
+/******/ 			"css/dashboard/utilities": 0,
+/******/ 			"css/dashboard/table": 0,
+/******/ 			"css/dashboard/modal": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkslim_dashboard"] = self["webpackChunkslim_dashboard"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/modal.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/register.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/dashboard.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/form.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/inputs.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/modal.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/table.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/utilities.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/wrappers.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/accounts.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/dashboard/inputs","css/dashboard/form","css/dashboard/dashboard","css/register","css/modal","css/dashboard/accounting","css/dashboard/accounts","css/dashboard/wrappers","css/dashboard/utilities","css/dashboard/table","css/dashboard/modal"], () => (__webpack_require__("./resources/assets/css/dashboard/accounting.css")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
