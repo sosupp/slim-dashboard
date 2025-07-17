@@ -27,9 +27,10 @@ trait UploadImages
             $filename = '';
 
             if(isset($data['filename']) && !empty($data['filename'])){
-                $filename = str()->slug($data['filename']);
+                $filename = str($data['filename'])->slug()->value();
             }else{
-                $filename = pathinfo($data['image']->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalName = pathinfo($data['image']->getClientOriginalName(), PATHINFO_FILENAME);
+                $filename = str($originalName)->slug()->value();
             }
 
             $image = '';
@@ -60,10 +61,11 @@ trait UploadImages
                 $filename = '';
 
                 // dd($data['images'], $file['filename'], $file['image'], str()->slug($file['filename']), pathinfo($file['image']->getClientOriginalName(), PATHINFO_FILENAME));
-                if(isset($file['filename']) && !empty($file['filename'])){
-                    $filename = str()->slug($file['filename']);
+                if(isset($data['filename']) && !empty($data['filename'])){
+                    $filename = str($data['filename'])->slug()->value();
                 }else{
-                    $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $originalName = pathinfo($data['image']->getClientOriginalName(), PATHINFO_FILENAME);
+                    $filename = str($originalName)->slug()->value();
                 }
 
 
@@ -92,9 +94,10 @@ trait UploadImages
             $filename = '';
 
             if(isset($data['filename']) && !empty($data['filename'])){
-                $filename = str()->slug($data['filename']);
+                $filename = str($data['filename'])->slug()->value();
             }else{
-                $filename = pathinfo($data['image']->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalName = pathinfo($data['image']->getClientOriginalName(), PATHINFO_FILENAME);
+                $filename = str($originalName)->slug()->value();
             }
 
             $image = '';
