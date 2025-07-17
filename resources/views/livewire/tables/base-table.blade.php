@@ -250,7 +250,7 @@
                                                         @if (isset($colHeading['key']) && $colHeading['key'] === 'image')
                                                             @include('slim-dashboard::includes.table.table-inline-image')
                                                         @else
-                                                            @if (isset($colHeading['relation']) || $colHeading !== null)
+                                                            @if (isset($colHeading['relation']) || $colHeading['relation'] !== null)
                                                             <div class="inline-edit-wrapper">
                                                                 <div class="{{$colHeading['css']}}">
                                                                     {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null, $colHeading['valueCss']) !!}
