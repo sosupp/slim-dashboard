@@ -161,7 +161,7 @@
                                                     @include('slim-dashboard::includes.table.table-inline-image')
                                                 @else
                                                     @if (isset($colHeading['relation']) || $colHeading !== null)
-                                                    <div class="card-item-wrapper {{$colHeading['css']}}">
+                                                    <div class="card-item-wrapper {{$colHeading['valueCss']}}">
                                                         {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null, $colHeading['valueCss']) !!}
                                                         @if ($colHeading['showLabel'])
                                                         <p class="item-label2">{{ $colHeading['label'] }}</p>
@@ -183,7 +183,7 @@
                                                         @elseif(isset($colHeading['type']) && $colHeading['type'] === 'date')
                                                         {{euroDate($record[$colHeading])}}
                                                         @else
-                                                            <div class="card-item-wrapper {{$colHeading['css']}}">
+                                                            <div class="card-item-wrapper {{$colHeading['valueCss']}}">
                                                                 <p class="item-value">{{ $record[$colHeading['col']] }}</p>
 
                                                                 @if ($colHeading['showLabel'])
@@ -194,7 +194,7 @@
                                                     @endif
                                                 @endif
                                             @else
-                                                <div class="card-item-wrapper {{$colHeading['css']}}">
+                                                <div class="card-item-wrapper {{$colHeading['valueCss']}}">
                                                     {{ $record[$colHeading] }}
                                                     @if ($colHeading['showLabel'])
                                                     <p class="item-label2">{{ $colHeading['label'] }}</p>
@@ -252,7 +252,7 @@
                                                         @else
                                                             @if (isset($colHeading['relation']) || $colHeading['callback'] !== null)
                                                             <div class="inline-edit-wrapper">
-                                                                <div class="{{$colHeading['css']}}">
+                                                                <div class="{{$colHeading['valueCss']}}">
                                                                     {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null, $colHeading['valueCss']) !!}
                                                                 </div>
                                                                 @if ($colHeading['inlineEdit'])
@@ -280,17 +280,17 @@
                                                                 @else
                                                                     @if ($colHeading['inlineEdit'])
                                                                         <div class="inline-edit-wrapper">
-                                                                            <div class="{{$colHeading['css']}}">{{ $record[$colHeading['col']] }}</div>
+                                                                            <div class="{{$colHeading['valueCss']}}">{{ $record[$colHeading['col']] }}</div>
                                                                             @include('slim-dashboard::includes.table.table-inline-edit')
                                                                         </div>
                                                                     @else
-                                                                        <div class="{{$colHeading['css']}}">{{ $record[$colHeading['col']] }}</div>
+                                                                        <div class="{{$colHeading['valueCss']}}">{{ $record[$colHeading['col']] }}</div>
                                                                     @endif
                                                                 @endif
                                                             @endif
                                                         @endif
                                                     @else
-                                                        <div class="{{$colHeading['css']}}">{{ $record[$colHeading] }}</div>
+                                                        <div class="{{$colHeading['valueCss']}}">{{ $record[$colHeading] }}</div>
                                                     @endif
                                                 @endif
                                             </td>
