@@ -8,7 +8,7 @@
 
                 @forelse ($theadings as $heading)
                     @if ($heading['canView'])
-                    <th class="">
+                    <th class="{{$heading['css']}}">
                         {{-- @if ($heading['filter'])
                             <select name="" id="">
                                 <option value="#">Filter</option>
