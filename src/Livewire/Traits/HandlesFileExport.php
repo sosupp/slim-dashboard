@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\Traits;
+namespace Sosupp\SlimDashboard\Livewire\Traits;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
