@@ -10,6 +10,7 @@ class PageCtas
         string $label,
         string|null $route = null,
         string|null $wireAction = null,
+        string|null $wireProperty = null,
         string $css = '',
         bool $withSidePanel = false,
         bool $shouldConfirm = false,
@@ -17,12 +18,14 @@ class PageCtas
         string $wireTarget = 'selectAll',
         ?string $component = null,
         bool $show = true,
+        array|null $options = [],
     )
     {
         static::$pageActions[$label]['type'] = $type;
         static::$pageActions[$label]['label'] = $label;
         static::$pageActions[$label]['route'] = $route;
         static::$pageActions[$label]['wireAction'] = $wireAction;
+        static::$pageActions[$label]['wireProperty'] = $wireProperty;
         static::$pageActions[$label]['css'] = $css;
         static::$pageActions[$label]['withSidePanel'] = $withSidePanel;
         static::$pageActions[$label]['shouldConfirm'] = $shouldConfirm;
@@ -30,6 +33,7 @@ class PageCtas
         static::$pageActions[$label]['wireTarget'] = $wireTarget;
         static::$pageActions[$label]['component'] = $component;
         static::$pageActions[$label]['show'] = $show;
+        static::$pageActions[$label]['options'] = $options;
 
         return new static;
     }

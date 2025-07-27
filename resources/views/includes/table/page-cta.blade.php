@@ -47,15 +47,25 @@
                             wire:confirm="Do you want to continue?">{{ $cta['label'] }}</button>
                     @endif
 
-                    @if ($cta['type'] === 'select')
-                        <select name="bulkAction" id="bulkAction">
-                            <option>Bulk Action</option>
-                            <option value="">Attach all products</option>
-                            <option value="">Delete all products</option>
+                    @if ($cta['type'] === 'export')
+                        <select name="bulkAction" id="bulkAction"
+                            class="{{$cta['css'] ?? 'custom-btn'}}"
+                            wire:model.live="selectedExportType"
+                            wire:change="{{$cta['wireAction']}}">
+                            <option>{{$cta['label']}}</option>
+                            @forelse ($cta['options'] as $key => $option)
+                                @if (is_array($option))
+                                <option value="{{$option[$cta['optionId']]}}">{{$option[$cta['optionKey']]}}</option>
+                                @else
+                                <option value="{{$option}}">{{$option}}</option>
+                                @endif
+                            @empty
+                                Add options.
+                            @endforelse
                         </select>
                     @endif
 
-                    @if ($cta['type'] === 'dropdown')
+                    @if ($cta['type'] === 'dropdown' || $cta['type'] === 'select')
                         <select name="bulkAction" id="bulkAction" wire:model.live="{{$cta['wireProperty']}}"
                             wire:change="{{$cta['wireAction']}}" class="filter-wrapper select-filter as-pointer">
                             <option>{{$cta['label']}}</option>

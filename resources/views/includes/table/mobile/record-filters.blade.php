@@ -9,7 +9,7 @@
             this.mobileFilterLabel = label
             this.toggleFilter()
         }
-    }">
+    }" x-on:filtermodal.window="filterModal=!filterModal">
 
     <button type="button" class="filter-wrapper filter-trigger {{$filterTriggerCss}} as-pointer"
         x-on:click="toggleFilter">

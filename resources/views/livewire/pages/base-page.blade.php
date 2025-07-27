@@ -7,4 +7,6 @@
         @include('slim-dashboard::includes.table.side-panel')
         @endif
     </div>
+
+    @include('slim-dashboard::includes.table.mobile.record-filters')
 </div>

@@ -7,7 +7,7 @@
                 @endif
 
                 @forelse ($theadings as $heading)
-                    @if ($heading['canView'])
+                    @if ($heading['canView'] && $heading['screen'] == 'all')
                     <th class="{{$heading['css']}}">
                         {{-- @if ($heading['filter'])
                             <select name="" id="">
