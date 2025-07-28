@@ -38,9 +38,22 @@ trait HandlesFileExport
         ];
     }
 
+    public function pageCta()
+    {
+        // return [''];
+        return PageCtas::ctaDropdown(
+            label: 'placeholder',
+            key: 'place_holder',
+            options: [],
+            optionId: 'name',
+            show: false,
+        )
+        ->make();
+    }
+
     public function mergeWithPageCta(): array
     {
-        $ctas = $this->pageCta();
+        $ctas = (array) $this->pageCta();
 
         $exportCta = PageCtas::cta(
             type: 'export',
@@ -50,6 +63,9 @@ trait HandlesFileExport
             wireAction: 'executeExport'
         )
         ->make();
+
+
+
 
         return array_merge($ctas, $exportCta);
     }
@@ -68,8 +84,9 @@ trait HandlesFileExport
             );
         }
 
-        $html = '';
-        $pdf = Pdf::loadHtml($html)->setPaper('a4');
+        // $html = $this->pdfView();
+        // dd($html);
+        $pdf = Pdf::loadHtml($this->pdfView())->setPaper('a4');
 
         return response()->streamDownload(
             fn() => print($pdf->stream()),

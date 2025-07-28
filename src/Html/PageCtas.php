@@ -13,7 +13,7 @@ class PageCtas
         string|null $wireProperty = null,
         string $css = '',
         bool $withSidePanel = false,
-        bool $shouldConfirm = false,
+        bool $shouldConfirm = true,
         string $confirmMessage = '',
         string $wireTarget = 'selectAll',
         ?string $component = null,

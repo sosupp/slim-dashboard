@@ -56,6 +56,8 @@
         {{$this->compositePage()}}
     </div>
 
+    {{$this->viewBeforeTable()}}
+
     @if ($this->hasCardListing())
         <div class="for-mobile">
             @include('slim-dashboard::includes.table.card-listing')
@@ -76,7 +78,7 @@
             @if ($this->showTableCta())
             <div class="table-cta-wrapper {{$this->tableHeadingCss}}">
                 @if (!empty($this->tableHeading()))
-                <h2 class="table-heading">{!! $this->tableHeading() !!}</h2>
+                <div class="table-heading">{!! $this->tableHeading() !!}</div>
                 @endif
 
                 <div class="search-input-and-results" x-data="{openResults: true}">
@@ -98,16 +100,15 @@
                     @endif
                 </div>
 
+
                 @include('slim-dashboard::includes.table.page-cta')
 
             </div>
             @endif
 
-            <div class="">
-                @if ($this->useSideModal())
-                @include('slim-dashboard::includes.table.side-panel')
-                @endif
-            </div>
+            @if ($this->useSideModal())
+            @include('slim-dashboard::includes.table.side-panel')
+            @endif
 
             @if ($this->showPaginationFilter())
             <div class="custom-pagination-wrapper">
@@ -132,9 +133,13 @@
             @include('slim-dashboard::includes.table.table-inline-statistics')
             @endif
 
-
-            @include('slim-dashboard::includes.table.table-to-cards')
-            @include('slim-dashboard::includes.table.standard')
+            
+            @if($this->useCustomTableView())
+                {{ $this->useCustomTableView() }}
+            @else
+                @include('slim-dashboard::includes.table.table-to-cards')
+                @include('slim-dashboard::includes.table.standard')
+            @endif
 
             
         </div>

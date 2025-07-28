@@ -73,7 +73,6 @@ abstract class BaseTable extends Component
 
 
     public abstract function mount();
-    public abstract function useCustomTable();
     public abstract function tableCols();
     public abstract function tableRecords();
     public abstract function tableActions();
@@ -91,6 +90,8 @@ abstract class BaseTable extends Component
         $this->checkRecords = $this->tableRecords->pluck('id')->all();
     }
 
+    public function useCustomTableView(){}
+    
     public function pageFilters()
     {
         return [];
@@ -169,6 +170,7 @@ abstract class BaseTable extends Component
     public function getOneModel(string|int $id){}
     public function updateImageColumn(string|int $modelId, string $image){}
     public function breadcrumbData(){}
+    public function viewBeforeTable(){}
 
     public function setCustomRoute($model, $callback = null)
     {

@@ -28,7 +28,8 @@ trait CommonScopes
         // dd($date);
         if(!is_null($date)){
             $query->when(is_string($date) && !empty($date) && $date !== null, function($query) use($date, $col){
-                $query->whereDate($col, '=', $date);
+                $query->whereDate($col, '>=', $date)
+                ->whereDate($col, '<=', $date);
             })
             ->when(is_array($date) && !empty($date), function($query) use($date, $col){
                 // dd($date);
@@ -37,7 +38,8 @@ trait CommonScopes
                 });
 
                 if($date->count() == 1){
-                    $query->whereDate($col, '=', $date);
+                    $query->whereDate($col, '>=', $date)
+                    ->whereDate($col, '<=', $date);
                     return;
                 }
 
