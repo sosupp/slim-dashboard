@@ -2,6 +2,7 @@
 namespace Sosupp\SlimDashboard\Livewire\Traits;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Sosupp\SlimDashboard\Html\PageCtas;
 
@@ -11,6 +12,7 @@ trait HandlesFileExport
 
     abstract function exportModel();
     abstract function exportFilename(): string;
+
 
     public function renderingHandlesFileExport()
     {
@@ -36,6 +38,11 @@ trait HandlesFileExport
             'excel',
             'pdf'
         ];
+    }
+
+    public function pdfView(): string|View
+    {
+        return '';
     }
 
     public function pageCta()
@@ -64,9 +71,7 @@ trait HandlesFileExport
         )
         ->make();
 
-
-
-
+        // dd($ctas, $exportCta);
         return array_merge($ctas, $exportCta);
     }
 

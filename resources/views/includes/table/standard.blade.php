@@ -9,10 +9,10 @@
             @includeIf($this->useCustomTable())
         @else
             @forelse ($this->tableRecords as $index => $record)
-                <tr wire:key="table_{{$index}}_{{$record->id}}">
+                <tr wire:key="table_{{$index}}_{{$record['id']}}">
                     @if ($this->withCheckbox)
                     <td scope="row">
-                        <input type="checkbox" value="{{$record->id}}" wire:model="checkRecords">
+                        <input type="checkbox" value="{{$record['id']}}" wire:model="checkRecords">
                     </td>
                     @endif
                     @foreach ($this->tableCols() as $colHeading)
@@ -41,7 +41,7 @@
                                                     @else
                                                     <label class="switch">
                                                         <input type="checkbox" value="{{ $record[$colHeading['col']] }}"
-                                                            wire:click="toggleStatus({{ $record->id }}, '{{$colHeading['col']}}')"
+                                                            wire:click="toggleStatus({{ $record['id'] }}, '{{$colHeading['col']}}')"
                                                             {{ $record[$colHeading['col']] === 'active' ? 'checked' : '' }}>
                                                         <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
                                                     </label>

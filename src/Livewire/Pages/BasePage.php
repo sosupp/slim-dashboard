@@ -35,6 +35,12 @@ abstract class BasePage extends Component
         return 'bg-goldrod';
     }
 
+    public function pageFilters()
+    {
+        return [];
+    }
+
+    
     public function render()
     {
         return view('slim-dashboard::livewire.pages.base-page')

@@ -6,6 +6,16 @@ use Illuminate\Support\Carbon;
 
 trait WithPresentableDateFormat
 {
+    public function getFormatDates($key)
+    {
+        if(is_array($key)){
+            return $key;
+        }
+
+        return $this->easyDates($key);
+    }
+
+
     public function easyDates($key)
     {
         return [
