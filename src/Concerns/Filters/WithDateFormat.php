@@ -85,6 +85,29 @@ trait WithDateFormat
         $query->whereBetween($dateCol, $useDate);
     }
 
+    private function prepareDateRanges(array|string $date)
+    {
+        // dd($date);
+        $date = collect($this->selectedDate)->reject(function($date){
+            return empty($date) || is_null($date);
+        });
+
+        // dd($date);
+
+        if($date->count() == 1){
+            return [
+                'start' => $date['start'] . ' 00:00:00',
+                'end' => $date['start'] . ' 23:59:59',
+            ];
+        }
+
+        return [
+            'start' => $date['start'] . ' 00:00:00',
+            'end' => $date['end'] . ' 23:59:59',
+        ];
+    }
+
+    
     private function excludeStartDate($query, string $dateCol = 'created_at')
     {
         $date = collect($this->selectedDate)->reject(function($date){
