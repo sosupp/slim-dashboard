@@ -20,6 +20,11 @@ abstract class BasePage extends Component
         return false;
     }
 
+    public function withMobileFilters()
+    {
+        return true;
+    }
+
     public function panelWidth()
     {
         return 'inherit';
