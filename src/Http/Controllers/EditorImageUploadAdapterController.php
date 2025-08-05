@@ -3,7 +3,7 @@
 namespace Sosupp\SlimDashboard\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Sosupp\SlimDashboard\Http\Controllers\Controller;
 
 
@@ -17,7 +17,7 @@ class EditorImageUploadAdapterController extends Controller
             $user = auth()->user()->id ?? random_int(2,4);
             $image = 'images/'.$filename . '-' .  $user .'.webp';
 
-            Image::make($request->file('image'))
+            Image::read($request->file('image'))
             ->save(
                 path: $image,
                 quality: 50,

@@ -2,7 +2,7 @@
 namespace Sosupp\SlimDashboard\Concerns;
 
 use Livewire\Attributes\Validate;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 
 trait UploadImages
 {
@@ -40,8 +40,8 @@ trait UploadImages
                 $image = 'images/'.$filename.'.webp';
             }
 
-            Image::make($data['image'])
-            // ->resize($width, $height)
+            Image::read($data['image'])
+            // ->resize()
             ->save(
                 path: $image,
                 quality: 50,
@@ -71,7 +71,7 @@ trait UploadImages
 
                 $image = 'images/'.$filename.$fileType;
 
-                Image::make($file['image'])
+                Image::read($file['image'])
                 // ->resize($width, $height)
                 ->save(
                     path: $image,
@@ -107,13 +107,14 @@ trait UploadImages
                 $image = 'images/'.$filename.'.webp';
             }
 
-            Image::make($data['image'])
-            // ->resize($width, $height)
+            Image::read($data['image'])
+            // ->resize()
             ->save(
                 path: $image,
                 quality: 50,
                 format: 'webp'
             );
+
 
             // dd($image);
             return $image;
