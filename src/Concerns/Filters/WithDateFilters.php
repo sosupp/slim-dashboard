@@ -46,6 +46,11 @@ trait WithDateFilters
         $this->selectedDate = $key;
         $this->dateLabel = $key;
         $this->mobileDateLabel = $key;
+
+        session([
+            'selected_date_label' => $key,
+            'mobile_date_label' => $key,
+        ]);
     }
 
     public function selectedDateRange()
