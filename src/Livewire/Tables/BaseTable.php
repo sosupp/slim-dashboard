@@ -70,6 +70,9 @@ abstract class BaseTable extends Component
 
     public $withBreadcrumb = true;
 
+    public $modalRecordId = null;
+    public $modalRecordDeleted = null;
+
 
 
     public abstract function mount();
@@ -91,7 +94,7 @@ abstract class BaseTable extends Component
     }
 
     public function useCustomTableView(){}
-    
+
     public function pageFilters()
     {
         return [];
@@ -184,7 +187,7 @@ abstract class BaseTable extends Component
     {
         return 'inherit';
     }
-    
+
     public function panelCustomView(){}
 
     public function searchModelResults(): array|Collection
@@ -300,6 +303,11 @@ abstract class BaseTable extends Component
         return true;
     }
 
+    public function showTableFilters()
+    {
+        return true;
+    }
+
     public function showStandardTable()
     {
         return true;
@@ -357,7 +365,16 @@ abstract class BaseTable extends Component
     {
         return false;
     }
-    
+
+    public function resolveMobileRecord($id = null)
+    {
+        if($id){
+            return $this->tableRecords->where('id', $id)->first();
+        }
+
+        return [];
+    }
+
     public function showTableToCards()
     {
         return false;

@@ -114,12 +114,16 @@
             <div class="custom-pagination-wrapper">
                 @if ($this->showPagination())
                 <div class="record-count">
-                    <span class="total-record-count">{{$this->tableRecords->total()}} records</span>
+                    <span class="total-record-count">
+                        {{ $this->tableRecords ? $this->tableRecords->total() : ''}} records
+                    </span>
                 </div>
                 @endif
 
                 <div class="filters-and-pagination">
+                    @if($this->showTableFilters())
                     @include('slim-dashboard::includes.table.table-filters')
+                    @endif
 
                     @if ($this->showPagination())
                     @include('slim-dashboard::includes.table.table-navs')
@@ -133,7 +137,7 @@
             @include('slim-dashboard::includes.table.table-inline-statistics')
             @endif
 
-            
+
             @if($this->useCustomTableView())
                 {{ $this->useCustomTableView() }}
             @else
@@ -141,7 +145,7 @@
                 @include('slim-dashboard::includes.table.standard')
             @endif
 
-            
+
         </div>
     </div>
 

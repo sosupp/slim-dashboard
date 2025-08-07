@@ -1,11 +1,16 @@
 <div x-data="{
         cardModal: false,
         selectedCard: null,
+        recordDeleted: $wire.entangle('modalRecordDeleted'),
+        modalRecord: $wire.entangle('modalRecordId').live,
         cardItem: [],
-        openCardModal(key, item){
+        openCardModal(key, item, deleted){
             if(key==this.selectedCard){
-                this.cardModal = !this.cardModal
-                this.cardItem = item
+                console.log(key)
+                this.cardModal = !this.cardModal;
+                this.cardItem = item;
+                this.modalRecord = key;
+                this.recordDeleted = deleted;
             }
         },
         ctaRoute(url = 'login', model = null){
@@ -30,7 +35,11 @@
                     {{$this->withListCardImage()}}
                 @endif
 
-                <div class="card-item-info card-item-info-detail" x-on:click="selectedCard='{{$record->id}}',openCardModal('{{$record->id}}', {{$this->withCardModalData($record)}})">
+                <div class="card-item-info card-item-info-detail" x-on:click="selectedCard='{{$record->id}}',openCardModal(
+                    '{{$record->id}}',
+                    {{$this->withCardModalData($record)}},
+                    '{{$record->deleted_at}}'
+                )">
                     <div>
                         @foreach ($this->cardContents() as $key => $colHeading)
                             <div class="card-inline-items">
@@ -97,9 +106,9 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
     @empty
 
     @endforelse
@@ -111,7 +120,6 @@
             </div>
         </div>
     </div>
-
 
     <div x-cloak x-show="cardModal" x-on:keydown.escape.window="cardModal = false">
         <div class="action-modal" style="">
@@ -127,7 +135,7 @@
 
                     @if ($this->mobileModalCta())
                         @forelse ($this->tableActions() as $action)
-                            @include('slim-dashboard::includes.table.table-actions')
+                            @include('slim-dashboard::includes.table.mobile.modal-ctas')
                         @empty
                         @endforelse
                     @endif
@@ -135,4 +143,6 @@
             </div>
         </div>
     </div>
+
+
 </div>
