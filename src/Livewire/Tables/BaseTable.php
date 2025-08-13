@@ -16,6 +16,7 @@ use Illuminate\Contracts\View\View;
 use Sosupp\SlimDashboard\Concerns\UploadImages;
 use Sosupp\SlimDashboard\ValueObjects\CardEdit;
 use Sosupp\SlimDashboard\Concerns\AddsSessionData;
+use Sosupp\SlimDashboard\Concerns\Filters\WithDateFilters;
 use Sosupp\SlimDashboard\Concerns\ModelDeleteable;
 use Sosupp\SlimDashboard\Concerns\Html\WithDefaultCss;
 use Sosupp\SlimDashboard\Concerns\HtmlForms\WithTableFilters;
@@ -32,7 +33,8 @@ abstract class BaseTable extends Component
         WithPagination,
         WithoutUrlPagination,
         UploadImages,
-        HandleUserAlerts;
+        HandleUserAlerts,
+        WithDateFilters;
 
     public $pageHeading;
     public $pageTitle;
@@ -72,6 +74,7 @@ abstract class BaseTable extends Component
 
     public $modalRecordId = null;
     public $modalRecordDeleted = null;
+    public $mobileMoreRecord;
 
 
 
@@ -82,6 +85,46 @@ abstract class BaseTable extends Component
     // public abstract function tableForm();
     public abstract function pageCta();
     public abstract function defineSearch();
+
+    public function useMoreCols()
+    {
+        if($this->tableCols()){
+            return collect($this->tableCols())
+            ->map(function($items){
+                if($items['screen'] == 'more'){
+                    return [
+                        'col' => $items['col'],
+                        'label' => $items['label']
+                    ];
+                };
+            })
+            ->filter(fn($item) => $item !== null)
+            ->values()
+            ->toArray();
+        }
+
+        return [];
+    }
+
+    public function useMoreActions()
+    {
+        if($this->tableActions()){
+            return collect($this->tableActions())
+            ->map(function($items){
+                if($items['screen'] == 'more'){
+                    return [
+                        'label' => $items['label']
+                    ];
+                };
+            })
+            ->filter(fn($item) => $item !== null)
+            ->values()
+            ->toArray();
+        }
+
+        return [];
+    }
+
 
     public function updatedSelectAll($key)
     {
@@ -369,7 +412,9 @@ abstract class BaseTable extends Component
     public function resolveMobileRecord($id = null)
     {
         if($id){
-            return $this->tableRecords->where('id', $id)->first();
+            $record = $this->tableRecords->where('id', $id)->first();
+            $this->mobileMoreRecord = $record;
+            return $record;
         }
 
         return [];

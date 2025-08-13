@@ -1,9 +1,46 @@
 @if ($this->showStandardTable())
-<div class="table-and-loading ">
+<div class="table-and-loading" x-data="{
+    tableSidePanel: false,
+    sidePanelTitle: 'MORE INFO',
+    selectedMoreId: null,
+    moreData: {},
+    moreKeys: [],
+    setMoreCols(){
+        $wire.useMoreCols().then(result => {
+            if(result) {
+                this.moreKeys = result;
+            }
+        })
+
+    },
+    toggleTableSidePanel(data = null,){
+        this.tableSidePanel = !this.tableSidePanel;
+        this.moreData = data;
+        this.selectedMoreId = data.id;
+        $wire.resolveMobileRecord(data.id).then(result => {
+            if(result) {
+
+            }
+        })
+    },
+    getRecords(placeholder = '-'){
+        const data = this.moreData;
+        const cols = this.moreKeys;
+
+        return cols.map(colObj => ({
+            label: colObj.label,
+            value: data.hasOwnProperty(colObj.col)
+                ? data[colObj.col]
+                : placeholder
+        }));
+    }
+}" x-init="setMoreCols()">
     <x-slim-dashboard::table :theadings="$this->tableCols()"
         :withCheckbox="$this->withCheckbox"
         :hasActions="$this->hasActions">
         <x-slot:bodyRow>
+
+
 
         @if (!empty($this->useCustomTable()))
             @includeIf($this->useCustomTable())
@@ -88,6 +125,43 @@
 
         </x-slot:bodyRow>
     </x-slim-dashboard::table>
+
+    <div x-cloak x-show="tableSidePanel">
+        <div class="side-modal-overlay" x-on:click="tableSidePanel=false"></div>
+        <div class="table-form side-modal-panel">
+            {{-- @includeIf($this->tableForm()) --}}
+            <div class="side-modal-heading-wrapper">
+                <p class="side-modal-heading" x-text="sidePanelTitle"></p>
+                <span class="close-modal as-pointer" x-on:click="tableSidePanel=false">
+                    <x-icons.close />
+                </span>
+            </div>
+
+            <div>
+                <template x-for="item in getRecords()" :key="item.label">
+                    <div class="table-more-item-wrapper">
+                        <div class="more-item-label" x-text="item.label"></div>
+                        <div class="more-item-value" x-text="item.value"></div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="table-more-actions">
+                <p class="panel-content-heading">
+                    <b>More Actions: </b>
+                </p>
+                @if ($this->hasActions)
+                     @forelse ($this->tableActions() as $action)
+                        @include('slim-dashboard::includes.table.table-actions', [
+                            'screen' => 'more',
+                            'record' => $this->mobileMoreRecord
+                        ])
+                    @empty
+                    @endforelse
+                @endif
+            </div>
+        </div>
+    </div>
 
     <div wire:loading>
         <div class="full-table-loading">

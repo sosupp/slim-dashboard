@@ -1,8 +1,6 @@
 <?php
 namespace Sosupp\SlimDashboard\Html\Tables;
 
-use Closure;
-
 class Rows
 {
     protected static $columnActions = [];
@@ -19,6 +17,7 @@ class Rows
         bool $isVisible = true,
         bool $confirm = false,
         bool $isAuthorize = false,
+        string $screen = 'all',
     )
     {
 
@@ -37,6 +36,7 @@ class Rows
         static::$columnActions[$name]['isVisible'] = $isVisible;
         static::$columnActions[$name]['confirm'] = $useConfirm;
         static::$columnActions[$name]['isAuthorize'] = $isAuthorize;
+        static::$columnActions[$name]['screen'] = $screen;
         return new static;
     }
 

@@ -16,6 +16,7 @@
             this.subnav = key
         },
         toggleSidePanel(component = '', title = '', record = null){
+            console.log(this.componentName)
             this.sidePanelTitle = title
             this.sidePanel = !this.sidePanel
             if(component !== ''){
@@ -32,7 +33,8 @@
         closePanel(){
             this.sidePanel = !this.sidePanel
         }
-    }" x-init="imagePreview = '{{asset($previewImagePath)}}'">
+    }" x-init="imagePreview = '{{asset($previewImagePath)}}'"
+        x-on:opensidepanel.window="toggleSidePanel($event.detail.component, $event.detail.title)">
 
     @persist('pagesubnavs')
         @if (!empty($this->pageSubNavs))

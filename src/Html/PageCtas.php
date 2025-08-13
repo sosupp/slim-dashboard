@@ -19,6 +19,8 @@ class PageCtas
         ?string $component = null,
         bool $show = true,
         array|null $options = [],
+        string $optionKey = 'name',
+        string $optionId = 'id',
     )
     {
         static::$pageActions[$label]['type'] = $type;
@@ -34,6 +36,8 @@ class PageCtas
         static::$pageActions[$label]['component'] = $component;
         static::$pageActions[$label]['show'] = $show;
         static::$pageActions[$label]['options'] = $options;
+        static::$pageActions[$label]['optionKey'] = $optionKey;
+        static::$pageActions[$label]['optionId'] = $optionId;
 
         return new static;
     }

@@ -8,8 +8,8 @@
     </select>
 
     @if (count($this->tableRecords) > 0)
-    <div class="custom-pagination">
-        {{$this->tableRecords->links()}}
-    </div>
+    {{-- <div class="custom-pagination">
+    </div> --}}
+    {{$this->tableRecords->links()}}
     @endif
 </div>

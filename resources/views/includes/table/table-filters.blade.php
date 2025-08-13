@@ -4,7 +4,7 @@
         @if ($filter['type'] == 'select')
 
         <select wire:model.live="{{$filter['wireProperty']}}" id="externalFilter"
-            class="filter-wrapper select-filter as-pointer {{$filter['wrapperCss']}}" :class="darkmode ? 'dmode-input-bg' : ''" x-on:change="selectFilterLabel = $event.target.options[$event.target.selectedIndex].text">
+            class="{{$filter['wrapperCss']}} as-pointer" :class="darkmode ? 'dmode-input-bg' : ''" x-on:change="selectFilterLabel = $event.target.options[$event.target.selectedIndex].text">
             <option class="as-pointer filter-label" value="all">{{$filter['label']}}</option>
 
             @if ($filter['options'])
@@ -24,7 +24,7 @@
         <div x-data="{
                 triggerLabel: $wire.entangle('dateLabel')
             }">
-            <x-dropdown>
+            <x-slim-dashboard::dropdown wrapperCss="dropdown-wrapper">
                 <x-slot:trigger>
                     <div class="chevron-wrapper">
                         <span x-text="triggerLabel"></span>
@@ -53,12 +53,12 @@
                         @endif
                     </div>
                 </x-slot:content>
-            </x-dropdown>
+            </x-slim-dashboard::dropdown>
         </div>
         @endif
 
         @if($filter['type'] == 'button')
-            <span role="button" class="filter-wrapper select-filter as-pointer {{$filter['wrapperCss']}}" 
+            <span role="button" class="{{$filter['wrapperCss']}} as-pointer "
             wire:click="{{$filter['wireAction'] . "('"."')" }}">
                 {{$filter['label']}}
             </span>

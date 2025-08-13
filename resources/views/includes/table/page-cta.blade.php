@@ -74,10 +74,16 @@
 
                     @if ($cta['type'] === 'dropdown' || $cta['type'] === 'select')
                         <select name="bulkAction" id="bulkAction" wire:model.live="{{$cta['wireProperty']}}"
-                            wire:change="{{$cta['wireAction']}}" class="filter-wrapper select-filter as-pointer">
+                            wire:change="{{$cta['wireAction']}}"
+
+                            class="filter-wrapper as-pointer">
                             <option>{{$cta['label']}}</option>
                             @forelse ($cta['options'] as $option)
-                            <option value="{{$option[$cta['optionId']]}}">{{$option[$cta['optionKey']]}}</option>
+                                @if (is_array($option))
+                                <option value="{{$option[$cta['optionId']]}}">{{$option[$cta['optionKey']]}}</option>
+                                @else
+                                <option value="{{$option}}">{{$option}}</option>
+                                @endif
                             @empty
                                 Add options.
                             @endforelse
@@ -135,10 +141,12 @@
                         </select>
                     @endif
 
-                    
+
                     @if ($cta['type'] === 'dropdown' || $cta['type'] === 'select')
                         <select name="bulkAction" id="bulkAction" wire:model.live="{{$cta['wireProperty']}}"
-                            wire:change="{{$cta['wireAction']}}" class="filter-wrapper select-filter as-pointer">
+                            wire:change="{{$cta['wireAction']}}"
+
+                            class="filter-wrapper filter-wrapper as-pointer">
                             <option>{{$cta['label']}}</option>
                             @forelse ($cta['options'] as $option)
                                 @if (is_array($option))

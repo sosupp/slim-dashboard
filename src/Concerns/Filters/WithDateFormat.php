@@ -9,7 +9,7 @@ trait WithDateFormat
     protected $selectedDateEnd;
     protected $dateColumn = 'created_at';
 
-    public function forDate(string|array $date = 'today', string $dateColumn = 'created_at')
+    public function forDate(string|array|null $date = 'today', string $dateColumn = 'created_at')
     {
         // dd($date);
         $this->dateColumn = $dateColumn;
@@ -41,8 +41,8 @@ trait WithDateFormat
                 'end' => Carbon::today()->endOfWeek()->format('Y-m-d')
             ],
             'last week' => [
-                'start' => Carbon::today()->startOfWeek()->subDays(7),
-                'end' => Carbon::today()->startOfWeek()->subDays(1)
+                'start' => Carbon::today()->startOfWeek()->subDays(7)->format('Y-m-d'),
+                'end' => Carbon::today()->startOfWeek()->subDays(1)->format('Y-m-d')
             ],
             'this month' => [
                 'start' => Carbon::today()->startOfMonth()->format('Y-m-d'),

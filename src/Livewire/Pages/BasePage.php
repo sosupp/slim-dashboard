@@ -24,6 +24,11 @@ abstract class BasePage extends Component
     {
         return true;
     }
+    
+    public function showStandardPageFilters()
+    {
+        return true;
+    }
 
     public function panelWidth()
     {

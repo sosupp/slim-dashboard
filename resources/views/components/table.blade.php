@@ -14,7 +14,7 @@
                                 <option value="#">Filter</option>
                             </select>
                         @endif --}}
-                        <div class="custom-align">
+                        <div class="{{$heading['innerCss'] ?? 'custom-align'}}">
                             {{ $heading['label'] ?? $heading }}
 
                             @if (isset($heading['filter']) && $heading['filter'])

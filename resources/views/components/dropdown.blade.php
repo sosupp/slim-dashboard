@@ -1,4 +1,4 @@
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white', 'wrapperCss' => ''])
+@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white', 'wrapperCss' => 'filter-wrapper'])
 
 @php
 switch ($align) {
@@ -21,7 +21,7 @@ switch ($width) {
 }
 @endphp
 
-<div class="filter-wrapper relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+<div class="{{$wrapperCss}} relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
     <div class="custom-dropdown-trigger" @click="open = ! open">
         {{ $trigger }}
     </div>

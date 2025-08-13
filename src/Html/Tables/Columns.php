@@ -36,7 +36,8 @@ class Columns
         bool $canView = true,
         string $valueCss = 'many-pills',
         string|null $format = null,
-        string $screen = 'all'
+        string $screen = 'all',
+        string $innerCss = 'custom-align',
     )
     {
         $useLabel = $label == '' ? $name : $label;
@@ -66,6 +67,7 @@ class Columns
         $this->columnNames[$label]['valueCss'] = $valueCss;
         $this->columnNames[$label]['format'] = $format;
         $this->columnNames[$label]['screen'] = $screen;
+        $this->columnNames[$label]['innerCss'] = $innerCss;
         return $this;
     }
 
