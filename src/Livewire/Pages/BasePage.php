@@ -29,6 +29,16 @@ abstract class BasePage extends Component
     {
         return true;
     }
+    
+    public function showPageCtas()
+    {
+        return false;
+    }
+
+    public function pageCta()
+    {
+        return [];
+    }
 
     public function panelWidth()
     {
