@@ -21,8 +21,9 @@ document.addEventListener('alpine:init', () => {
             this.sidePanelTitle = title
             this.sidePanel = !this.sidePanel
             if(component !== ''){
-                this.useComponent = true
-                this.componentName = component
+                this.useComponent = true;
+                this.componentName = component;
+                this.$wire.$set('sidePanelComponent', component);
             }else {
                 this.useComponent = false
             }
@@ -68,4 +69,20 @@ document.addEventListener('alpine:init', () => {
             Alpine.data('accordion').call(el).__x.$data.checkWidth();
         });
     });
+
+    window.objectToArray = (obj) => {
+        if (Array.isArray(obj)) return obj;
+        if (obj == null) return [];
+
+        if (typeof obj === 'object') {
+            // Livewire sometimes ships arrays as keyed objects: {0:{},1:{}}
+            return Object.values(obj);
+        }
+
+        if (typeof obj === 'string') {
+            try { return JSON.parse(obj); } catch (e) { return []; }
+        }
+
+        return [];
+    };
 })
