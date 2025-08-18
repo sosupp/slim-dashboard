@@ -31,8 +31,10 @@
         isMobile: false,
         isMedium: false,
         cardModal: false,
+        bottomNav: true,
         mobileFilterLabel: $persist(''),
         appname: null,
+        withTheme: 'light-purple-nav',
         toggleTheme(mode) {
             this.darkmode = !this.darkmode
         },

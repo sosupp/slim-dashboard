@@ -42,9 +42,9 @@
             @forelse (collect($this->inlineTableStatistics) as $card)
                 @if (is_array($card))
                     @if ($card['canView'])
-                    <p class="mobile-record-stat-item {{$card['css'] ?? ''}}">
-                        {{$card['label']}}: {{$card['value']}}
-                    </p>
+                    <div class="mobile-record-stat-item {{$card['css'] ?? ''}}">
+                        {{$card['value']}}
+                    </div>
                     @endif
 
                 @endif
@@ -52,7 +52,7 @@
             @endforelse
 
             <span id="mobileMoreStats" class="as-pointer" x-on:click="statsPanel = true;sidePanelTitle='{!! __($this->inlineTableStatistics['description'] ?? '') !!}'">
-                <x-icons.open w="28" color="limegreen"/>
+                <x-icons.open w="30" color="limegreen"/>
             </span>
         </div>
 

@@ -41,7 +41,7 @@
         <div class="quick-links-wrapper" id="globalActionsCta">
             <x-dropdown wrapperCss="" dropdownCss="reset-dropdown">
                 <x-slot:trigger>
-                    <x-icons.circle-plus w="45" class="as-pointer" />
+                    <xx-slim-dashboard::icons.circle-plus w="45" class="as-pointer" />
                 </x-slot:trigger>
 
                 <x-slot:content>
