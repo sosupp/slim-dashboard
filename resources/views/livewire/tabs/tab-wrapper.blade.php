@@ -7,7 +7,7 @@
 
     <div class="{{$this->tabContentWrapper()}}"
         x-data="{
-            selectedTab: $wire.entangle('selectedTab').live,
+            selectedTab: $persist('selectedTab'),
             setNextTab: null,
             tabItems: [],
             endOfTabItems: false,
@@ -15,6 +15,8 @@
                 $wire.tabHeadings().then(result => {
                     this.tabItems = objectToArray(result);
                 })
+
+                this.selectedTab = $wire.selectedTab;
             },
             toggleSelected(tab){
                 this.selectedTab = tab
