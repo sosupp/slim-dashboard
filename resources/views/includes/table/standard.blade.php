@@ -133,7 +133,7 @@
             <div class="side-modal-heading-wrapper">
                 <p class="side-modal-heading" x-text="sidePanelTitle"></p>
                 <span class="close-modal as-pointer" x-on:click="tableSidePanel=false">
-                    <x-icons.close />
+                    <x-slim-dashboard::icons.close />
                 </span>
             </div>
 
@@ -166,7 +166,7 @@
     <div wire:loading>
         <div class="full-table-loading">
             <div class="loading-spinner">
-                <x-icons.bars-spinner-fade w="50" h="50" />
+                <x-slim-dashboard::icons.bars-spinner-fade w="50" h="50" />
             </div>
         </div>
     </div>

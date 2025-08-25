@@ -166,12 +166,12 @@
 
     <div class="mobile-menu-overlay" x-show="mobileCta" x-cloak x-on:click="openMobileCta">
         <span class="as-pointer mobile-close-cta" id="mobileCtaClose" x-show="isMobile()" x-cloak>
-            <x-icons.close />
+            <x-slim-dashboard::icons.close />
         </span>
     </div>
 
     <span class="as-pointer mobile-more-trigger {{$this->mobileMoreCtaCss()}}" x-on:click="openMobileCta" x-show="isMobile()" x-cloak>
-        <x-icons.more w="32" color="#fff"/>
+        <x-slim-dashboard::icons.more w="32" color="#fff"/>
     </span>
 </div>
 @endif

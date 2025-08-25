@@ -28,7 +28,7 @@
                 <x-slot:trigger>
                     <div class="chevron-wrapper">
                         <span x-text="triggerLabel"></span>
-                        <x-icons.chevron w="14" />
+                        <x-slim-dashboard::icons.chevron w="14" />
                     </div>
                 </x-slot:trigger>
 

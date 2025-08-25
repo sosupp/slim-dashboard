@@ -65,6 +65,7 @@ class MenuNav
         string|null $route = null,
         $image = null,
         bool $authorize = true,
+        string $logoWrapper = 'brand-logo-wrapper',
     )
     {
         static::$navs['logo']['name'] = $name;
@@ -73,6 +74,7 @@ class MenuNav
         static::$navs['logo']['route'] = $route;
         static::$navs['logo']['image'] = $image;
         static::$navs['logo']['authorize'] = $authorize;
+        static::$navs['logo']['wrapper'] = $logoWrapper;
 
         return new static;
     }

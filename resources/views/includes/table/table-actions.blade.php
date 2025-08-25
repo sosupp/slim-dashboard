@@ -1,6 +1,11 @@
 @props(['screen' => 'all', 'record'])
+@php
+    $visible = is_callable($action['isVisible'])
+        ? $action['isVisible']($record)
+        : $action['isVisible'];
+@endphp
 @if (@$record)
-    @if ($action['isVisible'] && $action['screen'] === $screen)
+    @if ($visible && $action['screen'] === $screen)
         @if ($action['label'] === 'delete')
             @if ($record->deleted_at)
             <button class="cta-btn restore-btn as-pointer modal-cta-item"

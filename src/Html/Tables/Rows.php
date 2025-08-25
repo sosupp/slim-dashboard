@@ -1,6 +1,8 @@
 <?php
 namespace Sosupp\SlimDashboard\Html\Tables;
 
+use Closure;
+
 class Rows
 {
     protected static $columnActions = [];
@@ -14,7 +16,7 @@ class Rows
         string $panelHeading = '',
         bool $asCheckbox = false,
         string|null $wireAction = null,
-        bool $isVisible = true,
+        bool|Closure $isVisible = true,
         bool $confirm = false,
         bool $isAuthorize = false,
         string $screen = 'all',

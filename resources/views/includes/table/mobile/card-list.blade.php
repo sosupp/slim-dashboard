@@ -83,14 +83,14 @@
                     </div>
 
                     <div class="card-item-cta as-pointer">
-                        <x-icons.chevron-right w="32" color="#535151" stroke="1"/>
+                        <x-slim-dashboard::icons.chevron-right w="32" color="#535151" stroke="1"/>
 
                         @if ($this->withListCardEdit($record))
                             @if (!empty($this->withListCardEdit($record)->navigate))
                                 <a wire:navigate href="{{$this->withListCardEdit($record)->navigate}}"
                                     class="card-inline-edit"
                                     x-on:click.stop>
-                                    <x-icons.edit w="21" color="green"/>
+                                    <x-slim-dashboard::icons.edit w="21" color="green"/>
                                 </a>
                             @else
 
@@ -99,7 +99,7 @@
                                     '{{$this->withListCardEdit($record)->title}}',
                                     '{{$record->id}}'
                                 )">
-                                    <x-icons.edit w="21" color="green"/>
+                                    <x-slim-dashboard::icons.edit w="21" color="green"/>
                                 </span>
                             @endif
                         @endif
@@ -116,7 +116,7 @@
     <div wire:loading>
         <div class="full-table-loading">
             <div class="loading-spinner">
-                <x-icons.bars-spinner-fade w="50" h="50" />
+                <x-slim-dashboard::icons.bars-spinner-fade w="50" h="50" />
             </div>
         </div>
     </div>

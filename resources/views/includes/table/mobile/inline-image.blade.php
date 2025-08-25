@@ -24,7 +24,7 @@
     }" class="inline-image-upload" id="imageForm{{$record->id}}">
 
     <label class="inline-image-label" for="selectedImage{{$record->id}}">
-        <x-icons.upload stroke="1" />
+        <x-slim-dashboard::icons.upload stroke="1" />
         <input wire:model="inlineImages.{{$record->id}}" type="file" id="selectedImage{{$record->id}}" class="inline-image-input as-pointer"
             x-ref="uploadedImage"
             x-on:change="previewImage({{$record->id}}, '{!!$imageName!!}')"

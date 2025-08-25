@@ -6,7 +6,7 @@
         <div class="side-modal-heading-wrapper">
             <p class="side-modal-heading" x-html="sidePanelTitle">Side Modal Heading</p>
             <span class="close-modal as-pointer" x-on:click="closePanel">
-                <x-icons.close />
+                <x-slim-dashboard::icons.close />
             </span>
         </div>
 
@@ -34,7 +34,7 @@
         <div wire:loading>
             <div class="full-table-loading">
                 <div class="loading-spinner">
-                    <x-icons.bars-spinner-fade w="50" h="50" />
+                    <x-slim-dashboard::icons.bars-spinner-fade w="50" h="50" />
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
         x-show="alert" x-cloak x-transition>
         {{ session('success-message') }}
         <span x-on:click="alert=false" class="as-pointer">
-            <x-icons.close />
+            <x-slim-dashboard::icons.close />
         </span>
     </p>
     @endif
@@ -16,7 +16,7 @@
         x-show="alert" x-cloak>
         {{ session('failed') }}
         <span x-on:click="alert=false"></span>
-        <x-icons.close />
+        <x-slim-dashboard::icons.close />
     </p>
     @endif
 

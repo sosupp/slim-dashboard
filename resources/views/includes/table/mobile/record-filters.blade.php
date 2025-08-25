@@ -14,7 +14,7 @@
     <button type="button" class="filter-wrapper filter-trigger {{$filterTriggerCss}} as-pointer"
         x-on:click="toggleFilter">
         Filter
-        <x-icons.chevron />
+        <x-slim-dashboard::icons.chevron />
     </button>
 
     <div x-cloak x-show="filterModal" x-on:keydown.escape.window="filterModal = false">
@@ -37,8 +37,8 @@
                                 x-on:click="openSection = (openSection === '{{$filter['label']}}' ? null : '{{$filter['label']}}')">
                                     {{$filter['label']}}
 
-                                    <span x-show="openSection!=='{{$filter['label']}}'"><x-icons.chevron-right /></span>
-                                    <span x-show="openSection==='{{$filter['label']}}'"><x-icons.chevron /></span>
+                                    <span x-show="openSection!=='{{$filter['label']}}'"><x-slim-dashboard::icons.chevron-right /></span>
+                                    <span x-show="openSection==='{{$filter['label']}}'"><x-slim-dashboard::icons.chevron /></span>
 
                                 </button>
                             </div>

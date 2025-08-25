@@ -52,7 +52,7 @@
             @endforelse
 
             <span id="mobileMoreStats" class="as-pointer" x-on:click="statsPanel = true;sidePanelTitle='{!! __($this->inlineTableStatistics['description'] ?? '') !!}'">
-                <x-icons.open w="30" color="limegreen"/>
+                <x-slim-dashboard::icons.open w="30" color="limegreen"/>
             </span>
         </div>
 
@@ -62,7 +62,7 @@
         <div class="side-modal-heading-wrapper">
             <p class="side-modal-heading" x-html="sidePanelTitle">Side Modal Heading</p>
             <span class="close-modal as-pointer" x-on:click="statsPanel=false">
-                <x-icons.close />
+                <x-slim-dashboard::icons.close />
             </span>
         </div>
 

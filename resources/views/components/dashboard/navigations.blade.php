@@ -64,7 +64,7 @@
         x-on:click="toggleMenu">
         @persist('admin-side-nav')
         <div class="nav-items-wrapper">
-            <div class="brand-logo-wrapper">
+            <div class="{{$navItems['logo']['wrapper']}}">
                 @if (isset($navItems['logo']))
                 {!! $navItems['logo']['view'] !!}
                 @endif

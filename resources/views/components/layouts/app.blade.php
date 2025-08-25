@@ -23,6 +23,73 @@
     @include('slim-dashboard::includes.assets.normalizer')
 
     <script src="{{ mix_vendor('js/dashboard.js', 'slim-dashboard') }}"></script>
+
+    <style>
+        .global-layout {
+            width: 1250px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-card-selectors {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .nav-card-selector {
+            background: #fff;
+            box-shadow: rgba(60,64,67,0.3) 0px 1px 2px 0px,rgba(60,64,67,0.15) 0px 1px 3px 1px;
+            padding: 20px;
+            border-radius: 10px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column; /* Stack icon and heading vertically */
+            align-items: center;    /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            text-align: center;     /* Ensure text aligns center */
+            height: 100%;
+
+        }
+        .nav-card-selector-content {
+            display: flex;
+            flex-direction: column; /* Stack icon and heading vertically */
+            align-items: center;    /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            text-align: center;     /* Ensure text aligns center */
+            height: 100%;           /* Optional: full height of parent */
+        }
+
+        .nav-card-selector:hover {
+            border: 2px solid lemonchiffon;
+        }
+        .page-section-heading {
+            margin: 10px 0;
+        }
+
+        .nav-card-selector-heading {
+            font-size: 18px;
+            padding: 10px 0;
+        }
+
+
+        @media(max-width: 299px) {
+
+            .nav-card-selectors {
+                display: block
+            }
+            .nav-card-selector {
+                margin-bottom: 17px;
+            }
+        }
+
+        @media(max-width: 991px) {
+
+            .global-layout {
+                padding: 0;
+            }
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased" x-data="{
@@ -47,14 +114,21 @@
         }
     }" x-init="mobilePage = '{{ $title ?? '' }}';calMobile()">
     <div class="dashboard-wrapper">
-        <x-slimer-navigations />
+        @php
+            $isPreview = $isPreview ?? false;
+        @endphp
 
-        <main class="dashboard-main-content">
+        @if ($isPreview == false)
+        <x-slimer-navigations />
+        @endif
+
+        <main class="dashboard-main-content" style="{{ $isPreview ? 'margin-left: 0;' : '' }}">
             <div class="dashboard-head-section page-heading-section" x-cloak x-show="isMobile==false" id="withGlobalCta">
                 <x-slim-dashboard::utils.breadcrumb :data="$breadcrumb ?? []" />
             </div>
 
             <div class="main-content-wrapper">
+                
                 <x-slim-dashboard::alerts.session />
                 <x-slim-dashboard::alerts.custom />
                 {{ $slot }}

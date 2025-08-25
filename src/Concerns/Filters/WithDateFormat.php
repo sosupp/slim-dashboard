@@ -60,7 +60,8 @@ trait WithDateFormat
                 'start' => Carbon::today()->startOfYear()->subYear()->format('Y-m-d'),
                 'end' => Carbon::today()->startOfYear()->subDays(1)->format('Y-m-d')
             ],
-            'all time' => null
+            'all time' => null,
+            "" => null
         ][$key];
     }
 
