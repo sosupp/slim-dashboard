@@ -52,7 +52,7 @@
             }
         }" x-init="getTabItems()">
 
-        @persist('tabheadings')
+        
         <div class="{{$this->headingCss()}}">
             @foreach ($this->tabHeadings() as $tab)
             @if ($tab['isVisible'])
@@ -104,7 +104,7 @@
                 &rsaquo;
             </button>
         </div>
-        @endpersist
+        
 
         <div class="selected-tab-items">
             <div class="order-items-wrapper">
