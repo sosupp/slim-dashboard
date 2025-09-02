@@ -223,3 +223,9 @@ if(! function_exists('fullDate')){
     }
 }
 
+if (! function_exists('closepanel')) {
+    function closepanel(object $object)
+    {
+        $object->dispatch('opensidepanel');
+    }
+}

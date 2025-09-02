@@ -54,7 +54,7 @@
                     @endif
                     @foreach ($this->tableCols() as $colHeading)
                         @if($colHeading['canView'] && $colHeading['screen'] == 'all')
-                            <td class="">
+                            <td class="{{$colHeading['css'] ?? ''}}">
                                 @if ($colHeading === 'image')
                                     <img src="{{ asset($record[$colHeading]) }}" width="50">
                                 @else

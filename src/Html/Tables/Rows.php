@@ -20,6 +20,7 @@ class Rows
         bool $confirm = false,
         bool $isAuthorize = false,
         string $screen = 'all',
+        string $css = '',
     )
     {
 
@@ -39,6 +40,7 @@ class Rows
         static::$columnActions[$name]['confirm'] = $useConfirm;
         static::$columnActions[$name]['isAuthorize'] = $isAuthorize;
         static::$columnActions[$name]['screen'] = $screen;
+        static::$columnActions[$name]['css'] = $css;
         return new static;
     }
 

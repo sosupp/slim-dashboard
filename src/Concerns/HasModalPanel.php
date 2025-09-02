@@ -12,4 +12,9 @@ trait HasModalPanel
 
     public function tableForm(){}
 
+    public function closePanel()
+    {
+        $this->dispatch('opensidepanel');
+    }
+
 }

@@ -5,6 +5,6 @@ trait WithCommonEvents
 {
     public function closePanel()
     {
-        $this->dispatch('close-sidepanel');
+        $this->dispatch('opensidepanel');
     }
 }
