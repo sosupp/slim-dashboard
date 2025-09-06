@@ -1,0 +1,100 @@
+.daily-report-summaries-wrapper {
+    /* font-family: 'Segoe UI', sans-serif; */
+    /* background: #f4f6f8; */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.daily-summary-heading {
+    background: #1e1e1e;
+    padding: 1px 18px;
+    border-radius: 10px 10px 0 0;
+    margin: 0 -18px;
+    background: #ff450024;
+    text-align: center;
+    line-height: 21px;
+}
+.daily-composite-chart {
+	background: #ff45001a;
+	color: #fff !important;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+	border-radius: 10px;
+}
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 0 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.report-heading-wrapper {
+	box-shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+	padding: 10px;
+	border-radius: 0 0 10px 10px;
+	margin-bottom: 20px;
+}
+.reportable-name {
+	font-size: 19px;
+	font-weight: inherit;
+	color: #27ae60;
+}
+h1, h2 {
+    margin-bottom: 10px;
+    color: #2a2e35;
+}
+.section {
+	/* margin-bottom: 30px; */
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	border-radius: 10px;
+	margin-top: 20px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.section-header {
+	border-bottom: 1px solid #eaeaea;
+	padding-bottom: 5px;
+	background: #27ae601f;
+	border-radius: 10px 10px 0 0;
+}
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.stats-table th, .stats-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+.stats-table th {
+    background: #f9fafb;
+    font-weight: 600;
+    border-radius: 10px 0 0 10px;
+}
+.footer {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    margin-top: 40px;
+}
+.positive { color: #27ae60; }
+.negative { color: #c0392b; }
+.neutral  { color: #2980b9; }
+
+.report-heading-logo {
+	font-size: 34px;
+}
+.report-main-heading-wrapper {
+	display: flex;
+	align-items: center;
+	line-height: 10px;
+	padding-bottom: 10px;
+}
+.report-main-heading {
+    line-height: 19px;
+}
+@media(max-width: 520px){
+    .report-main-heading {
+        font-size: 18px;
+    }
+}

@@ -90,6 +90,8 @@
             }
         }
     </style>
+
+    @includeIf(config('slim-dashboard.extra_assets'))
 </head>
 
 <body class="font-sans antialiased" x-data="{
@@ -131,12 +133,18 @@
                 
                 <x-slim-dashboard::alerts.session />
                 <x-slim-dashboard::alerts.custom />
-                {{ $slot }}
+                
+                @if (config('slim-dashboard.inject_view_into_layout.replace'))
+                    @includeIf(config('slim-dashboard.inject_view_into_layout.view'))
+                @else
+                    {{ $slot }}
+                    @includeIf(config('slim-dashboard.inject_view_into_layout.view'))
+                @endif
             </div>
         </main>
     </div>
 
-
+    
 
     <script>
         if (navigator.userAgent.indexOf('iPhone') > -1) {

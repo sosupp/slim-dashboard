@@ -32,6 +32,7 @@
         },
         closePanel(){
             this.sidePanel = !this.sidePanel
+            $dispatch('closesidepanel')
         }
     }" x-init="imagePreview = '{{asset($previewImagePath)}}'"
         x-on:opensidepanel.window="toggleSidePanel($event.detail.component, $event.detail.title)">

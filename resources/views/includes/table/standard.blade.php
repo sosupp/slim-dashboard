@@ -1,7 +1,6 @@
 @if ($this->showStandardTable())
 <div class="table-and-loading" x-data="{
     tableSidePanel: false,
-    sidePanelTitle: 'MORE INFO',
     selectedMoreId: null,
     moreData: {},
     moreKeys: [],
@@ -13,8 +12,9 @@
         })
 
     },
-    toggleTableSidePanel(data = null,){
+    toggleTableSidePanel(data = null, title = null){
         this.tableSidePanel = !this.tableSidePanel;
+        this.sidePanelTitle = title;
         this.moreData = data;
         this.selectedMoreId = data.id;
         $wire.resolveMobileRecord(data.id).then(result => {

@@ -42,7 +42,7 @@
 
             @elseif ($action['link'] === 'more')
             <button type="button" class="cta-btn as-pointer modal-cta-item"
-                x-on:click="toggleTableSidePanel({{$record}})"
+                x-on:click="toggleTableSidePanel({{$record}}, '{{$action['panelHeading']}}')"
                 :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
                 {{$action['confirm'] ? 'wire:confirm' : ''}}>
                 {{ $action['label'] }}

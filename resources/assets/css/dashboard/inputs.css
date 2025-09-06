@@ -265,3 +265,31 @@
     color: green;
     border-radius: 5px;
 }
+
+
+.image-upload-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    right: 0;
+    left: 0;
+    justify-content: center;
+}
+.checkbox-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin: 10px 0;
+	flex-direction: row-reverse;
+	gap: 10px;
+}
+.special-checkbox {
+	/* width: 22px;
+	height: 26px; */
+    transform: scale(1.5); /* Increase size by 1.5x */
+    -webkit-transform: scale(1.5); /* For Safari */
+    margin: 5px;
+    cursor: pointer;
+}

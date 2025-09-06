@@ -30,4 +30,17 @@ return [
 
     'prefix' => 'slimdashboard',
     'middleware' => ['web', 'auth'], // You can change or add middleware 
+
+    /**
+     * Pass a view or file path to load extra assets 
+     */
+    'extra_assets' => null,
+    
+    /**
+     * Pass a view or file path into default layout file (app.blade.php)
+     */
+    'inject_view_into_layout' => [
+        'replace' => true,
+        'view' => 'includes.dashboard.layout'
+    ],
 ];

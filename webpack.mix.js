@@ -15,6 +15,7 @@ mix.setPublicPath('public')
     .postCss('resources/assets/css/dashboard/wrappers.css', 'public/css/dashboard')
     .postCss('resources/assets/css/dashboard/accounts.css', 'public/css/dashboard')
     .postCss('resources/assets/css/dashboard/accounting.css', 'public/css/dashboard')
+    .postCss('resources/assets/css/dashboard/reports.css', 'public/css/dashboard')
     .version();
 
 mix.options({
