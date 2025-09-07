@@ -9,6 +9,14 @@
                 <x-slim-dashboard::icons.close />
             </span>
         </div>
+        
+        <div class="dashboard-errors-wrapper">
+            @forelse ($errors->all() as $message)
+                <p class="error">{{$message}}</p>
+            @empty
+
+            @endforelse
+        </div>
 
         <template x-if="useComponent">
             <div>
