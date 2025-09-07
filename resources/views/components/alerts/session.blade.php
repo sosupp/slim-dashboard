@@ -11,7 +11,7 @@
     @endif
 </div>
 
-<div x-data="{alert: true}">
+<div x-data="{alert: true}"> 
     @if (session()->has('failed'))
     <p class="custom-alert-wrapper error-dark-theme justify-inline-wrapper"
         x-on:success-alert.window="'{{session('failed')}}'"
