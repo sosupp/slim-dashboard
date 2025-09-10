@@ -178,6 +178,9 @@ select{
     margin: 0 -10px;
     padding: 5px 10px;
 }
+.quick-link-item:hover {
+	background: #fff;
+}
 .quick-transactions>*:not(:last-child) {
     border-bottom: 1px solid #80008057;
 }
@@ -759,6 +762,10 @@ select{
 	background: #32cd3261;
 	color: green;
 	text-transform: capitalize;
+}
+.accordion-wrapper {
+	margin: 10px 0;
+	border-bottom: 1px solid #ddd;
 }
 .accordion-cta-wrapper {
 	border-bottom: 1px solid #ddd;

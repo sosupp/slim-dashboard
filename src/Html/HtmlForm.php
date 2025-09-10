@@ -729,13 +729,14 @@ class HtmlForm
         $useLabel = empty($label) ? ($isUpdate ? 'Update' : 'Save') : $label;
 
         if($canView){
-            $useIcon = $this->spinnerIcon();
+            $useIcon = $this->loaderIcon();
 
             $this->form .= <<<BUTTON
             <div class="">
                 <button type="$type"
                     id="$id"
                     class="$class button-loader as-pointer"
+                    style="display:flex;gap:10px"
                     wire:$useWire
                     wire:loading.attr="disabled"
                     $action>

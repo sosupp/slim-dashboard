@@ -11,6 +11,9 @@
         this.isOpen = false;
         },
         toggleOption(option) {
+            console.log(option)
+            this.selectedOptions = this.selectedOptions || [];
+
             if (this.isSelected(option)) {
                 // Remove from selectedOptions
                 this.selectedOptions = this.selectedOptions.filter(
@@ -22,7 +25,7 @@
             }
         },
         isSelected(option) {
-            return this.selectedOptions.some(selected => selected.value === option.value);
+            return (this.selectedOptions || []).some(selected => selected.value === option.value);
         },
         get filteredOptions() {
             return this.options.filter(option =>

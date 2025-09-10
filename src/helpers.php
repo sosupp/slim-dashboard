@@ -224,8 +224,8 @@ if(! function_exists('fullDate')){
 }
 
 if (! function_exists('closepanel')) {
-    function closepanel(object $object)
+    function closepanel(object $object, string $event = 'opensidepanel')
     {
-        $object->dispatch('opensidepanel');
+        $object->dispatch($event);
     }
 }

@@ -56,7 +56,7 @@
                         @if($colHeading['canView'] && $colHeading['screen'] == 'all')
                             <td class="{{$colHeading['css'] ?? ''}}">
                                 @if ($colHeading === 'image')
-                                    <img src="{{ asset($record[$colHeading]) }}" width="50">
+                                    <img src="{{ $record[$colHeading] ? asset($record[$colHeading]) : asset('default.webp') }}" width="50">
                                 @else
                                     @if (is_array($colHeading))
                                         @if (isset($colHeading['key']) && $colHeading['key'] === 'image')

@@ -43,4 +43,11 @@ return [
         'replace' => true,
         'view' => 'includes.dashboard.layout'
     ],
+    
+    /**
+     * Pass a view or file path into default layout file (app.blade.php)
+     */
+    'global_cta_view' => null
+
+
 ];

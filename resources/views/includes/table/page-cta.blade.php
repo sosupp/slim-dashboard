@@ -25,7 +25,7 @@
     }
 }" class="page-cta-wrapper">
 
-    <div class="page-cta-wrapper-items mobile-cta for-desktop">
+    <div class="page-cta-wrapper-items for-desktop">
         @foreach ($this->pageCta() as $key => $cta)
             @if (isset($cta['show']) && $cta['show'])
                 @if (isset($cta['type']))
@@ -40,17 +40,30 @@
                     @endif
 
                     @if ($cta['type'] === 'button')
-                        @if ($cta['shouldConfirm'])
+                        @if ($cta['asModal'])
                         <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
-                            wire:click="{{$cta['wireAction']}}"
+                            x-on:click="$dispatch('globalmodal', {
+                                title: '{{$cta['modalTitle']}}',
+                                component: '{{$cta['component']}}'
+                            })"
                             wire:loading.attr="disabled"
                             wire:target="{{$cta['wireTarget']}}"
-                            wire:confirm="Do you want to continue?">{{ $cta['label'] }}</button>
+                            >{{ $cta['label'] }}</button>
                         @else
-                        <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
-                            wire:click="{{$cta['wireAction']}}"
-                            wire:loading.attr="disabled"
-                            wire:target="{{$cta['wireTarget']}}">{{ $cta['label'] }}</button>
+                            @if ($cta['shouldConfirm'])
+                            <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
+                                wire:click="{{$cta['wireAction']}}"
+                                wire:loading.attr="disabled"
+                                wire:target="{{$cta['wireTarget']}}"
+                                wire:confirm="Do you want to continue?"
+                                >{{ $cta['label'] }}</button>
+                            @else
+                            <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
+                                wire:click="{{$cta['wireAction']}}"
+                                wire:loading.attr="disabled"
+                                wire:target="{{$cta['wireTarget']}}"
+                                >{{ $cta['label'] }}</button>
+                            @endif
                         @endif
                     @endif
 
@@ -109,19 +122,33 @@
                     @endif
 
                     @if ($cta['type'] === 'button')
-                        @if ($cta['shouldConfirm'])
+                        @if ($cta['asModal'])
                         <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
-                            wire:click="{{$cta['wireAction']}}"
+                            x-on:click="$dispatch('globalmodal', {
+                                title: '{{$cta['modalTitle']}}',
+                                component: '{{$cta['component']}}'
+                            })"
                             wire:loading.attr="disabled"
                             wire:target="{{$cta['wireTarget']}}"
-                            wire:confirm="Do you want to continue?">{{ $cta['label'] }}</button>
+                            >{{ $cta['label'] }}</button>
                         @else
-                        <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
-                            wire:click="{{$cta['wireAction']}}"
-                            wire:loading.attr="disabled"
-                            wire:target="{{$cta['wireTarget']}}">{{ $cta['label'] }}</button>
+                            @if ($cta['shouldConfirm'])
+                            <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
+                                wire:click="{{$cta['wireAction']}}"
+                                wire:loading.attr="disabled"
+                                wire:target="{{$cta['wireTarget']}}"
+                                wire:confirm="Do you want to continue?"
+                                >{{ $cta['label'] }}</button>
+                            @else
+                            <button type="button" class="custom-btn as-pointer {{$cta['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
+                                wire:click="{{$cta['wireAction']}}"
+                                wire:loading.attr="disabled"
+                                wire:target="{{$cta['wireTarget']}}"
+                                >{{ $cta['label'] }}</button>
+                            @endif
                         @endif
                     @endif
+
 
                     @if ($cta['type'] === 'export')
                         <select name="bulkAction" id="bulkAction"

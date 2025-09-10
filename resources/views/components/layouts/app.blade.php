@@ -127,6 +127,7 @@
         <main class="dashboard-main-content" style="{{ $isPreview ? 'margin-left: 0;' : '' }}">
             <div class="dashboard-head-section page-heading-section" x-cloak x-show="isMobile==false" id="withGlobalCta">
                 <x-slim-dashboard::utils.breadcrumb :data="$breadcrumb ?? []" />
+                <x-slim-dashboard::utils.global-cta />
             </div>
 
             <div class="main-content-wrapper">
@@ -140,6 +141,8 @@
                     {{ $slot }}
                     @includeIf(config('slim-dashboard.inject_view_into_layout.view'))
                 @endif
+
+                @livewire('slimer-global-modal')
             </div>
         </main>
     </div>

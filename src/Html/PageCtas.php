@@ -21,6 +21,8 @@ class PageCtas
         array|null $options = [],
         string $optionKey = 'name',
         string $optionId = 'id',
+        bool $asModal = false,
+        string $modalTitle = '',
     )
     {
         static::$pageActions[$label]['type'] = $type;

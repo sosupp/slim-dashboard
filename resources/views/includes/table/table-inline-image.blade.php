@@ -43,7 +43,7 @@
         </template>
     @else
     <template x-if="!imgsrc">
-        <img src="{{ asset($record[$colHeading['col']]) }}" width="50" alt="">
+        <img src="{{ $record[$colHeading['col']] ? asset($record[$colHeading['col']]) : asset('images/default.webp') }}" width="50">
     </template>
 
     <template x-if="imgsrc">

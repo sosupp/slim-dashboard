@@ -386,7 +386,7 @@ td {
     background: whitesmoke;
     top: 100%;
     z-index: 51;
-    padding: 10px;
+    padding: 0 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     right: 0;
@@ -745,13 +745,17 @@ span.color-code-red {
 	object-fit: contain;
 }
 
-.card-item-modal-cta {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    text-align: center;
-    padding: 10px;
+.card-item-modal-cta,
+.modal-cta-item {
+	display: block;
+	width: 100%;
+	margin: 10px 0;
+	text-align: center;
+	padding: 10px;
+	text-transform: uppercase;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
 }
 
 #modalDelete {
@@ -857,17 +861,6 @@ td:last-child {
         width: 100%;
     }
 
-    .card-item-modal-cta,
-    .modal-cta-item {
-        display: block;
-        width: 100%;
-        margin: 10px 0;
-        border: 1px solid #ddd;
-        text-align: center;
-        padding: 10px;
-        text-transform: capitalize;
-    }
-
     #tableSearch {
         width: 100% !important;
         font-size: 16px;
@@ -886,7 +879,7 @@ td:last-child {
         padding: 10px;
     }
 
-    .page-cta-wrapper-items.mobile-cta * {
+    .page-cta-wrapper-items.mobile-cta {
         display: block;
         width: 100%;
         text-align: left;

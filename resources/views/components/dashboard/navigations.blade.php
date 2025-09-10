@@ -36,25 +36,31 @@
             {!! $navItems['logo']['view'] !!}
         </div>
         @endif
-        <span class="leave-empty"></span>
+
         @if (isset($navItems['action']))
-        <div class="quick-links-wrapper" id="globalActionsCta">
-            <x-dropdown wrapperCss="" dropdownCss="reset-dropdown">
+        <div class="quick-links-wrapper for-mobile for-medium">
+            <x-slim-dashboard::dropdown wrapperCss="" dropdownCss="reset-dropdown">
                 <x-slot:trigger>
-                    <xx-slim-dashboard::icons.circle-plus w="45" class="as-pointer" />
+                    <x-slim-dashboard::icons.circle-plus w="45" class="as-pointer" />
                 </x-slot:trigger>
 
                 <x-slot:content>
-                    <div class="quick-transactions">
-                        @forelse ($navItems['action'] as $cta)
-                        <a class="quick-link-item" wire:navigate href="{{$cta['route']}}">{{$cta['name']}}</a>
-                        @empty
-                            No global action links
-                        @endforelse
+                    @if (isset($navItems['action']['view']))
+                        @includeIf($navItems['action']['view']['view'])
+                    @else
+                        <div class="quick-transactions">
+                            @forelse ($navItems['action'] as $cta)
+                            <a class="quick-link-item" wire:navigate href="{{$cta['route']}}">{{$cta['name']}}</a>
+                            @empty
+                                No global action links
+                            @endforelse
 
-                    </div>
+                        </div>
+                    @endif
+
+
                 </x-slot:content>
-            </x-dropdown>
+            </x-slim-dashboard::dropdown>
         </div>
         @endif
 

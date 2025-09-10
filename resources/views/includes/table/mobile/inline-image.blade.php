@@ -32,7 +32,7 @@
     </label>
 
     <template x-if="!imgsrc">
-        <img src="{{ $image ? asset($image) : asset($record->image) }}" width="50">
+        <img src="{{ $image ? asset($image) : asset('images/default.webp') }}" width="50">
     </template>
 
     <template x-if="imgsrc">

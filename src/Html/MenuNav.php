@@ -126,6 +126,21 @@ class MenuNav
         return new static;
     }
 
+    public static function globalCtaView(
+        string $name = '',
+        string $key = '',
+        string|View|null $view = null,
+        bool $authorize = true,
+    )
+    {
+        static::$navs['action']['view']['name'] = $name;
+        static::$navs['action']['view']['key'] = $key;
+        static::$navs['action']['view']['view'] = $view;
+        static::$navs['action']['view']['authorize'] = $authorize;
+
+        return new static;
+    }
+
     public static function styles(
         string $wrapperCss = 'admin-sidenav',
         string $navsBg = 'light-purple-nav',
