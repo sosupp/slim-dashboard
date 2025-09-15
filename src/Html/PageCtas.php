@@ -40,6 +40,8 @@ class PageCtas
         static::$pageActions[$label]['options'] = $options;
         static::$pageActions[$label]['optionKey'] = $optionKey;
         static::$pageActions[$label]['optionId'] = $optionId;
+        static::$pageActions[$label]['asModal'] = $asModal;
+        static::$pageActions[$label]['modalTitle'] = $modalTitle;
 
         return new static;
     }
