@@ -79,13 +79,7 @@
 	margin-bottom: 1rem;
 	text-transform: capitalize;
 }
-#activeTab,
-.active-tab {
-	border-bottom: 2px solid;
-}
-.dark-active-bottom {
-    border-bottom: 3px solid #cd5c5c;
-}
+
 .special-bg {
     background-color: rgb(255, 69, 0, 0.09);
     color: orangered;
