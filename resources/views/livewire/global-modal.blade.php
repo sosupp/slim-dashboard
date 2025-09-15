@@ -1,11 +1,19 @@
 <div x-data="{
     modal: false,
     title: '',
+    html: '',
     toggleModal(data = null){
         this.modal = !this.modal;
         this.title = data?.title;
+        console.log('from-global', data)
         if(data !==null){
+            if(data.render){
+                this.html = data.render;
+                return;
+            }
+
             console.log('calling', data.component, data.title);
+            this.html = '';
             $dispatch('switch-modal', {
                 component: data.component,
             })
@@ -19,7 +27,7 @@ x-on:globalmodal.window="toggleModal($event.detail)"
 
 x-on:closeglobalmodal.window="closeModal()"
 x-show="modal" x-cloak
-    >
+    class="global-modal-parent">
 
     <div class="global-modal-panel">
         <div class="global-modal-heading-wrapper">
@@ -35,11 +43,15 @@ x-show="modal" x-cloak
                 @endforelse
             </div>
 
-            @if (isset($componentName) && !empty($componentName))
-                @livewire($componentName, $this->passExtraData(), key($componentName))
-            @else
-            @includeIf($this->useViewFile, $this->passExtraData())
-            @endif
+            <div x-html="html"></div>
+
+            <div x-show="html == ''" x-cloak>
+                @if (isset($componentName) && !empty($componentName))
+                    @livewire($componentName, $this->passExtraData(), key($componentName))
+                @else
+                @includeIf($this->useViewFile, $this->passExtraData())
+                @endif
+            </div>
         </div>
     </div>
 
