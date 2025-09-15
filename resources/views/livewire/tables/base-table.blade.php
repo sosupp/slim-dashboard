@@ -33,6 +33,9 @@
         closePanel(){
             this.sidePanel = !this.sidePanel
             $dispatch('closesidepanel')
+        },
+        withModal(data = {}){
+            console.log(data)
         }
     }" x-init="imagePreview = '{{asset($previewImagePath)}}'"
         x-on:opensidepanel.window="toggleSidePanel($event.detail.component, $event.detail.title)">

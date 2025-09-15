@@ -4,7 +4,8 @@
         <textarea data-description="@this"
             wire:model.blur="{{$model}}"
             id="{{$id}}"
-            placeholder="">{{$this->$model ?? old($model)}}</textarea>
+            placeholder=""
+            {{$action}}>{{$this->$model ?? old($model)}}</textarea>
 
         @error($model) <p class="error">{{$message}}</p> @enderror
     </div>

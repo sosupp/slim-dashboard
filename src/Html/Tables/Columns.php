@@ -40,9 +40,9 @@ class Columns
         string $innerCss = 'custom-align',
     )
     {
-        $useLabel = $label == '' ? $name : $label;
+        $label = empty($label) ? $name : $label;
 
-        $this->columnNames[$label]['label'] = $useLabel;
+        $this->columnNames[$label]['label'] = $label;
         $this->columnNames[$label]['subLabel'] = $subLabel;
         $this->columnNames[$label]['col'] = $name;
         $this->columnNames[$label]['relation'] = $relation;

@@ -457,9 +457,17 @@ class HtmlForm
         $setState = $wireLive === 'blur' ? '.blur' : ($wireLive ? '.live' : '.defer');
         $setLocked = $lock ? 'disabled' : '';
 
-        $wrapperCss = $type == 'checkbox' ? $wrapperCss : (empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss);
-        $labelCss = $type == 'checkbox' ? $labelCss : (empty($this->labelCss) ? $labelCss : $this->labelCss);
-        $inputCss = $type == 'checkbox' ? $inputCss : (empty($this->inputCss) ? $inputCss : $this->inputCss);
+        $wrapperCss = ($type == 'checkbox' || $type == 'radio')
+            ? $wrapperCss
+            : (empty($this->wrapperCss) ? $wrapperCss : $this->wrapperCss);
+
+        $labelCss = ($type == 'checkbox' || $type == 'radio')
+            ? $labelCss
+            : (empty($this->labelCss) ? $labelCss : $this->labelCss);
+
+        $inputCss = ($type == 'checkbox' || $type == 'radio')
+            ? $inputCss
+            : (empty($this->inputCss) ? $inputCss : $this->inputCss);
 
         $input = '';
 
@@ -659,7 +667,8 @@ class HtmlForm
         string $inputCss = 'custom-input',
         bool $customPlaceholder = true,
         bool $withImageUpload = true,
-        string $state = ''
+        string $state = '',
+        bool $canView = true,
     )
     {
         $setLabel = is_null($label) ? $name : $label;
@@ -668,15 +677,21 @@ class HtmlForm
         $labelCss = empty($this->labelCss) ? $labelCss : $this->labelCss;
         $inputCss = empty($this->inputCss) ? $inputCss : $this->inputCss;
 
-        if($withEditor === false){
-            $this->form .= $this->plainEditor(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel, state: $state);
-            return $this;
-        }
-
-        if($withImageUpload){
-            $this->form .= $this->ckEditor(id: $setId, model: $name, label: $setLabel, state: $state);
-        }else{
-            $this->form .= $this->ckEditorWithoutUpload(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel);
+        if($canView){
+            if($withEditor === false){
+                $this->form .= $this->plainEditor(
+                    id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss,
+                    inputCss: $inputCss, label: $setLabel, state: $state,
+                    action: $action, placeholder: $placeholder,
+                );
+                return $this;
+            }
+    
+            if($withImageUpload){
+                $this->form .= $this->ckEditor(id: $setId, model: $name, label: $setLabel, state: $state, action: $action);
+            }else{
+                $this->form .= $this->ckEditorWithoutUpload(id: $setId, model: $name, wrapperCss: $wrapperCss, labelCss: $labelCss, inputCss: $inputCss, label: $setLabel);
+            }
         }
 
         return $this;
@@ -989,14 +1004,14 @@ class HtmlForm
         BLADE;
     }
 
-    private function plainEditor(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label, string $state)
+    private function plainEditor(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label, string $state, string $action, string $placeholder)
     {
-        return view('slim-dashboard::components.utils.forms.plain-editor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss', 'label', 'state'));
+        return view('slim-dashboard::components.utils.forms.plain-editor', compact('id', 'model', 'wrapperCss', 'labelCss', 'inputCss', 'label', 'state', 'action', 'placeholder'));
     }
 
-    private function ckEditor(string $id, string $model, string $label, string $state)
+    private function ckEditor(string $id, string $model, string $label, string $state, string $action)
     {
-        return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model', 'label', 'state'));
+        return view('slim-dashboard::components.utils.forms.ckeditor', compact('id', 'model', 'label', 'state', 'action'));
     }
 
     private function ckEditorWithoutUpload(string $id, string $model, string $wrapperCss, string $labelCss, string $inputCss, string $label)

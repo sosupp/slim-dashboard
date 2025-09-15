@@ -72,6 +72,7 @@ abstract class BaseTable extends Component
 
     public $withBreadcrumb = true;
 
+    public $modalRecord;
     public $modalRecordId = null;
     public $modalRecordDeleted = null;
     public $mobileMoreRecord;

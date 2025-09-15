@@ -2,14 +2,16 @@
         cardModal: false,
         selectedCard: null,
         recordDeleted: $wire.entangle('modalRecordDeleted'),
-        modalRecord: $wire.entangle('modalRecordId').live,
+        modalRecordId: $wire.entangle('modalRecordId').live,
+        modalRecord: $wire.entangle('modalRecord').live,
         cardItem: [],
         openCardModal(key, item, deleted){
             if(key==this.selectedCard){
                 console.log(key)
                 this.cardModal = !this.cardModal;
                 this.cardItem = item;
-                this.modalRecord = key;
+                this.modalRecordId = key;
+                this.modalRecord = item
                 this.recordDeleted = deleted;
             }
         },

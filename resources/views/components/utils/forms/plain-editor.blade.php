@@ -5,7 +5,8 @@
         <textarea class="plain-textarea {{$inputCss}}"
             wire:model{{$state}}="{{$model}}"
             id="{{$id}}"
-            placeholder=""></textarea>
+            placeholder="{{$placeholder}}"
+            {{$action}}></textarea>
     </div>
     @error($model) <p class="error">{{$message}}</p> @enderror
 

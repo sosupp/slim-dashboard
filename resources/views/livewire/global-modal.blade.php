@@ -16,10 +16,10 @@
     }
 }"
 x-on:globalmodal.window="toggleModal($event.detail)"
-x-on:click.self="closeModal()"
+
 x-on:closeglobalmodal.window="closeModal()"
 x-show="modal" x-cloak
-    class="global-modal-overlay">
+    >
 
     <div class="global-modal-panel">
         <div class="global-modal-heading-wrapper">
@@ -42,4 +42,6 @@ x-show="modal" x-cloak
             @endif
         </div>
     </div>
+
+    <div class="global-modal-overlay" x-on:click.self="closeModal()"></div>
 </div>
