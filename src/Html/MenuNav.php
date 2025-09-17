@@ -18,6 +18,7 @@ class MenuNav
         bool $authorize = true,
         string|View|null $icon = null,
         bool $asButton = false,
+        string|null $css = null,
     )
     {
         static::$navs[$name]['name'] = $name;
@@ -29,6 +30,7 @@ class MenuNav
         static::$navs[$name]['authorize'] = $authorize;
         static::$navs[$name]['icon'] = $icon;
         static::$navs[$name]['asButton'] = $asButton;
+        static::$navs[$name]['css'] = $css;
 
         return new static;
     }
@@ -43,6 +45,7 @@ class MenuNav
         bool $authorize = true,
         string|View|null $icon = null,
         bool $asButton = false,
+        string|null $css = null,
     )
     {
         static::$navs['menu'][$name]['name'] = $name;
@@ -54,6 +57,7 @@ class MenuNav
         static::$navs['menu'][$name]['authorize'] = $authorize;
         static::$navs['menu'][$name]['icon'] = $icon;
         static::$navs['menu'][$name]['asButton'] = $asButton;
+        static::$navs['menu'][$name]['css'] = $css;
 
         return new static;
     }
