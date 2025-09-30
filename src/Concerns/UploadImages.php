@@ -1,7 +1,10 @@
 <?php
 namespace Sosupp\SlimDashboard\Concerns;
 
+use Illuminate\Http\File;
+use Illuminate\Http\UploadedFile;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 trait UploadImages
@@ -19,8 +22,13 @@ trait UploadImages
     protected $uploadedImagesPath = [];
 
     // For single image
-    protected function uploadImage($data, $width = null, $height = null, $subDir = null)
+    protected function uploadImage(
+        $data, $width = null, $height = null, $subDir = null,
+        $private = false,
+    )
     {
+        // dd($data['image']);
+
 
         if(isset($data['image']) && $data['image'] !== null){
             // $filename = $data['image']->getClientOriginalName();
@@ -33,6 +41,14 @@ trait UploadImages
                 $filename = str($originalName)->slug()->value();
             }
 
+            if($private && $subDir){
+                return $this->storePrivately(
+                    dir: $subDir,
+                    file: $data['image'],
+                    filename: $filename.'.webp'
+                );
+            }
+
             $image = '';
             if($subDir !== null){
                 $image = 'images/'.$subDir .'/'.$filename.'.webp';
@@ -40,6 +56,7 @@ trait UploadImages
                 $image = 'images/'.$filename.'.webp';
             }
 
+            // dd($image);
             Image::read($data['image'])
             // ->resize()
             ->save(
@@ -121,5 +138,24 @@ trait UploadImages
         };
     }
 
+    private function storePrivately(string $dir, $file, string $filename)
+    {
+        // dd($dir, $file, $filename);
+        // Case 1: If it's an UploadedFile (from request()->file(...))
+        if ($file instanceof UploadedFile) {
+            return Storage::putFileAs($dir, $file, $filename);
+        }
 
+        // Case 2: If it's a valid file path
+        if (is_string($file) && file_exists($file)) {
+            return Storage::putFileAs($dir, new File($file), $filename);
+        }
+
+        // Case 3: If it's raw file contents (string or binary data)
+        if (is_string($file)) {
+            return Storage::put($dir . '/' . $filename, $file);
+        }
+
+        throw new \InvalidArgumentException('Unsupported file type passed to storePrivately');
+    }
 }

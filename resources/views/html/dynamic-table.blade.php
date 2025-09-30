@@ -22,6 +22,7 @@
             <tbody class="{{ $tbodyCss ?? 'table-body'}}">
                 @foreach($rows as $rowKey => $row)
                     <tr>
+
                         @foreach($columns as $col)
                             @php
                                 $key = $col['key'];
@@ -51,7 +52,14 @@
                                         </button>
                                     </div>
                                 @else
+
+                                    @if ($col['callback'])
+                                        <div class="{{$col['css']}}">
+                                            {{$col['callback']($row)}}
+                                        </div>
+                                    @else
                                     {{ $value }}
+                                    @endif
                                 @endif
                             </td>
                         @endforeach

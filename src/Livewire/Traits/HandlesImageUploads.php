@@ -10,7 +10,7 @@ trait HandlesImageUploads
 {
     use WithFileUploads,
         UploadImages;
-        
+
     #[Session()]
     public $imagePath;
     public $image;
@@ -32,6 +32,16 @@ trait HandlesImageUploads
 
     abstract function uploadImageOnSave(): bool;
 
+    public function fileAsPrivate(): bool
+    {
+        return false;
+    }
+
+    public function storageDirectory()
+    {
+        return null;
+    }
+
     public function uploadImageNow()
     {
         $this->imagePath = $this->uploadImage(
@@ -39,6 +49,8 @@ trait HandlesImageUploads
                 'image' => $this->image,
                 'filename' => $this->colForImageName()
             ],
+            subDir: $this->storageDirectory(),
+            private: $this->fileAsPrivate()
         );
 
         if(!empty($this->customImagePropertyName())){

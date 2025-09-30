@@ -13,6 +13,7 @@ class Columns
 
     public function column(
         string $name,
+        string|null $key = null,
         string $label = '',
         string $subLabel = '',
         string|null $relation = null,
@@ -22,7 +23,6 @@ class Columns
         $filterCols = [],
         bool $hasCustomColKeys = false,
         $wireFilterProperty = null,
-        string|null $key = null,
         string $css = '',
         bool $showLabel = false,
         string $filterModel = '',
