@@ -110,4 +110,11 @@ trait CommonFilters
         $this->withoutRelationColValue = $colValues;
         return $this;
     }
+
+    public function withStatus(string $status, string $col = 'status')
+    {
+        $this->status = $status;
+        $this->statusCol = $col;
+        return $this;
+    }
 }

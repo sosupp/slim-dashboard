@@ -38,12 +38,12 @@
 
                 </button>
             @elseif ($action['link'] === 'more')
-            <button type="button" class="cta-btn as-pointer card-item-modal-cta"
+            {{-- <button type="button" class="cta-btn as-pointer card-item-modal-cta"
                 x-on:click="toggleTableSidePanel({{$modalRecord}}, '{{$action['panelHeading']}}')"
                 :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
                 {{$action['confirm'] ? 'wire:confirm' : ''}}>
                 {{ $action['label'] }}
-            </button>
+            </button> --}}
             @else
             <a wire:navigate
                 href="{{ !empty($action['link']) ? route($action['link'], $modalRecordId) : '#' }}"

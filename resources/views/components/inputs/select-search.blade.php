@@ -1,8 +1,8 @@
 <div x-data="{
         isOpen: false,
         search: '',
-        selected: $wire.entangle('{{$name}}'){{$wireState}},
-        options: @js($options),
+        selected: $wire.entangle('{{$name}}'),
+        options: [],
         toggle() {
         this.isOpen = !this.isOpen;
         },
@@ -10,16 +10,17 @@
         this.isOpen = false;
         },
         select(value) {
-        this.selected = value;
-        this.search = '';
-        this.close();
+            this.selected = value;
+            this.search = '';
+            console.log(value, this.selected)
+            this.close();
         },
         get filteredOptions() {
             return this.options.filter(option =>
                 option.label.toLowerCase().includes(this.search.toLowerCase())
             );
         },
-    }" class="">
+    }" x-init="selected = null; options = @js($options)">
 
     <!-- Dropdown -->
     <div class="{{$wrapperCss}}">
