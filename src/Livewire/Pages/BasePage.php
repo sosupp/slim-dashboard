@@ -65,6 +65,6 @@ abstract class BasePage extends Component
     {
         return view('slim-dashboard::livewire.pages.base-page')
         ->layoutData(['breadcrumb' => $this->breadcrumbData()])
-        ->title($this->pageTitle);;
+        ->title($this->pageTitle);
     }
 }

@@ -66,6 +66,10 @@ trait WithDateFilters
 
     public function dateDescription()
     {
+        if(is_null($this->selectedDate)){
+            return;
+        }
+        
         $description = '<b>';
 
 

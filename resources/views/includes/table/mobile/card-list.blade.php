@@ -7,7 +7,6 @@
         cardItem: [],
         openCardModal(key, item, deleted){
             if(key==this.selectedCard){
-                console.log(key)
                 this.cardModal = !this.cardModal;
                 this.cardItem = item;
                 this.modalRecordId = key;
@@ -23,7 +22,6 @@
 
     @forelse ($this->tableRecords as $record)
         <div class="as-card-item-plain as-pointer">
-
             <div class="card-item-details">
                 @if ($this->withListCardImage() === 'editable')
                     <div class="card-item-image">
@@ -43,45 +41,100 @@
                     '{{$record->deleted_at}}'
                 )">
                     <div>
-                        @foreach ($this->cardContents() as $key => $colHeading)
-                            <div class="card-inline-items">
-                            @foreach ($colHeading as $rowItem)
-                                @if ($rowItem['canView'])
-                                    @if (isset($rowItem['relation']) || $rowItem['callback'] !== null)
-                                    <p class="card-item-name item-heading {{$rowItem['css']}}">
-                                        @if ($rowItem['label'] !== null)
-                                        <span class="{{$rowItem['labelCss']}}">{{$rowItem['label']}}:</span>
-                                        @endif
+                        @if ($this->tableColsForMobile())
+                            @foreach ($this->tableCols() as $key => $rowItem)
+                                <div class="card-inline-items">
+                                    @if ($rowItem['onMobile'] && $rowItem['canView'])
+                                        @if (isset($rowItem['relation']) || $rowItem['callback'] !== null)
+                                        <p class="card-item-name item-heading {{$rowItem['css']}}">
+                                            <div>
+                                                @if ($rowItem['showLabel'])
+                                                <span class="{{$rowItem['labelCss']}}">{{$rowItem['label']}}:</span>
+                                                @endif
 
-                                        <span class="{{$rowItem['valueCss']}}">{!! $this->relation($record, $rowItem['relation'], $rowItem['name'], $rowItem['callback'] ?? null) !!}</span>
-                                    </p>
-                                    @elseif (isset($colHeading['type']) && $colHeading['type'] === 'date')
-                                        <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
-                                    @elseif ($rowItem['name'] == 'created_at' || $rowItem['name'] == 'updated_at' || $rowItem['name'] == 'deleted_at' || $rowItem['name'] == 'date')
-                                        <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
-                                    @elseif(isset($rowItem['type']) && $rowItem['type'] === 'toggle')
-                                        @if ($record->deleted_at)
-                                        <p class="deleted-label">Deleted</p>
+                                                <span class="{{$rowItem['valueCss']}}">{!! $this->relation($record, $rowItem['relation'], $rowItem['col'], $rowItem['callback'] ?? null) !!}</span>
+                                            </div>
+                                            @if ($rowItem['inlineEdit'])
+                                                @include('slim-dashboard::includes.table.table-inline-edit', [
+                                                    'colHeading' => $rowItem
+                                                ])
+                                            @endif
+                                        </p>
+                                        @elseif (isset($rowItem['type']) && $rowItem['type'] === 'date')
+                                            <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['col']]) }}</span>
+                                        @elseif ($rowItem['col'] == 'created_at' || $rowItem['col'] == 'updated_at' || $rowItem['col'] == 'deleted_at' || $rowItem['col'] == 'date')
+                                            <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['col']]) }}</span>
+                                        @elseif(isset($rowItem['type']) && $rowItem['type'] === 'toggle')
+                                            @if ($record->deleted_at)
+                                            <p class="deleted-label">Deleted</p>
+                                            @else
+                                            <label class="switch">
+                                                <input type="checkbox" value="{{ $record[$rowItem['col']] }}"
+                                                    wire:click="toggleStatus({{ $record->id }}, '{{$rowItem['col']}}')"
+                                                    {{ $record[$rowItem['col']] === 'active' ? 'checked' : '' }}>
+                                                <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
+                                            </label>
+                                            @endif
                                         @else
-                                        <label class="switch">
-                                            <input type="checkbox" value="{{ $record[$rowItem['name']] }}"
-                                                wire:click="toggleStatus({{ $record->id }}, '{{$rowItem['name']}}')"
-                                                {{ $record[$rowItem['name']] === 'active' ? 'checked' : '' }}>
-                                            <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
-                                        </label>
+                                        <p class="card-item-name item-heading">
+                                            <div>
+                                                @if ($rowItem['showLabel'])
+                                                <span class="{{$rowItem['labelCss']}}">{{$rowItem['label']}}:</span>
+                                                @endif
+                                                <span class="{{$rowItem['valueCss']}}">{{$record[$rowItem['col']]}}</span>
+                                            </div>
+
+                                            @if ($rowItem['inlineEdit'])
+                                                @include('slim-dashboard::includes.table.table-inline-edit', [
+                                                    'colHeading' => $rowItem
+                                                ])
+                                            @endif
+                                        </p>
                                         @endif
-                                    @else
-                                    <p class="card-item-name item-heading">
-                                        @if ($rowItem['label'] !== null)
-                                        <span class="{{$rowItem['labelCss']}}">{{$rowItem['label']}}:</span>
-                                        @endif
-                                        <span class="{{$rowItem['valueCss']}}">{{$record[$rowItem['name']]}}</span>
-                                    </p>
                                     @endif
-                                @endif
+                                </div>
                             @endforeach
-                            </div>
-                        @endforeach
+                        @else
+                            @foreach ($this->cardContents() as $key => $colHeading)
+                                <div class="card-inline-items">
+                                @foreach ($colHeading as $rowItem)
+                                    @if ($rowItem['canView'])
+                                        @if (isset($rowItem['relation']) || $rowItem['callback'] !== null)
+                                        <p class="card-item-name item-heading {{$rowItem['css']}}">
+                                            @if ($rowItem['label'] !== null)
+                                            <span class="{{$rowItem['labelCss']}}">{{$rowItem['label']}}:</span>
+                                            @endif
+
+                                            <span class="{{$rowItem['valueCss']}}">{!! $this->relation($record, $rowItem['relation'], $rowItem['name'], $rowItem['callback'] ?? null) !!}</span>
+                                        </p>
+                                        @elseif (isset($colHeading['type']) && $colHeading['type'] === 'date')
+                                            <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
+                                        @elseif ($rowItem['name'] == 'created_at' || $rowItem['name'] == 'updated_at' || $rowItem['name'] == 'deleted_at' || $rowItem['name'] == 'date')
+                                            <span class="{{$rowItem['valueCss']}}">{{ $this->customDateFormat($record[$rowItem['name']]) }}</span>
+                                        @elseif(isset($rowItem['type']) && $rowItem['type'] === 'toggle')
+                                            @if ($record->deleted_at)
+                                            <p class="deleted-label">Deleted</p>
+                                            @else
+                                            <label class="switch">
+                                                <input type="checkbox" value="{{ $record[$rowItem['name']] }}"
+                                                    wire:click="toggleStatus({{ $record->id }}, '{{$rowItem['name']}}')"
+                                                    {{ $record[$rowItem['name']] === 'active' ? 'checked' : '' }}>
+                                                <span class="slider round" :class="darkmode ? 'dmode-slider' : 'slider-bg'"></span>
+                                            </label>
+                                            @endif
+                                        @else
+                                        <p class="card-item-name item-heading">
+                                            @if ($rowItem['label'] !== null)
+                                            <span class="{{$rowItem['labelCss']}}">{{$rowItem['label']}}:</span>
+                                            @endif
+                                            <span class="{{$rowItem['valueCss']}}">{{$record[$rowItem['name']]}}</span>
+                                        </p>
+                                        @endif
+                                    @endif
+                                @endforeach
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
 
                     <div class="card-item-cta as-pointer">
@@ -109,8 +162,6 @@
                 </div>
             </div>
         </div>
-
-
     @empty
 
     @endforelse

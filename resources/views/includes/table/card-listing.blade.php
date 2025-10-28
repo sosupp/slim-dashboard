@@ -12,10 +12,12 @@
 </div>
 @endif
 
+
 <div class="search-and-listing" x-data="{
         statsPanel: false
     }">
 
+    @if($this->mobileTableCta())
     <div class="search-input-and-results" x-data="{openResults: true}">
         @include('slim-dashboard::includes.platform.search-input')
         @include('slim-dashboard::includes.table.page-cta')
@@ -28,7 +30,9 @@
         </div>
         @endif
     </div>
+    @endif
 
+    @if ($this->mobileStats())
     <div class="mobile-stats-wrapper">
         @if ($this->showPagination())
         <div class="record-count">
@@ -57,6 +61,7 @@
         </div>
 
     </div>
+    @endif
 
     <div x-cloak x-show="statsPanel" id="mobileStatPanel" class="side-modal-panel">
         <div class="side-modal-heading-wrapper">

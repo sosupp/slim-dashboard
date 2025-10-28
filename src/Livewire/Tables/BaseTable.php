@@ -95,7 +95,9 @@ abstract class BaseTable extends Component
                 if($items['screen'] == 'more'){
                     return [
                         'col' => $items['col'],
-                        'label' => $items['label']
+                        'label' => $items['label'],
+                        'relation' => $items['relation'],
+                        'callback' => '',
                     ];
                 };
             })
@@ -362,6 +364,11 @@ abstract class BaseTable extends Component
         return false;
     }
 
+    public function tableColsForMobile(): bool
+    {
+        return false;
+    }
+
     public function listAsCards(): string|View|null
     {
         return null;
@@ -408,6 +415,16 @@ abstract class BaseTable extends Component
     public function mobileModalCta(): bool
     {
         return false;
+    }
+
+    public function mobileTableCta(): bool
+    {
+        return true;
+    }
+
+    public function mobileStats(): bool
+    {
+        return true;
     }
 
     public function resolveMobileRecord($id = null)

@@ -9,6 +9,8 @@ use Sosupp\SlimDashboard\Html\PageCtas;
 trait HandlesFileExport
 {
     public $selectedExportType;
+    public $paperOrientation = 'portrait';
+    public $paperSize = 'a4';
 
     abstract function exportModel();
     abstract function exportFilename(): string;
@@ -16,7 +18,8 @@ trait HandlesFileExport
 
     public function renderingHandlesFileExport()
     {
-        $this->mergeWithPageCta();
+        // dd($this->mergeWithPageCta());
+        return $this->mergeWithPageCta();
     }
 
     public function updatedSelectedExportType($type)
@@ -71,7 +74,7 @@ trait HandlesFileExport
         )
         ->make();
 
-        // dd($ctas, $exportCta);
+        // dd($ctas, $exportCta, array_merge($ctas, $exportCta));
         return array_merge($ctas, $exportCta);
     }
 
@@ -89,9 +92,10 @@ trait HandlesFileExport
             );
         }
 
-        // $html = $this->pdfView();
-        // dd($html);
-        $pdf = Pdf::loadHtml($this->pdfView())->setPaper('a4');
+        $pdf = Pdf::loadHtml($this->pdfView())
+        ->setOption('isHtml5ParserEnabled', true)
+        ->setOption('isRemoteEnabled', true)
+        ->setPaper($this->paperSize, $this->paperOrientation);
 
         return response()->streamDownload(
             fn() => print($pdf->stream()),

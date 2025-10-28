@@ -38,6 +38,8 @@ class Columns
         string|null $format = null,
         string $screen = 'all',
         string $innerCss = 'custom-align',
+        string $labelCss = '',
+        bool $onMobile = false,
     )
     {
         $label = empty($label) ? $name : $label;
@@ -68,6 +70,8 @@ class Columns
         $this->columnNames[$label]['format'] = $format;
         $this->columnNames[$label]['screen'] = $screen;
         $this->columnNames[$label]['innerCss'] = $innerCss;
+        $this->columnNames[$label]['labelCss'] = $labelCss;
+        $this->columnNames[$label]['onMobile'] = $onMobile;
         return $this;
     }
 

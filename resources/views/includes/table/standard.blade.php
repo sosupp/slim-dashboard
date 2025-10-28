@@ -27,12 +27,26 @@
         const data = this.moreData;
         const cols = this.moreKeys;
 
-        return cols.map(colObj => ({
+        const getValue = (obj, path) => {
+            return path.split('.').reduce((acc, key) => {
+                return acc && acc[key] !== undefined ? acc[key] : undefined;
+            }, obj);
+        };
+
+        return cols.map(colObj => {
+            const value = getValue(data, colObj.col);
+            return {
+                label: colObj.label,
+                value: value !== undefined && value !== null ? value : placeholder
+            };
+        });
+
+        {{-- return cols.map(colObj => ({
             label: colObj.label,
             value: data.hasOwnProperty(colObj.col)
                 ? data[colObj.col]
                 : placeholder
-        }));
+        })); --}}
     }
 }" x-init="setMoreCols()">
     <x-slim-dashboard::table :theadings="$this->tableCols()"
