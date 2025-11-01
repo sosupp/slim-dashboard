@@ -88,7 +88,10 @@ trait WithDateFormat
 
     private function prepareDateRanges(array|string $date)
     {
-        // dd($date);
+        if(is_null($date)){
+            return;
+        }
+        
         $date = collect($this->selectedDate)->reject(function($date){
             return empty($date) || is_null($date);
         });
