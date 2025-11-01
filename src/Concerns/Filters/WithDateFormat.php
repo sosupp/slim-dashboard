@@ -86,12 +86,12 @@ trait WithDateFormat
         $query->whereBetween($dateCol, $useDate);
     }
 
-    private function prepareDateRanges(array|string $date)
+    private function prepareDateRanges(array|string|null $date = null)
     {
         if(is_null($date)){
             return;
         }
-        
+
         $date = collect($this->selectedDate)->reject(function($date){
             return empty($date) || is_null($date);
         });
