@@ -21,6 +21,7 @@ class Rows
         bool $isAuthorize = false,
         string $screen = 'all',
         string $css = '',
+        bool $asModal = false,
     )
     {
 
@@ -41,6 +42,7 @@ class Rows
         static::$columnActions[$name]['isAuthorize'] = $isAuthorize;
         static::$columnActions[$name]['screen'] = $screen;
         static::$columnActions[$name]['css'] = $css;
+        static::$columnActions[$name]['asModal'] = $asModal;
         return new static;
     }
 

@@ -320,7 +320,7 @@
 	height: 50vh;
 	border-radius: 10px;
 	z-index: 99999;
-	position: relative;
+	position: fixed;
 	margin: auto;
 	overflow-y: auto;
 }

@@ -32,6 +32,17 @@
                 </button>
             @elseif ($action['asCheckbox'])
 
+            @elseif ($action['asModal'])
+                <button type="button" class="cta-btn cta-btn-border as-pointer {{$action['css'] ?? ''}} {{$this->selectAll ? 'bg-aquamarine' : ''}}"
+                    x-on:click="$dispatch('globalmodal', {
+                        title: '{{$action['panelHeading']}}',
+                        component: '{{$action['component']}}'
+                    })"
+                    wire:loading.attr="disabled"
+                    wire:target="{{$action['wireAction']}}"
+                    >{{ $action['label'] }}
+                </button>
+
             @elseif ($action['link'] === 'button')
                 <button type="button" class="cta-btn as-pointer modal-cta-item"
                     wire:click="{{$action['wireAction'].'('.$record.')'}}"

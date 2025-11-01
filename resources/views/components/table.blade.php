@@ -25,8 +25,7 @@
                                             this.toggleSelect = !this.toggleSelect
                                         }
                                     }">
-
-
+                                    
                                     <div class="custom-selection-filter as-pointer" @click.outside="toggleSelect=false">
                                         <div class="select-box" x-on:click="showCheckBoxes">
                                             <x-slim-dashboard::icons.unfold-more />
@@ -34,26 +33,14 @@
 
                                         @if (isset($heading['filtercols']))
                                         <div x-show="toggleSelect" id="checkBoxes" class="select-checkboxes">
-                                            {{-- <select wire:model="{{$heading['wireProperty']}}" id="">
-                                                @foreach ($heading['filtercols'] as $key => $value)
-                                                <option value="{{$value['id']}}">{{$value['name']}}</option>
-                                                @endforeach
-                                            </select> --}}
-
                                             @foreach ($heading['filtercols'] as $key => $value)
                                             <label for="{{$heading['label'].$key}}">
-                                                <input type="radio" id="{{$heading['label'].$key}}" value="{{$value['id']}}"
+                                                <input type="radio" id="{{$heading['label'].$key}}"
+                                                    value="{{$value['id']}}"
                                                     wire:model.live="{{$heading['wireProperty']}}">
                                                 {{$value['name']}}
                                             </label>
                                             @endforeach
-                                            {{-- @foreach ($this->configureFilterColumns($heading['relation'], $heading['filtercols'], $heading['filterModel'], $heading['hasCustomColKeys']) as $key => $name)
-                                                <label for="{{$heading['label'].$key}}">
-                                                    <input type="radio" id="{{$heading['label'].$key}}" value="{{$key}}"
-                                                        wire:model.live="{{$heading['wireProperty']}}">
-                                                    {{$name}}
-                                                </label>
-                                            @endforeach --}}
 
                                             @if ($heading['hasButton'])
                                             <button type="button" id="applyFilter" class="as-pointer"

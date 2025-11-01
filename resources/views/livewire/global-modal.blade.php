@@ -16,6 +16,7 @@
             this.html = '';
             $dispatch('switch-modal', {
                 component: data.component,
+                model: data.model,
             })
         }
     },
