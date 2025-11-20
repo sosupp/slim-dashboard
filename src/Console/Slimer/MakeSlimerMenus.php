@@ -6,8 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class MakeSlimerMenus extends Command
 {
-
-    protected $signature = 'slimer:menus';
+    protected $signature = 'slimer:menus {name? : The name of the menu class (optional)}';
     protected $description = 'Publish a menu class used to add navigation menus
                             to slim-dashboard navigations';
 
@@ -21,42 +20,39 @@ class MakeSlimerMenus extends Command
 
     public function handle()
     {
-        $componentClassPath = app_path("View/Components/Slimer/Menus.php");
-
-        // dd($componentClassPath);
+        $className = $this->argument('name') ?? 'Menus';
+        $componentClassPath = app_path("View/Components/Slimer/Menus/{$className}.php");
 
         // Ensure directories exist
         $this->makeDirectory($componentClassPath);
 
         // Publish the Component Class
         if (!$this->files->exists($componentClassPath)) {
-            $this->files->put($componentClassPath, $this->getComponentClassTemplate());
+            $this->files->put($componentClassPath, $this->getComponentClassTemplate($className));
             $this->info("View Component Class published: {$componentClassPath}");
         } else {
             $this->warn("View Component Class already exists: {$componentClassPath}");
         }
-
     }
 
     protected function makeDirectory($path)
     {
-
         $directory = dirname($path);
         if (!$this->files->isDirectory($directory)) {
             $this->files->makeDirectory($directory, 0755, true);
         }
     }
 
-    protected function getComponentClassTemplate()
+    protected function getComponentClassTemplate($className = 'Menus')
     {
         return <<<PHP
         <?php
 
-        namespace App\View\Components\Slimer;
+        namespace App\View\Components\Slimer\Menus;
 
         use Sosupp\SlimDashboard\Html\MenuNav;
 
-        class Menus
+        class {$className}
         {
             public static function items()
             {
@@ -89,6 +85,4 @@ class MakeSlimerMenus extends Command
         }
         PHP;
     }
-
-
 }

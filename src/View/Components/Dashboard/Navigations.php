@@ -2,21 +2,24 @@
 
 namespace Sosupp\SlimDashboard\View\Components\Dashboard;
 
-use App\View\Components\Slimer\Menus;
-use Closure;
+use App\View\Components\Slimer\Menus\Menus;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
+use Closure;
 
 class Navigations extends Component
 {
-    public $navItems = [];
+    public array $navItems;
 
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
-        $this->navItems = $this->decideNavigationChannel();
+    public function __construct(
+        array $data = []
+    ) {
+        $this->navItems = !empty($data)
+            ? $data
+            : $this->decideNavigationChannel();
     }
 
     /**
@@ -24,18 +27,20 @@ class Navigations extends Component
      */
     public function render(): View|Closure|string
     {
-        // dd("ss");
         return view('slim-dashboard::components.dashboard.navigations');
     }
 
-    protected function decideNavigationChannel()
+    /**
+     * Determine where to retrieve the navigation items.
+     */
+    protected function decideNavigationChannel(): array
     {
-        // $providedNavClass = config('slim-dashboard.dashboard_navigation');
-        if(config('slim-dashboard.dashboard_navigation') !== null){
-            return config('slim-dashboard.dashboard_navigation');
+        $configNavigation = config('slim-dashboard.dashboard_navigation');
+
+        if (is_array($configNavigation) && !empty($configNavigation)) {
+            return $configNavigation;
         }
 
-        // dd(Menus::items());
         return Menus::items();
     }
 }

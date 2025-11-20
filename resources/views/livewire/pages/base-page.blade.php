@@ -1,4 +1,12 @@
 <div x-data="{...sidepanel($wire), ...image()}" x-on:opensidepanel.window="toggleSidePanel($event.detail.component, $event.detail.title)">
+    <div class="dashboard-errors-wrapper">
+        @forelse ($errors->all() as $message)
+            <p class="error">{{$message}}</p>
+        @empty
+
+        @endforelse
+    </div>
+
     <div class="justify-inline-wrapper" style="margin-top: 10px">
         @if ($this->showStandardPageFilters())
             @includeIf($this->includePageFilters())
