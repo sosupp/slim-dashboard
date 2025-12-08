@@ -346,3 +346,24 @@
 	padding: 15px 0 0;
 	flex-wrap: wrap;
 }
+
+select {
+    -webkit-appearance: none; /* Removes default dropdown arrow and styling */
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0; /* Remove iOS rounded corners */
+    background-size: 12px;
+    padding-right: 24px; /* Make space for arrow */
+    font-size: 16px; /* Prevents zooming on iOS */
+    width: 100%;
+    box-sizing: border-box;
+}
+input[type="date"] {
+    -webkit-appearance: none;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+}

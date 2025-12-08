@@ -1,7 +1,9 @@
-<div x-cloak x-show="sidePanel">
+<div x-cloak x-show="sidePanel"
+    :class="panelAsModal ? 'global-modal-parent' : ''">
     <div class="{{$this->useSideModal() ? 'side-modal-overlay' : ''}}" x-on:click="closePanel"></div>
-    <div class="table-form {{$this->useSideModal() ? 'side-modal-panel' : ''}}"
-        :style="{width: '{{$this->panelWidth()}}'}">
+    <div class=""
+        :style="{width: '{{$this->panelWidth()}}'}"
+        :class="panelAsModal ? 'global-modal-panel' : 'side-modal-panel'">
         {{-- @includeIf($this->tableForm()) --}}
         <div class="side-modal-heading-wrapper">
             <p class="side-modal-heading" x-html="sidePanelTitle">Side Modal Heading</p>
@@ -9,7 +11,7 @@
                 <x-slim-dashboard::icons.close />
             </span>
         </div>
-        
+
         <div class="dashboard-errors-wrapper">
             @forelse ($errors->all() as $message)
                 <p class="error">{{$message}}</p>
@@ -32,7 +34,7 @@
                 @if($this->hasCustomDatePanel())
                     @include('slim-dashboard::includes.table.custom-date-selector')
                 @endif
-                
+
 
                 {!! $this->tableForm() !!}
             </div>

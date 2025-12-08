@@ -2,6 +2,7 @@
 <div key="{{str()->random(20)}}" x-data="{
         sidePanel: $wire.entangle('hasSidePanel'),
         sidePanelTitle: '',
+        panelAsModal: false,
         subnav: $wire.entangle('subnav').live,
         useComponent: false,
         componentName: $wire.entangle('sidePanelComponent').live,
@@ -15,16 +16,21 @@
         subActive(key){
             this.subnav = key
         },
-        toggleSidePanel(component = '', title = '', record = null){
+        toggleSidePanel(component = '', title = '', record = null, asModal = false){
             console.log(this.componentName)
             this.sidePanelTitle = title
             this.sidePanel = !this.sidePanel
             if(component !== ''){
+                if(asModal){
+                    this.panelAsModal = true;
+                }
+
                 this.useComponent = true
                 this.componentName = component
             }else {
                 this.useComponent = false
             }
+
             if(record !== null){
                 $wire.sidePanelModel(record)
                 $wire.resolvePanelModel(record)

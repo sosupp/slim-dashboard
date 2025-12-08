@@ -125,6 +125,7 @@
         @endif
 
         <main class="dashboard-main-content" style="{{ $isPreview ? 'margin-left: 0;' : '' }}">
+            <x-slim-dashboard::alerts.system />
             <div class="dashboard-head-section page-heading-section" x-cloak x-show="isMobile==false" id="withGlobalCta">
                 <x-slim-dashboard::utils.breadcrumb :data="$breadcrumb ?? []" />
                 <x-slim-dashboard::utils.global-cta />

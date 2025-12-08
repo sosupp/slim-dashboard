@@ -26,7 +26,12 @@
                 :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">{{ $action['label'] }}</a>
             @elseif ($action['sidePanel'])
                 <button type="button" class="cta-btn as-pointer modal-cta-item"
-                    x-on:click="toggleSidePanel('{{$action['component']}}','{{$action['panelHeading']}}', '{{$record->id}}')"
+                    x-on:click="toggleSidePanel(
+                        '{{$action['component']}}',
+                        '{{$action['panelHeading']}}', 
+                        '{{$record->id}}',
+                        '{{$action['asModal']}}'
+                    )"
                     :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">
                     {{ $action['label'] }}
                 </button>

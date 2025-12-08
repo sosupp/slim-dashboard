@@ -1632,6 +1632,16 @@
 	align-items: baseline;
 	gap: 10px;
 }
+.system-error-banner{
+    border-radius: 0 !important;
+    padding: 10px;
+    background-color: #ff450026;
+    color: orangered;
+}
+.system-alert-banner{
+    border-radius: 0 !important;
+    padding: 10px !important;
+}
 
 /* MEDIA QUERIES */
 @media(max-width: 300px) {
