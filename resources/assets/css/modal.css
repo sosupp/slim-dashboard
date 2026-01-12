@@ -341,6 +341,9 @@
     .global-modal-parent{
         padding: 10px;
     }
+    .global-modal-panel{
+        max-width: 95%;
+    }
 }
 
 @media(max-width: 768px) {
