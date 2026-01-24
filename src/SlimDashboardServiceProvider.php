@@ -47,7 +47,18 @@ class SlimDashboardServiceProvider extends ServiceProvider
 
         Blade::componentNamespace('SlimDashboard\\Views\\Components', 'slim-dashboard');
         Blade::component('navigations', Navigations::class, 'slimer');
-        Livewire::component('slimer::global-modal', GlobalModal::class);
+        
+        // Livewire::component('slimer::global-modal', GlobalModal::class);
+
+        Livewire::addNamespace(
+            namespace: 'slim-dashboard',
+            classNamespace: 'Sosupp\SlimDashboard\Livewire',
+        );
+
+        Livewire::addComponent(
+            name: 'global-modal',
+            class: GlobalModal::class,
+        );
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

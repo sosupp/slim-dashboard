@@ -143,7 +143,7 @@
                     @includeIf(config('slim-dashboard.inject_view_into_layout.view'))
                 @endif
 
-            @livewire('slimer::global-modal')
+            @livewire('slim-dashboard::global-modal')
             </div>
         </main>
     </div>

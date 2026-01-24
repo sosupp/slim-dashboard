@@ -40,7 +40,7 @@ return [
      * Pass a view or file path into default layout file (app.blade.php)
      */
     'inject_view_into_layout' => [
-        'replace' => true,
+        'replace' => false,
         'view' => 'includes.dashboard.layout'
     ],
     
