@@ -686,7 +686,7 @@ class HtmlForm
                 );
                 return $this;
             }
-    
+
             if($withImageUpload){
                 $this->form .= $this->ckEditor(id: $setId, model: $name, label: $setLabel, state: $state, action: $action);
             }else{
@@ -735,6 +735,7 @@ class HtmlForm
         string $wire = '',
         string $wireTarget = 'save',
         string $class = 'standard-btn',
+        string $wrapper = '',
         string $defaultSave = 'save',
         bool $isUpdate = false,
         bool $canView = true,
@@ -747,7 +748,7 @@ class HtmlForm
             $useIcon = $this->loaderIcon();
 
             $this->form .= <<<BUTTON
-            <div class="">
+            <div class="$wrapper">
                 <button type="$type"
                     id="$id"
                     class="$class button-loader as-pointer"
@@ -853,57 +854,37 @@ class HtmlForm
     protected function asAlpineTab()
     {
         $useContent = static::$tabContent;
-        // dump($useContent, static::$tabHeadings, $this->newTabHeadings);
-        $useWire = '$wire';
-        $this->form .= <<<WRAPPER
-            <div class="tab-content-wrapper"
-                x-data="{
-                    selectedTab: '$this->selectedTab',
-                    wireComponent: '',
-                    isActive: '',
-                    toggleActive(tab, component, view){
-                        this.selectedTab = tab
-                        this.isActive = tab
-                        $useWire.switchWire(component, view)
-                        console.log(tab, component, view)
-                    }
-                }"
-                x-cloak>
-                <div class="tab-item-heading">
-        WRAPPER;
+        $defaultTab = array_key_first($useContent);
 
-        // Tab headings
-        foreach($useContent as $key => $heading){
+        // dump($useContent, $defaultTab);
+
+        $this->form .= <<<HTML
+        <div class="tab-content-wrapper"
+            x-data="{ selectedTab: '{$this->selectedTab}' }"
+            x-cloak>
+
+            <div class="tab-item-heading">
+        HTML;
+
+        foreach ($useContent as $key => $heading) {
             $title = $heading['heading'];
-            $component = $heading['wire'];
-            $view = $heading['externalView'];
 
             $this->form .= <<<HTML
                 <span class="tab-heading as-pointer"
-                    :class="'$key'==selectedTab ? 'active-tab' : ''"
-                    wire:key="$key"
-                    x-on:click="toggleActive('$key', '$component', '$view')">
-                $title
+                    :class="selectedTab === '$key' ? 'active-tab' : ''"
+                    x-on:click="selectedTab = '$key'">
+                    $title
                 </span>
             HTML;
         }
 
-        $this->form .= '</div>';
+        $this->form .= '</div>'; // close headings
 
-        // Tab contents
         $this->withNormalContent($useContent);
-        // if($this->asWireTab === false){
 
-        //     Log::info('by passing 1');
-        //     $this->withNormalContent($useContent);
-
-        // }else{
-        //     $this->withWireContent();
-        // }
-
-
-
+        $this->form .= '</div>'; // close wrapper
     }
+
 
     protected function livewireTabbing()
     {
@@ -968,32 +949,26 @@ class HtmlForm
 
     protected function withNormalContent($useContent)
     {
+        $this->form .= '<div class="selected-tab-items">';
 
-        $items = '<div class="selected-tab-items">';
-            $content = '';
+        foreach ($useContent as $key => $item) {
 
-            foreach ($useContent as $key => $content) {
-                if(!empty($content['externalView'])){
-                    $content = view($content['externalView']);
-                } else {
-                    $content = $content['content'];
-                }
-
-                $items .= <<<WRAPPER
-                    <div x-show="'$key'==selectedTab">
-
-                    $content
-                    </div>
-
-                WRAPPER;
+            if (!empty($item['externalView'])) {
+                $content = view($item['externalView']);
+            } else {
+                $content = $item['content'];
             }
 
-            $items .= '</div>';
+            $this->form .= <<<HTML
+                <div x-show="selectedTab === '$key'">
+                    $content
+                </div>
+            HTML;
+        }
 
-
-            $this->form .= $items;
-            $this->form .='</div>';
+        $this->form .= '</div>';
     }
+
 
     private function error($name)
     {

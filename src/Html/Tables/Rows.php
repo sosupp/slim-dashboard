@@ -22,6 +22,7 @@ class Rows
         string $screen = 'all',
         string $css = '',
         bool $asModal = false,
+        string|null $icon = null,
     )
     {
 
@@ -43,6 +44,7 @@ class Rows
         static::$columnActions[$name]['screen'] = $screen;
         static::$columnActions[$name]['css'] = $css;
         static::$columnActions[$name]['asModal'] = $asModal;
+        static::$columnActions[$name]['icon'] = $icon;
         return new static;
     }
 

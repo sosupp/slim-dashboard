@@ -38,7 +38,12 @@
         @endif
 
         @if (isset($navItems['action']))
-        <div class="quick-links-wrapper for-mobile for-medium">
+        <div class="quick-links-wrapper for-mobile for-medium" x-data="{
+                globalCta: false,
+                toggleGlobalCta(){
+                    this.globalCta = !this.globalCta
+                }
+            }">
             <x-slim-dashboard::dropdown wrapperCss="" dropdownCss="reset-dropdown">
                 <x-slot:trigger>
                     <x-slim-dashboard::icons.circle-plus w="45" class="as-pointer" />
@@ -61,6 +66,8 @@
 
                 </x-slot:content>
             </x-slim-dashboard::dropdown>
+
+            <div class="global-cta-overlay" x-cloak x-show="globalCta" x-on:click="globalCta=false"></div>
         </div>
         @endif
 

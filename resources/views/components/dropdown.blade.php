@@ -22,7 +22,7 @@ switch ($width) {
 @endphp
 
 <div class="{{$wrapperCss}} relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
-    <div class="custom-dropdown-trigger" @click="open = ! open">
+    <div class="custom-dropdown-trigger" x-on:click="open = ! open;toggleGlobalCta()">
         {{ $trigger }}
     </div>
 
