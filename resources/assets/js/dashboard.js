@@ -25,14 +25,19 @@ document.addEventListener('alpine:init', () => {
         sidePanel: '',
         panelWidth: '',
         sidePanelTitle: '',
+        panelAsModal: false,
         useComponent: false,
         componentName: '',
         dateLabel: '',
-        toggleSidePanel(component = '', title = '', record = null) {
+        toggleSidePanel(component = '', title = '', record = null, asModal = false) {
             console.log('yes panrel')
             this.sidePanelTitle = title
             this.sidePanel = !this.sidePanel
-            if(component !== ''){
+            if (component !== '') {
+                if(asModal){
+                    this.panelAsModal = true;
+                }
+
                 this.useComponent = true;
                 this.componentName = component;
                 this.$wire.$set('sidePanelComponent', component);

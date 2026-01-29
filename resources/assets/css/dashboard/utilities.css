@@ -908,6 +908,15 @@ select{
 	color: green;
 	border: 1px solid;
 }
+.inline-loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	right: 0;
+	left: 0;
+    height: 100px;
+}
 
 /* MEDIA QUERIES */
 @media(max-width: 350px){
