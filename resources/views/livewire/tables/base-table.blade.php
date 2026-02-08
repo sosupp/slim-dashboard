@@ -13,6 +13,10 @@
         imagePreview: null,
         imgsrc: null,
         imagePath: null,
+        tableSidePanel: false,
+        selectedMoreId: null,
+        moreData: {},
+        moreKeys: [],
         subActive(key){
             this.subnav = key
         },
@@ -42,8 +46,54 @@
         },
         withModal(data = {}){
             $dispatch('globalmodal', data)
+        },
+        setMoreCols(){
+            $wire.useMoreCols().then(result => {
+                if(result) {
+                    this.moreKeys = result;
+                }
+            })
+
+        },
+        toggleTableSidePanel(data = null, title = null){
+            console.log('be');
+            this.tableSidePanel = !this.tableSidePanel;
+            this.sidePanelTitle = title;
+            this.moreData = data;
+            this.selectedMoreId = data.id;
+            $wire.resolveMobileRecord(data.id).then(result => {
+                console.log(data.id)
+                if(result) {
+                    console.log('res')
+                }
+            })
+        },
+        getRecords(placeholder = '-'){
+            const data = this.moreData;
+            const cols = this.moreKeys;
+
+            const getValue = (obj, path) => {
+                return path.split('.').reduce((acc, key) => {
+                    return acc && acc[key] !== undefined ? acc[key] : undefined;
+                }, obj);
+            };
+
+            return cols.map(colObj => {
+                const value = getValue(data, colObj.col);
+                return {
+                    label: colObj.label,
+                    value: value !== undefined && value !== null ? value : placeholder
+                };
+            });
+
+            {{-- return cols.map(colObj => ({
+                label: colObj.label,
+                value: data.hasOwnProperty(colObj.col)
+                    ? data[colObj.col]
+                    : placeholder
+            })); --}}
         }
-    }" x-init="imagePreview = '{{asset($previewImagePath)}}'"
+    }" x-init="imagePreview = '{{asset($previewImagePath)}}';setMoreCols()"
         x-on:opensidepanel.window="toggleSidePanel($event.detail.component, $event.detail.title)">
 
     @persist('pagesubnavs')
@@ -161,6 +211,41 @@
         </div>
     </div>
 
+    <div x-cloak x-show="tableSidePanel">
+        <div class="side-modal-overlay" x-on:click="tableSidePanel=false"></div>
+        <div class="table-form side-modal-panel">
+            {{-- @includeIf($this->tableForm()) --}}
+            <div class="side-modal-heading-wrapper">
+                <p class="side-modal-heading" x-text="sidePanelTitle"></p>
+                <span class="close-modal as-pointer" x-on:click="tableSidePanel=false">
+                    <x-slim-dashboard::icons.close />
+                </span>
+            </div>
 
+            <div>
+                <template x-for="item in getRecords()" :key="item.label">
+                    <div class="table-more-item-wrapper">
+                        <div class="more-item-label" x-text="item.label"></div>
+                        <div class="more-item-value" x-text="item.value"></div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="table-more-actions">
+                <p class="panel-content-heading">
+                    <b>More Actions: </b>
+                </p>
+                @if ($this->hasActions)
+                     @forelse ($this->tableActions() as $action)
+                        @include('slim-dashboard::includes.table.table-actions', [
+                            'screen' => 'more',
+                            'record' => $this->mobileMoreRecord
+                        ])
+                    @empty
+                    @endforelse
+                @endif
+            </div>
+        </div>
+    </div>
 
 </div>

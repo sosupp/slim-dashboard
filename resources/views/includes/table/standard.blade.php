@@ -1,54 +1,5 @@
 @if ($this->showStandardTable())
-<div class="table-and-loading" x-data="{
-    tableSidePanel: false,
-    selectedMoreId: null,
-    moreData: {},
-    moreKeys: [],
-    setMoreCols(){
-        $wire.useMoreCols().then(result => {
-            if(result) {
-                this.moreKeys = result;
-            }
-        })
-
-    },
-    toggleTableSidePanel(data = null, title = null){
-        this.tableSidePanel = !this.tableSidePanel;
-        this.sidePanelTitle = title;
-        this.moreData = data;
-        this.selectedMoreId = data.id;
-        $wire.resolveMobileRecord(data.id).then(result => {
-            if(result) {
-
-            }
-        })
-    },
-    getRecords(placeholder = '-'){
-        const data = this.moreData;
-        const cols = this.moreKeys;
-
-        const getValue = (obj, path) => {
-            return path.split('.').reduce((acc, key) => {
-                return acc && acc[key] !== undefined ? acc[key] : undefined;
-            }, obj);
-        };
-
-        return cols.map(colObj => {
-            const value = getValue(data, colObj.col);
-            return {
-                label: colObj.label,
-                value: value !== undefined && value !== null ? value : placeholder
-            };
-        });
-
-        {{-- return cols.map(colObj => ({
-            label: colObj.label,
-            value: data.hasOwnProperty(colObj.col)
-                ? data[colObj.col]
-                : placeholder
-        })); --}}
-    }
-}" x-init="setMoreCols()">
+<div class="table-and-loading">
     <x-slim-dashboard::table :theadings="$this->tableCols()"
         :withCheckbox="$this->withCheckbox"
         :hasActions="$this->hasActions">
@@ -66,6 +17,7 @@
                         <input type="checkbox" value="{{$record['id']}}" wire:model="checkRecords">
                     </td>
                     @endif
+
                     @foreach ($this->tableCols() as $colHeading)
                         @if($colHeading['canView'] && $colHeading['screen'] == 'all')
                             <td class="{{$colHeading['css'] ?? ''}}">
@@ -139,43 +91,6 @@
 
         </x-slot:bodyRow>
     </x-slim-dashboard::table>
-
-    <div x-cloak x-show="tableSidePanel">
-        <div class="side-modal-overlay" x-on:click="tableSidePanel=false"></div>
-        <div class="table-form side-modal-panel">
-            {{-- @includeIf($this->tableForm()) --}}
-            <div class="side-modal-heading-wrapper">
-                <p class="side-modal-heading" x-text="sidePanelTitle"></p>
-                <span class="close-modal as-pointer" x-on:click="tableSidePanel=false">
-                    <x-slim-dashboard::icons.close />
-                </span>
-            </div>
-
-            <div>
-                <template x-for="item in getRecords()" :key="item.label">
-                    <div class="table-more-item-wrapper">
-                        <div class="more-item-label" x-text="item.label"></div>
-                        <div class="more-item-value" x-text="item.value"></div>
-                    </div>
-                </template>
-            </div>
-
-            <div class="table-more-actions">
-                <p class="panel-content-heading">
-                    <b>More Actions: </b>
-                </p>
-                @if ($this->hasActions)
-                     @forelse ($this->tableActions() as $action)
-                        @include('slim-dashboard::includes.table.table-actions', [
-                            'screen' => 'more',
-                            'record' => $this->mobileMoreRecord
-                        ])
-                    @empty
-                    @endforelse
-                @endif
-            </div>
-        </div>
-    </div>
 
     <div wire:loading.delay.longest>
         <div class="full-table-loading">

@@ -337,15 +337,6 @@
 
 
 /* MEDIA QUERIES */
-@media(max-width: 500px) {
-    .global-modal-parent{
-        padding: 10px;
-    }
-    .global-modal-panel{
-        max-width: 95%;
-    }
-}
-
 @media(max-width: 768px) {
     .modal-body {
         margin-bottom: 57px;
@@ -363,7 +354,21 @@
     .login-alert-modal {
         padding: 2rem 0;
     }
+    .global-modal-overlay {
+        left: 0;
+    }
 }
+
+
+@media(max-width: 500px) {
+    .global-modal-parent{
+        padding: 10px;
+    }
+    .global-modal-panel{
+        max-width: 95%;
+    }
+}
+
 
 @media(min-width: 769px) {
     .modal-content {

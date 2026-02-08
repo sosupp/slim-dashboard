@@ -917,6 +917,10 @@ select{
 	left: 0;
     height: 100px;
 }
+.disabled-effect {
+	cursor: not-allowed;
+	background: #dddddda3;
+}
 
 /* MEDIA QUERIES */
 @media(max-width: 350px){

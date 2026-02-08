@@ -807,6 +807,12 @@ td:last-child {
 	text-transform: capitalize;
 	color: #999;
 }
+.inline-action-align {
+	display: inline-flex;
+	gap: 3px;
+	align-items: center;
+}
+
 
 /* MEDIA QUERIES */
 @media(max-width: 520px) {

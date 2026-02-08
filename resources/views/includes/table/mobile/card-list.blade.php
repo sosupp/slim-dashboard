@@ -2,17 +2,22 @@
         cardModal: false,
         selectedCard: null,
         recordDeleted: $wire.entangle('modalRecordDeleted'),
-        modalRecordId: $wire.entangle('modalRecordId').live,
+        modalRecordId: null,
         modalRecord: $wire.entangle('modalRecord').live,
         cardItem: [],
-        openCardModal(key, item, deleted){
+        withMoreData: [],
+        openCardModal(moreData, item, deleted){
+            const key = moreData.id;
             if(key==this.selectedCard){
                 this.cardModal = !this.cardModal;
                 this.cardItem = item;
                 this.modalRecordId = key;
                 this.modalRecord = item
                 this.recordDeleted = deleted;
+                this.withMoreData = moreData;
             }
+
+            console.log('tes')
         },
         ctaRoute(url = 'login', model = null){
             let setUrl = `${url}/${this.selectedCard}`
@@ -36,7 +41,7 @@
                 @endif
 
                 <div class="card-item-info card-item-info-detail" x-on:click="selectedCard='{{$record->id}}',openCardModal(
-                    '{{$record->id}}',
+                    {{$record}},
                     {{$this->withCardModalData($record)}},
                     '{{$record->deleted_at}}'
                 )">
