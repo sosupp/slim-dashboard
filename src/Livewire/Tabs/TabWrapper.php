@@ -6,12 +6,14 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Sosupp\SlimDashboard\Concerns\Html\WithBreadcrumb;
+use Sosupp\SlimDashboard\Livewire\Traits\ForwardTabMethodCall;
 use Sosupp\SlimDashboard\Livewire\Traits\HandleUserAlerts;
 
 abstract class TabWrapper extends Component
 {
     use WithBreadcrumb,
-        HandleUserAlerts;
+        HandleUserAlerts,
+        ForwardTabMethodCall;
 
     public $pageTitle;
     public $componentName = '';
@@ -79,6 +81,14 @@ abstract class TabWrapper extends Component
         $this->selectedUrl = $url;
         $this->useViewFile = $view;
         $this->tab = $tab;
+    }
+
+    public function withExtraData()
+    {
+        return array_merge(
+            $this->passExtraData(),
+            $this->mergeWithPassExtraData(),
+        );
     }
 
     public function passExtraData(): array

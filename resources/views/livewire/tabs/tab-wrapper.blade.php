@@ -109,9 +109,9 @@
         <div class="selected-tab-items">
             <div class="order-items-wrapper">
                 @if (isset($componentName) && !empty($componentName))
-                    @livewire($componentName, $this->passExtraData(), key($componentName))
+                    @livewire($componentName, $this->withExtraData(), key($componentName))
                 @else
-                @includeIf($this->useViewFile, $this->passExtraData())
+                @includeIf($this->useViewFile, $this->withExtraData())
                 @endif
 
             </div>

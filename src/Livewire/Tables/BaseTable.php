@@ -59,6 +59,7 @@ abstract class BaseTable extends Component
     public $previewImagePath;
 
     public $hasSidePanel = false;
+    public $generalPanelTitle = '';
 
     #[Session()]
     public $recordPerPage = 10;

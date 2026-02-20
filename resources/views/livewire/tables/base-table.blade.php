@@ -1,7 +1,7 @@
 
 <div key="{{str()->random(20)}}" x-data="{
         sidePanel: $wire.entangle('hasSidePanel'),
-        sidePanelTitle: '',
+        sidePanelTitle: $wire.entangle('generalPanelTitle'),
         panelAsModal: false,
         subnav: $wire.entangle('subnav').live,
         useComponent: false,
