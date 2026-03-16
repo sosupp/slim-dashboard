@@ -18,9 +18,11 @@
 
     <link rel="stylesheet" href="{{ mix_vendor('css/dashboard/accounts.css', 'slim-dashboard') }}">
     <link rel="stylesheet" href="{{ mix_vendor('css/dashboard/accounting.css', 'slim-dashboard') }}">
+    <link rel="stylesheet" href="{{ mix_vendor('fontawesome-free-6.7.2-web/css/all.css', 'slim-dashboard')}}">
 
     @stack('css')
     @include('slim-dashboard::includes.assets.normalizer')
+    
 
     <script src="{{ mix_vendor('js/dashboard.js', 'slim-dashboard') }}"></script>
 
