@@ -191,7 +191,7 @@
         @endforeach
     </div>
 
-    <div class="mobile-menu-overlay" x-show="mobileCta" x-cloak x-on:click="openMobileCta">
+    <div class="" x-show="mobileCta" x-cloak x-on:click="openMobileCta">
         <span class="as-pointer mobile-close-cta" id="mobileCtaClose" x-show="isMobile()" x-cloak>
             <x-slim-dashboard::icons.close />
         </span>
