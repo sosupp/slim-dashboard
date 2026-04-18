@@ -170,6 +170,12 @@
             <div class="custom-pagination-wrapper">
                 @if ($this->showPagination())
                 <div class="record-count">
+                    @if ($this->withDesktop)
+                    <span class="pull-remote-trigger" style="color: green;cursor: pointer;">
+                        <i class="fa-solid fa-circle-down"></i>
+                    </span>
+                    @endif
+                    
                     <span class="total-record-count">
                         {{ $this->tableRecords ? $this->tableRecords->total() : ''}} records
                     </span>

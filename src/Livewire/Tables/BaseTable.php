@@ -51,6 +51,7 @@ abstract class BaseTable extends Component
     public $currentPage = 'test page';
 
     public $allowSearch = true;
+    public $withDesktop = false;
 
     public $callback;
 

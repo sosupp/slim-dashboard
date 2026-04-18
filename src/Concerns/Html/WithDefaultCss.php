@@ -5,4 +5,5 @@ trait WithDefaultCss
 {
     public $tableWrapperCss = 'table-with-heading-wrapper';
     public $tableHeadingCss = 'table-heading-wrapper';
+    public $tableActionsCss = 'table-actions-wrapper';
 }
