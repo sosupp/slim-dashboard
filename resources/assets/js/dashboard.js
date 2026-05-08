@@ -29,6 +29,7 @@ document.addEventListener('alpine:init', () => {
         useComponent: false,
         componentName: '',
         dateLabel: '',
+        hasCustomDate: false,
         toggleSidePanel(component = '', title = '', record = null, asModal = false) {
             console.log('yes panrel')
             this.sidePanelTitle = title

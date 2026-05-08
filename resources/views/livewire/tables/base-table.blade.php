@@ -17,6 +17,7 @@
         selectedMoreId: null,
         moreData: {},
         moreKeys: [],
+        hasCustomDate: false,
         subActive(key){
             this.subnav = key
         },
@@ -85,13 +86,6 @@
                     value: value !== undefined && value !== null ? value : placeholder
                 };
             });
-
-            {{-- return cols.map(colObj => ({
-                label: colObj.label,
-                value: data.hasOwnProperty(colObj.col)
-                    ? data[colObj.col]
-                    : placeholder
-            })); --}}
         }
     }" x-init="imagePreview = '{{asset($previewImagePath)}}';setMoreCols()"
         x-on:opensidepanel.window="toggleSidePanel($event.detail.component, $event.detail.title)">
@@ -176,6 +170,12 @@
             <div class="custom-pagination-wrapper">
                 @if ($this->showPagination())
                 <div class="record-count">
+                    @if ($this->withDesktop)
+                    <span class="pull-remote-trigger" style="color: green;cursor: pointer;">
+                        <i class="fa-solid fa-circle-down"></i>
+                    </span>
+                    @endif
+                    
                     <span class="total-record-count">
                         {{ $this->tableRecords ? $this->tableRecords->total() : ''}} records
                     </span>

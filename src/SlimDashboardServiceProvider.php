@@ -63,17 +63,17 @@ class SlimDashboardServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('slim-dashboard.php'),
-            ], 'slimer-config');
+            ], 'slimer-dashboard-config');
 
             // Publishing the views.
             $this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/slim-dashboard'),
-            ], 'slimer-views');
+            ], 'slimer-dashboard-views');
 
             // Publishing assets.
             $this->publishes([
                 __DIR__.'/../public' => public_path('vendor/slim-dashboard'),
-            ], 'slimer-assets');
+            ], 'slimer-dashboard-assets');
 
             $this->customCommands();
         }

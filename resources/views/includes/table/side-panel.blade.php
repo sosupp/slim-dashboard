@@ -31,14 +31,17 @@
             <div>
                 {!! $this->panelExtraView() !!}
 
-                @if($this->hasCustomDatePanel())
-                    @include('slim-dashboard::includes.table.custom-date-selector')
-                @endif
-
-
                 {!! $this->tableForm() !!}
             </div>
 
+        </template>
+
+        <template x-if="hasCustomDate">
+            <div>
+                @if($this->hasCustomDatePanel())
+                    @include('slim-dashboard::includes.table.custom-date-selector')
+                @endif
+            </div>
         </template>
 
         <div wire:loading.delay.longest>

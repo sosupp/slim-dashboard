@@ -1,7 +1,5 @@
 @props(['tbodyCss', 'theadCss', 'tbodyCss'])
 <div>
-
-
     <div class="custom-table-responsive {{ $tableWrapperCss ?? '' }}">
         <table class="{{ $tableCss ?? 'custom-table' }}">
             <thead class="{{ $theadCss ?? 'table-head' }}">
@@ -68,6 +66,5 @@
             </tbody>
         </table>
     </div>
-
 </div>
 

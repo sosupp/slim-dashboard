@@ -90,4 +90,8 @@ trait WithDateFilters
             euroDate($this->selectedEndDate, false) .'<br />';
     }
 
+    public function customDateForm()
+    {
+        return view('slim-dashboard::includes.table.custom-date-selector');
+    }
 }

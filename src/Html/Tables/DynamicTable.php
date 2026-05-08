@@ -54,8 +54,6 @@ class DynamicTable extends Component
 
     public function render()
     {
-        // dd($this->attributes);
-        // dd($this->columns);
         return view('slim-dashboard::html.dynamic-table', [
             'columns' => $this->columns,
             'rows' => $this->rows,

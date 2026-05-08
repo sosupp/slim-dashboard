@@ -49,7 +49,7 @@
                                         @if (isset($option['type']) && $option['type'] == 'toggler')
                                         <div class="modal-filter-item-wrapper">
                                             <button class="modal-filter-item as-pointer" type="button"
-                                                x-on:click="toggleSidePanel('', 'Custom date range');triggerLabel= '{{$option[$filter['optionKey']]}}';toggleFilter()"
+                                                x-on:click="toggleSidePanel('customDateForm', 'Custom date range', null, true);triggerLabel= '{{$option[$filter['optionKey']]}}';toggleFilter()"
                                                 id="customToggler">{{$option[$filter['optionKey']]}}</button>
                                         </div>
                                         @else
