@@ -812,6 +812,14 @@ td:last-child {
 	gap: 3px;
 	align-items: center;
 }
+.deleted-record {
+    color: #ff450082;
+}
+.deleted-record:hover {
+    background: #ff450047;
+    cursor: not-allowed;
+}
+
 
 
 /* MEDIA QUERIES */

@@ -11,7 +11,7 @@
             @includeIf($this->useCustomTable())
         @else
             @forelse ($this->tableRecords as $index => $record)
-                <tr wire:key="table_{{$index}}_{{$record['id']}}">
+                <tr wire:key="table_{{$index}}_{{$record['id']}}" class="{{$record->deleted_at ? 'deleted-record' : ''}}">
                     @if ($this->withCheckbox)
                     <td scope="row">
                         <input type="checkbox" value="{{$record['id']}}" wire:model="checkRecords">
