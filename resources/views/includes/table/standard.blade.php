@@ -76,7 +76,7 @@
                     @endforeach
 
                     @if ($this->hasActions)
-                    <td wire:ignore>
+                    <td wire:ignore class="table-actions-row">
                         @forelse ($this->tableActions() as $action)
                             @include('slim-dashboard::includes.table.table-actions')
                         @empty

@@ -1,9 +1,9 @@
 <?php
 namespace Sosupp\SlimDashboard\Livewire\Traits;
 
-use Livewire\WithFileUploads;
 use Illuminate\Validation\Rules\File;
 use Livewire\Attributes\Session;
+use Livewire\WithFileUploads;
 use Sosupp\SlimDashboard\Concerns\UploadImages;
 
 trait HandlesImageUploads
@@ -34,12 +34,14 @@ trait HandlesImageUploads
 
     public function fileAsPrivate(): bool
     {
-        return false;
+        return true;
     }
 
     public function storageDirectory()
     {
-        return null;
+        return config('slimertenancy.enabled')
+        ? tenantImagePath(app('tenant')['subdomain'])
+        : ($this->fileAsPrivate() ? 'images' : null);
     }
 
     public function uploadImageNow()
