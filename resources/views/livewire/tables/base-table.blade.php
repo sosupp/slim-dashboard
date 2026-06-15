@@ -88,7 +88,10 @@
             });
         }
     }" x-init="imagePreview = '{{asset($previewImagePath)}}';setMoreCols()"
-        x-on:opensidepanel.window="toggleSidePanel($event.detail.component, $event.detail.title)">
+        x-on:opensidepanel.window="toggleSidePanel(
+            $event.detail.componentName, $event.detail.title, $event.detail.record,
+            $event.detail.asModal
+        )">
 
     @persist('pagesubnavs')
         @if (!empty($this->pageSubNavs))
@@ -177,7 +180,7 @@
                     @endif
                     
                     <span class="total-record-count">
-                        {{ $this->tableRecords ? $this->tableRecords->total() : ''}} records
+                        ({{$this->paginated ? $this->tableRecords->total() : count($this->tableRecords)}}) records
                     </span>
                 </div>
                 @endif

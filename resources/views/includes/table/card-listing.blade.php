@@ -37,7 +37,9 @@
         @if ($this->showPagination())
         <div class="record-count">
             <span x-cloak x-html="mobileDateLabel"></span>
-            <span class="total-record-count">({{$this->tableRecords->total()}})</span>
+            <span class="total-record-count">
+                ({{$this->paginated ? $this->tableRecords->total() : count($this->tableRecords)}})
+            </span>
         </div>
         @endif
 

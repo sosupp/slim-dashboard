@@ -79,6 +79,8 @@ abstract class BaseTable extends Component
     public $modalRecordDeleted = null;
     public $mobileMoreRecord;
 
+    public $paginated = true;
+
 
 
     public abstract function mount();

@@ -7,9 +7,7 @@
         <option value="100">Show: 100</option>
     </select>
 
-    @if (count($this->tableRecords) > 0)
-    {{-- <div class="custom-pagination">
-    </div> --}}
-    {{$this->tableRecords->links()}}
+    @if ($this->paginated && count($this->tableRecords) > 0)
+        {{$this->tableRecords->links()}}
     @endif
 </div>
