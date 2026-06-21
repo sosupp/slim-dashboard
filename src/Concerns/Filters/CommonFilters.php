@@ -16,7 +16,7 @@ trait CommonFilters
     protected $withoutRelationCol = null;
     protected $withoutRelationColValue = null;
 
-    protected $searchType = 'contain';
+    protected $searchType = 'containSearch';
     protected $searchTerm = '';
     protected $searchCol = '';
 

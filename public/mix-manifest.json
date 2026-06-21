@@ -1,9 +1,9 @@
 {
-    "/js/app.js": "/js/app.js?id=3cb74ccd6f4e931be2b39fb43a5e9855",
+    "/js/app.js": "/js/app.js?id=785c9f134d7ec71165a46834570604d5",
     "/js/dashboard.js": "/js/dashboard.js?id=68daa4b3d9c4c606a4dcd5e7bafd70dd",
     "/css/dashboard/inputs.css": "/css/dashboard/inputs.css?id=61b8a69b93c89538f74b8cadf8a938b8",
     "/css/dashboard/form.css": "/css/dashboard/form.css?id=887d274f1502f6742da9f2d0a2c6a41e",
-    "/css/dashboard/dashboard.css": "/css/dashboard/dashboard.css?id=8f5870c74f63bcfdf70f7dd13c198386",
+    "/css/dashboard/dashboard.css": "/css/dashboard/dashboard.css?id=941c604e49b38274b1f96d9bd8e99e44",
     "/css/register.css": "/css/register.css?id=12a854085f272c8380df291e5f037f60",
     "/css/modal.css": "/css/modal.css?id=12fa00d31793aa6477730b3e548d0d91",
     "/css/dashboard/reports.css": "/css/dashboard/reports.css?id=b10f58e8fc1b92c0c8c17625bd5b366e",
@@ -11,6 +11,6 @@
     "/css/dashboard/accounts.css": "/css/dashboard/accounts.css?id=4304334dab405a0e178b2abc5af7129e",
     "/css/dashboard/wrappers.css": "/css/dashboard/wrappers.css?id=98e6b65ac0ba2709844096e107c4c4c3",
     "/css/dashboard/utilities.css": "/css/dashboard/utilities.css?id=ef0bc59a3c3a6428de2ab9b9d23b6437",
-    "/css/dashboard/table.css": "/css/dashboard/table.css?id=17ee0696543db8e242e6aaa16a8dada0",
+    "/css/dashboard/table.css": "/css/dashboard/table.css?id=3a986e51aaeb8df4b862b6b6c5340727",
     "/css/dashboard/modal.css": "/css/dashboard/modal.css?id=f2005d6c6a0238234325d0aa698f4daa"
 }
