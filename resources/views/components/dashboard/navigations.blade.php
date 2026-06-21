@@ -74,7 +74,7 @@
     </div>
 
     <div class="mobile-menu-overlay" x-show="isMobile ? open : open = true"
-        x-on:click="toggleMenu">
+        x-on:click="toggleMenu" x-cloak>
         @persist('admin-side-nav')
         <div class="nav-items-wrapper">
             <div class="{{$navItems['logo']['wrapper']}}">
