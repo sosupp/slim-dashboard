@@ -6,12 +6,14 @@
             @if ($modalRecordDeleted)
             <button class="cta-btn restore-btn as-pointer card-item-modal-cta"
                 :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
-                x-on:click="$wire.restorable(modalRecordId, {{$action['isAuthorize']}});cardModal=false"
+                x-on:click="cardModal=false"
+                wire:click="restorable(modalRecordId, {{$action['isAuthorize']}})"
                 wire:confirm="Are you sure you want to restore?">Restore</button>
             @else
             <button class="cta-btn delete as-pointer card-item-modal-cta"
                 :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
-                x-on:click="$wire.delete(modalRecordId, {{$action['isAuthorize']}});cardModal=false"
+                x-on:click="cardModal=false"
+                wire:click="delete(modalRecordId, {{$action['isAuthorize']}})"
                 wire:confirm="Are you sure you want to delete?">Delete</button>
             @endif
         @else
@@ -38,13 +40,21 @@
                     >{{ $action['label'] }}
                 </button>
             @elseif ($action['link'] === 'button')
-                <button type="button" class="cta-btn as-pointer card-item-modal-cta"
-                    x-on:click="$wire.{{ $action['wireAction'] }}(modalRecordId)"
-                    :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
-                    {{$action['confirm'] ? 'wire:confirm' : ''}}>
-                    {{ $action['label'] }}
-
-                </button>
+                @if ($action['confirm'])
+                    <button type="button"
+                            class="cta-btn as-pointer card-item-modal-cta"
+                            wire:click="{{ $action['wireAction'] }}(modalRecordId)"
+                            wire:confirm="Do you wish to continue?"
+                            :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">
+                        {{ $action['label'] }}
+                    </button>
+                @else
+                    <button type="button" class="cta-btn as-pointer card-item-modal-cta"
+                        x-on:click="$wire.{{ $action['wireAction'] }}(modalRecordId)"
+                        :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">
+                        {{ $action['label'] }}
+                    </button>
+                @endif
             @elseif ($action['link'] === 'more')
             <button type="button" class="cta-btn as-pointer card-item-modal-cta"
                 x-on:click="toggleTableSidePanel(withMoreData, '{{$action['panelHeading']}}')"

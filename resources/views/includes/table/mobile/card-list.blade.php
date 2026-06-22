@@ -26,7 +26,7 @@
     }">
 
     @forelse ($this->tableRecords as $record)
-        <div class="as-card-item-plain as-pointer">
+        <div class="as-card-item-plain as-pointer" {{$record->deleted_at ? 'deleted-record' : ''}}>
             <div class="card-item-details">
                 @if ($this->withListCardImage() === 'editable')
                     <div class="card-item-image">
@@ -193,7 +193,9 @@
 
                     @if ($this->mobileModalCta())
                         @forelse ($this->tableActions() as $action)
-                            @include('slim-dashboard::includes.table.mobile.modal-ctas')
+                            @if ($action['screen'] !== 'more')
+                                @include('slim-dashboard::includes.table.mobile.modal-ctas')
+                            @endif
                         @empty
                         @endforelse
                     @endif
