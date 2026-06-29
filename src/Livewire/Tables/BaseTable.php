@@ -235,7 +235,7 @@ abstract class BaseTable extends Component
     public function useSideModal(){}
     public function panelWidth()
     {
-        return 'inherit';
+        return '500px';
     }
 
     public function panelCustomView(){}
