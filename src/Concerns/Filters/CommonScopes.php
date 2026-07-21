@@ -23,7 +23,7 @@ trait CommonScopes
         $query->orWhere('status', 'inactive');
     }
 
-    public function scopeDated(Builder $query, string|array|null $date = null, string $col = 'created_at'): void
+    public function scopeDatedOld(Builder $query, string|array|null $date = null, string $col = 'created_at'): void
     {
         // dd($date);
         if(!is_null($date)){
@@ -51,6 +51,36 @@ trait CommonScopes
 
                 $query->whereBetween($col, $useDate);
             });
+        }
+    }
+
+    public function scopeDated(
+        Builder $query,
+        string|array|null $date = null,
+        string $col = 'created_at'
+    ): void {
+        if (blank($date)) {
+            return;
+        }
+
+        if (is_string($date)) {
+            $query->whereDate($col, $date);
+            return;
+        }
+
+        $start = $date['start'] ?? null;
+        $end   = $date['end'] ?? null;
+
+        if ($start && !$end) {
+            $query->whereDate($col, $start);
+            return;
+        }
+
+        if ($start && $end) {
+            $query->whereBetween($col, [
+                "{$start} 00:00:00",
+                "{$end} 23:59:59",
+            ]);
         }
     }
 
