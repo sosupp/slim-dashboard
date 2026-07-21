@@ -57,8 +57,7 @@ trait UploadImages
             }
 
             // dd($image);
-            Image::read($data['image'])
-            // ->resize()
+            Image::decode($data['image'])
             ->save(
                 path: $image,
                 quality: 50,
@@ -88,7 +87,7 @@ trait UploadImages
 
                 $image = 'images/'.$filename.$fileType;
 
-                Image::read($file['image'])
+                Image::decode($file['image'])
                 // ->resize($width, $height)
                 ->save(
                     path: $image,
@@ -124,7 +123,7 @@ trait UploadImages
                 $image = 'images/'.$filename.'.webp';
             }
 
-            Image::read($data['image'])
+            Image::decode($data['image'])
             // ->resize()
             ->save(
                 path: $image,
