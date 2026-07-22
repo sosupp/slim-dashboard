@@ -5,29 +5,57 @@ trait ModelDeleteable
 {
     abstract function useModel();
 
+    public function customDeletetionFlow($modelId = null): mixed
+    {
+        return null;
+    }
+
     public function deleteConditions($modelId)
     {
         return true;
     }
 
-    public function delete($modelId, $authorize = null)
+    public function delete($modelId, $authorize = false)
     {
-        $model = $this->useModel()::where('id', $modelId)
-        ->first();
+        $model = $this->useModel()::where('id', $modelId)->first();
 
-        // dd($model, (bool)$authorize);
-        if(!$this->deleteConditions($modelId)){
+        if (!$model) {
+            $this->failAlert('Record not found');
             return;
         }
 
-        if(!(bool)$authorize){
-            $this->authorize('delete', $model);
+        // Check authorization FIRST
+        if (!$authorize) {
+            try {
+                $this->authorize('delete', $model);
+            } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+                $this->failAlert('You are not authorized to delete this record');
+                return;
+            }
         }
 
-        $this->failAlert('Record deleted...You can refresh page for changes');
+        // Then check conditions
+        if (!$this->deleteConditions($modelId)) {
+            $this->failAlert('Cannot delete this record');
+            return;
+        }
 
-        return $model->delete();
+        // Check custom flow before attempting deletion
+        $customResult = $this->customDeletetionFlow($modelId);
+        if (!is_null($customResult)) {
+            return $customResult;
+        }
 
+        // Perform deletion
+        $result = $model->delete();
+
+        if(!$result){
+            $this->failAlert('Record not deleted. Something went wrong.');
+            return;
+        }
+
+        $this->successAlert('Record deleted successfully');
+        return $result;
     }
 
     public function restorable($modelId, $authorize = null)
