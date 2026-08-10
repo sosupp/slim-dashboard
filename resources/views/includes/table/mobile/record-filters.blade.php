@@ -8,6 +8,11 @@
         filterResult(label, call = null){
             this.mobileFilterLabel = label
             this.toggleFilter()
+        },
+        asHeading(data){
+            if(data.heading){
+                this.filterLabelHeading = data?.label;
+            }
         }
     }" x-on:filtermodal.window="filterModal=!filterModal">
 
@@ -57,7 +62,17 @@
 
                                             <button class="modal-filter-item as-pointer" type="button"
                                                 wire:click="{{$filter['wireAction'] . "('".  $option[$filter['optionId']] ."')" }}"
-                                                x-on:click="filterResult('{{$option[$filter['optionKey']]}}')">{{$option[$filter['optionKey']]}}</button>
+                                                x-on:click="
+                                                    filterResult(
+                                                        '{{$option[$filter['optionKey']]}}'
+                                                    ),
+                                                    asHeading({
+                                                        heading: '{{$filter['filterAsHeading'] ?? false}}',
+                                                        label: '{{$option[$filter['optionKey']]}}'
+                                                    })
+                                                ">
+                                                    {{$option[$filter['optionKey']]}}
+                                            </button>
                                         </div>
                                         @endif
                                     @endforeach

@@ -26,6 +26,8 @@ class {{ class }} extends BaseTable
     // {{if:inlineForm}}
     public $selectedModelId;
 
+    public $isUpdate = false;
+
     public function uploadImageOnSave(): bool
     {
         return true;
@@ -159,17 +161,11 @@ class {{ class }} extends BaseTable
         $model = $this->tableRecords->where('id', $id)->first();
 
         // More code here
+        if($model){
+            $this->isUpdate = true;
+           
+        }
 
-    }
-
-    public function panelExtraView(): string|View
-    {
-        return HtmlForm::make()
-        ->specialInput()
-        ->input(name: 'name', label: 'Name')
-        ->inlineImageInput(name: 'image', label: 'Image')
-        ->button(label: 'save')
-        ->build();
     }
 
     public function save()
@@ -194,14 +190,30 @@ class {{ class }} extends BaseTable
 
     public function makeForm()
     {
-        // Reset properties that are needed 
-        $this->reset('selectedModelId');
-        return $this->panelExtraView();
+        $this->resetProps();
+        return $this->updateForm();
     }
 
     public function updateForm()
     {
-        return $this->panelExtraView();
+        return HtmlForm::make()
+        ->specialInput()
+        ->input(name: 'name', label: 'Name')
+        ->inlineImageInput(name: 'image', label: 'Image')
+        ->button(label: 'save')
+        ->build();
+    }
+
+    public function resetProps()
+    {
+        if($this->isUpdate){
+            $this->isUpdate = false;
+
+            // Reset properties that are needed 
+            $this->reset(
+                'selectedModelId'
+            );
+        }
     }
     // {{if:inlineForm}}
 

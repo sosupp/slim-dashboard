@@ -16,6 +16,7 @@ class PageFilter
         ?string $wireProperty = '',
         ?string $wireAction = '',
         bool $showFilter = true,
+        bool $filterAsHeading = false,
         string $wrapperCss = 'filter-wrapper',
     ){
         static::$filters[$label]['type'] = $type;
@@ -28,6 +29,7 @@ class PageFilter
         static::$filters[$label]['wireProperty'] = $wireProperty;
         static::$filters[$label]['wireAction'] = $wireAction;
         static::$filters[$label]['showFilter'] = $showFilter;
+        static::$filters[$label]['filterAsHeading'] = $filterAsHeading;
         static::$filters[$label]['wrapperCss'] = $wrapperCss;
 
         return new static;

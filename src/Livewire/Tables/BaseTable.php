@@ -80,6 +80,7 @@ abstract class BaseTable extends Component
     public $mobileMoreRecord;
 
     public $paginated = true;
+    public $filterAsHeading = '';
 
 
 

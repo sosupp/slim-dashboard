@@ -104,8 +104,14 @@
         cardModal: false,
         bottomNav: true,
         mobileFilterLabel: $persist(''),
+        filterLabelHeading: null,
         appname: null,
         withTheme: 'light-purple-nav',
+        dismissOnboard: false,
+        globalCta: false,
+        toggleGlobalCta(){
+            this.globalCta = !this.globalCta
+        },
         toggleTheme(mode) {
             this.darkmode = !this.darkmode
         },

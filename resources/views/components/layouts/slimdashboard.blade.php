@@ -65,6 +65,7 @@
             darkmode: $persist(false),
             mobilePage: null,
             mobileFilterLabel: null,
+            filterLabelHeading: null,
             isMobile: false,
             toggleTheme(mode){
                 this.darkmode = !this.darkmode

@@ -10,6 +10,10 @@
     </div>
 
 </div>
+
+<div class="show-filter-label" style="text-transform: capitalize;margin-bottom: 10px;font-size: 18px;font-weight: bold;">
+    <span x-text="filterLabelHeading"></span>
+</div>
 @endif
 
 
