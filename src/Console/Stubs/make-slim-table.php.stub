@@ -99,6 +99,21 @@ class {{ class }} extends BaseTable
         return true;
     }
 
+    public function tableColsForMobile(): bool
+    {
+        return true;
+    }
+
+    public function mobileModalCta(): bool
+    {
+        return true;
+    }
+
+    public function mobileTableCta(): bool
+    {
+        return true;
+    }
+
     public function cardContents()
     {
         return ListCard::content()
@@ -133,10 +148,7 @@ class {{ class }} extends BaseTable
     {
         return <<<HTML
             <div class="card-item-modal-details">
-                <p><b>Item Count: </b><span x-text="cardItem[1]"></span></p>
-                <p><b>Order Date: </b><span x-text="cardItem[2]"></span></p>
-                <p><b>Delivery Method: </b><span x-text="cardItem[3]"></span></p>
-                <p><b>Current Status: </b><span x-text="cardItem[4]"></span></p>
+                <p><b>Item Count: </b><span x-text="cardItem.title"></span></p>
             </div>
 
             <div class="card-item-modal-ctas">

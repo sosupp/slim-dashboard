@@ -20,12 +20,11 @@
             @endforelse
         </div>
 
-        <template x-if="useComponent">
-            <div>
-                @includeIf('$sidePanelComponent')
+        @if($useComponent && $sidePanelComponent)
+            <div wire:key="side-panel-{{ $sidePanelComponent }}">
                 {!! $this->panelCustomView() !!}
             </div>
-        </template>
+        @endif
 
         <template x-if="!useComponent">
             <div>

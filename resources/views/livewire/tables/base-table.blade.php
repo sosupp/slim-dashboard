@@ -5,7 +5,7 @@
         panelAsModal: false,
         subnav: $wire.entangle('subnav').live,
         useComponent: false,
-        componentName: $wire.entangle('sidePanelComponent').live,
+        componentName: '',
         selectFilterLabel: $wire.entangle('selectFilterLabel'),
         dateLabel: $wire.entangle('dateLabel'),
         mobileDateLabel: $wire.entangle('mobileDateLabel'),
@@ -22,9 +22,10 @@
             this.subnav = key
         },
         toggleSidePanel(component = '', title = '', record = null, asModal = false){
-            console.log(this.componentName)
+            console.log(component)
             this.sidePanelTitle = title
             this.sidePanel = !this.sidePanel
+
             if(component !== ''){
                 if(asModal){
                     this.panelAsModal = true;
@@ -32,8 +33,11 @@
 
                 this.useComponent = true
                 this.componentName = component
+                this.$wire.setSidePanelComponent(component)
+
             }else {
                 this.useComponent = false
+                $wire.clearSidePanelComponent()
             }
 
             if(record !== null){
@@ -120,6 +124,7 @@
     @if ($this->hasCardListing())
         <div class="for-mobile">
             @include('slim-dashboard::includes.table.card-listing')
+
             @if ($this->useSideModal())
                 @include('slim-dashboard::includes.table.side-panel')
             @endif
@@ -178,7 +183,7 @@
                         <i class="fa-solid fa-circle-down"></i>
                     </span>
                     @endif
-                    
+
                     <span class="total-record-count">
                         ({{$this->paginated ? $this->tableRecords->total() : count($this->tableRecords)}}) records
                     </span>
