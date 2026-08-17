@@ -195,7 +195,7 @@
                     @include('slim-dashboard::includes.table.table-filters')
                     @endif
 
-                    @if ($this->showPagination())
+                    @if ($this->showPaginationNavs())
                     @include('slim-dashboard::includes.table.table-navs')
                     @endif
                 </div>

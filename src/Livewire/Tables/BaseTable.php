@@ -82,6 +82,11 @@ abstract class BaseTable extends Component
     public $paginated = true;
     public $filterAsHeading = '';
 
+    public $withExpandableRows = false;
+
+    public array $columns = [];
+    public array $rows = [];
+
 
 
     public abstract function mount();
@@ -343,6 +348,11 @@ abstract class BaseTable extends Component
     {
         return false;
     }
+    
+    public function showPaginationNavs()
+    {
+        return true;
+    }
 
     public function showRecordCount()
     {
@@ -413,6 +423,11 @@ abstract class BaseTable extends Component
     }
 
     public function withCardModalView(): string|View
+    {
+        return '';
+    }
+
+    public function expandableRowView(): string|View
     {
         return '';
     }

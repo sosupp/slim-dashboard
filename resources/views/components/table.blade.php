@@ -1,4 +1,11 @@
-<div class="custom-table-responsive" :class="darkmode ? 'dmode-input-bg' : ''">
+<div class="custom-table-responsive" :class="darkmode ? 'dmode-input-bg' : ''"
+    x-data="{
+        entries: [],
+        selected: null,
+        toggle(index) {
+            this.entries[index].open = !this.entries[index].open;
+        }
+    }">
     <table class="custom-table">
         <thead class="table-head">
             <tr>
@@ -53,7 +60,7 @@
                             @endif
                         </div>
                         <div class="heading-sub-label">
-                            <small>{{$heading['subLabel'] ?? ''}}</small>
+                            <small>{!! $heading['subLabel'] ?? '' !!}</small>
                         </div>
                     </th>
                     @endif

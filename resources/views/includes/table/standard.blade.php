@@ -11,7 +11,12 @@
             @includeIf($this->useCustomTable())
         @else
             @forelse ($this->tableRecords as $index => $record)
-                <tr wire:key="table_{{$index}}_{{$record['id']}}" class="{{$record->deleted_at ? 'deleted-record' : ''}}">
+                <tr wire:key="table_{{$index}}_{{$record['id']}}" 
+                    class="{{$record->deleted_at ? 'deleted-record' : ''}}"
+                    x-init="entries.push({open: false, id: {{$index}}})"
+                    x-on:click="toggle({{$index}})"
+                    :class="{ 'is-open': entries[{{$index}}]?.open }">
+
                     @if ($this->withCheckbox)
                     <td scope="row">
                         <input type="checkbox" value="{{$record['id']}}" wire:model="checkRecords">
@@ -84,8 +89,30 @@
                     </td>
                     @endif
                 </tr>
-            @empty
 
+                @if ($this->withExpandableRows)
+                    <tr wire:key="expandable_{{$index}}_{{$record['id']}}"
+                        x-show="entries[{{$index}}]?.open" x-cloak
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0"
+                        class="lines-row"
+                        x-init="console.log(selected == entries[selected]?.id, selected)"
+                        >
+                            <td colspan="6">
+                                {{ $this->expandableRowView() }}
+                            </td>
+                    </tr>
+                @endif
+            @empty
+                <tr>
+                    <td colspan="{{count($this->tableCols())}}">
+                        <p style="color: #94a3b8;">No records for the selected filters</p>
+                    </td>
+                </tr>
             @endforelse
         @endif
 
