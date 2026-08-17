@@ -14,6 +14,7 @@
             @includeIf(config('slim-dashboard.global_cta_view'))
         </x-slot:content>
     </x-slim-dashboard::dropdown>
-    <div class="{{$overlay ?? 'global-cta-overlay'}}" x-cloak x-show="globalCta" x-on:click="globalCta=false"></div>
+    
+    <div class="{{config('slim-dashboard.global_cta_overlay_css') ?? 'global-cta-overlay'}}" x-cloak x-show="globalCta" x-on:click="globalCta=false"></div>
 </div>
 
