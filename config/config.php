@@ -47,7 +47,8 @@ return [
     /**
      * Pass a view or file path into default layout file (app.blade.php)
      */
-    'global_cta_view' => null
+    'global_cta_view' => 'includes.dashboard.global-cta', // Default location you can use or change it
+    'global_cta_overlay_css' => null,
 
 
 ];

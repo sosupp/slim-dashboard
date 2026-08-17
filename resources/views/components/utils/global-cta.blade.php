@@ -1,4 +1,4 @@
-@props(['screen' => 'for-desktop'])
+@props(['screen' => 'for-desktop', 'overlay' => 'global-cta-overlay'])
 <div class="quick-links-wrapper {{$screen}}" x-data="{
     globalCta: false,
     toggleGlobalCta(){
@@ -14,6 +14,6 @@
             @includeIf(config('slim-dashboard.global_cta_view'))
         </x-slot:content>
     </x-slim-dashboard::dropdown>
-    <div class="global-cta-overlay" x-cloak x-show="globalCta" x-on:click="globalCta=false"></div>
+    <div class="{{$overlay ?? 'global-cta-overlay'}}" x-cloak x-show="globalCta" x-on:click="globalCta=false"></div>
 </div>
 
