@@ -40,7 +40,11 @@
                                 @foreach ($filter['options'] as $key => $option)
                                     @if (isset($option['type']) && $option['type'] == 'toggler')
                                     <button class="custom-dropdown-btn as-pointer" type="button"
-                                        x-on:click="toggleSidePanel('customDateForm', 'Custom date range', null, false);triggerLabel= '{{$option[$filter['optionKey']]}}'"
+                                        x-on:click="
+                                            toggleSidePanel('customDateForm', 'Custom date range', null, false);
+                                            triggerLabel= '{{$option[$filter['optionKey']]}}';
+                                            hasCustomDate = true;
+                                        "
                                         id="customToggler">{{$option[$filter['optionKey']]}}</button>
                                     @else
                                     <button class="custom-dropdown-btn as-pointer" type="button"

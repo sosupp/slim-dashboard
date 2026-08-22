@@ -30,11 +30,11 @@ trait WithDateFormat
         return [
             'today' => [
                 'start' => Carbon::today()->startOfDay()->format('Y-m-d'),
-                'start' => Carbon::today()->startOfDay()->format('Y-m-d'),
+                'end' => Carbon::today()->endOfDay()->format('Y-m-d'),
             ],
             'yesterday' => [
                 'start' => Carbon::yesterday()->startOfDay()->format('Y-m-d'),
-                'start' => Carbon::yesterday()->startOfDay()->format('Y-m-d'),
+                'end' => Carbon::yesterday()->endOfDay()->format('Y-m-d'),
             ],
             'this week' => [
                 'start' => Carbon::today()->startOfWeek()->format('Y-m-d'),
