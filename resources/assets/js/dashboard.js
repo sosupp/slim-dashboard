@@ -31,20 +31,24 @@ document.addEventListener('alpine:init', () => {
         dateLabel: '',
         hasCustomDate: false,
         toggleSidePanel(component = '', title = '', record = null, asModal = false) {
-            console.log('yes panrel')
+            console.log('panrel page')
             this.sidePanelTitle = title
             this.sidePanel = !this.sidePanel
+
             if (component !== '') {
                 if(asModal){
                     this.panelAsModal = true;
                 }
 
-                this.useComponent = true;
-                this.componentName = component;
-                this.$wire.$set('sidePanelComponent', component);
+                this.useComponent = true
+                this.componentName = component
+                this.$wire.setSidePanelComponent(component)
+
             }else {
                 this.useComponent = false
+                this.$wire.clearSidePanelComponent()
             }
+            
             if(record !== null){
                 this.$wire.sidePanelModel(record)
                 this.$wire.resolvePanelModel(record)

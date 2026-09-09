@@ -22,7 +22,7 @@
             this.subnav = key
         },
         toggleSidePanel(component = '', title = '', record = null, asModal = false){
-            console.log(component)
+            console.log(component, 'panrel table')
             this.sidePanelTitle = title
             this.sidePanel = !this.sidePanel
 
