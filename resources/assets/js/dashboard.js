@@ -186,6 +186,234 @@ document.addEventListener('alpine:init', () => {
             });
         }
     }))
+
+    // Reusable Stepper Component using Alpine.js
+    Alpine.data('stepper', (config = {}) => {
+        return {
+            // Configuration
+            steps: config.steps || [],
+            currentStep: config.initialStep || 0,
+            allowSkip: config.allowSkip || false,
+            orientation: config.orientation || 'horizontal',
+            validateStep: config.validateStep || null,
+            onStepChange: config.onStepChange || null,
+            onComplete: config.onComplete || null,
+
+            // State
+            completedSteps: [],
+            stepStatus: {},
+            isTransitioning: false,
+
+            // Computed
+            get totalSteps() {
+                return this.steps.length;
+            },
+
+            get isFirstStep() {
+                return this.currentStep === 0;
+            },
+
+            get isLastStep() {
+                return this.currentStep === this.totalSteps - 1;
+            },
+
+            get progress() {
+                return ((this.currentStep + 1) / this.totalSteps) * 100;
+            },
+
+            get currentStepData() {
+                return this.steps[this.currentStep] || {};
+            },
+
+            get stepStatusList() {
+                return this.steps.map((step, index) => ({
+                    ...step,
+                    index,
+                    status: this.getStepStatus(index),
+                    isActive: index === this.currentStep,
+                    isCompleted: this.isStepCompleted(index),
+                    isCurrent: index === this.currentStep,
+                }));
+            },
+
+            // Methods
+            init() {
+                // Initialize step status
+                this.steps.forEach((step, index) => {
+                    this.stepStatus[index] = {
+                        completed: false,
+                        visited: false,
+                        valid: true,
+                        errors: [],
+                    };
+                });
+
+                // Mark first step as visited
+                this.markStepVisited(0);
+
+                // Emit initialized event
+                this.$dispatch('stepper-initialized', {
+                    currentStep: this.currentStep,
+                    totalSteps: this.totalSteps,
+                });
+            },
+
+            goToStep(index) {
+                if (this.isTransitioning) return;
+                if (index < 0 || index >= this.totalSteps) return;
+                if (!this.allowSkip && index > this.currentStep + 1) return;
+                if (index < this.currentStep && !this.isStepCompleted(index)) return;
+
+                this.isTransitioning = true;
+
+                // Validate before moving forward
+                if (index > this.currentStep) {
+                    const isValid = this.validateCurrentStep();
+                    if (!isValid) {
+                        this.isTransitioning = false;
+                        return;
+                    }
+                }
+
+                this.currentStep = index;
+                this.markStepVisited(index);
+
+                if (this.onStepChange) {
+                    this.onStepChange(index, this.steps[index]);
+                }
+
+                this.$dispatch('stepper-step-change', {
+                    currentStep: index,
+                    stepData: this.steps[index],
+                });
+
+                setTimeout(() => {
+                    this.isTransitioning = false;
+                }, 300);
+            },
+
+            nextStep() {
+                if (this.isLastStep) {
+                    this.complete();
+                    return;
+                }
+
+                const isValid = this.validateCurrentStep();
+                if (!isValid) return;
+
+                this.markStepCompleted(this.currentStep);
+                this.goToStep(this.currentStep + 1);
+            },
+
+            previousStep() {
+                if (this.isFirstStep) return;
+                this.goToStep(this.currentStep - 1);
+            },
+
+            complete() {
+                // Validate all steps
+                let allValid = true;
+                this.steps.forEach((step, index) => {
+                    if (!this.isStepCompleted(index)) {
+                        const isValid = this.validateStep ? this.validateStep(index, step) : true;
+                        if (!isValid) {
+                            allValid = false;
+                            this.stepStatus[index].valid = false;
+                        }
+                    }
+                });
+
+                if (!allValid) {
+                    this.$dispatch('stepper-validation-failed', {
+                        errors: this.getValidationErrors(),
+                    });
+                    return;
+                }
+
+                if (this.onComplete) {
+                    this.onComplete();
+                }
+
+                this.$dispatch('stepper-completed', {
+                    steps: this.steps,
+                    completedSteps: this.completedSteps,
+                });
+            },
+
+            validateCurrentStep() {
+                if (!this.validateStep) return true;
+
+                const isValid = this.validateStep(this.currentStep, this.steps[this.currentStep]);
+                this.stepStatus[this.currentStep].valid = isValid;
+                this.stepStatus[this.currentStep].errors = isValid ? [] : ['Step validation failed'];
+
+                if (!isValid) {
+                    this.$dispatch('stepper-validation-error', {
+                        step: this.currentStep,
+                        errors: this.stepStatus[this.currentStep].errors,
+                    });
+                }
+
+                return isValid;
+            },
+
+            markStepCompleted(index) {
+                if (this.isStepCompleted(index)) return;
+                this.stepStatus[index].completed = true;
+                this.completedSteps.push(index);
+                this.$dispatch('stepper-step-completed', {
+                    step: index,
+                    stepData: this.steps[index],
+                });
+            },
+
+            markStepVisited(index) {
+                this.stepStatus[index].visited = true;
+                this.$dispatch('stepper-step-visited', {
+                    step: index,
+                    stepData: this.steps[index],
+                });
+            },
+
+            isStepCompleted(index) {
+                return this.stepStatus[index]?.completed || false;
+            },
+
+            getStepStatus(index) {
+                const status = this.stepStatus[index] || {};
+                if (status.completed) return 'completed';
+                if (status.visited && index === this.currentStep) return 'current';
+                if (status.visited) return 'visited';
+                return 'pending';
+            },
+
+            getValidationErrors() {
+                const errors = {};
+                this.steps.forEach((step, index) => {
+                    if (!this.stepStatus[index].valid) {
+                        errors[index] = this.stepStatus[index].errors;
+                    }
+                });
+                return errors;
+            },
+
+            resetStepper() {
+                this.currentStep = 0;
+                this.completedSteps = [];
+                this.stepStatus = {};
+                this.steps.forEach((step, index) => {
+                    this.stepStatus[index] = {
+                        completed: false,
+                        visited: false,
+                        valid: true,
+                        errors: [],
+                    };
+                });
+                this.markStepVisited(0);
+                this.$dispatch('stepper-reset');
+            },
+        };
+    });
     
     // Listen to window resize globally
     window.addEventListener('resize', () => {

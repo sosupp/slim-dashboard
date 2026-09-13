@@ -73,9 +73,10 @@
             @elseif ($action['link'] === 'button')
                 <button type="button" class="cta-btn as-pointer modal-cta-item"
                     title="{{ $action['label'] }}"
-                    wire:click="{{$action['wireAction'].'('.$record.')'}}"
+                    wire:click="{{ $action['wireAction'] }}({{ $record->id }})"
                     :class="darkmode ? 'dmode-btn' : 'cta-btn-border'"
                     {{$action['confirm'] ? 'wire:confirm' : ''}}>
+
                     @if ($action['icon'])
                         <i class="fas {{$action['icon']}}"></i>
                     @else

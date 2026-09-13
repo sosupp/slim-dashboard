@@ -75,7 +75,7 @@ abstract class BaseTable extends Component
     public $withBreadcrumb = true;
 
     public $modalRecord;
-    public $modalRecordId = null;
+    public $modalRecordId;
     public $modalRecordDeleted = null;
     public $mobileMoreRecord;
 
@@ -96,6 +96,11 @@ abstract class BaseTable extends Component
     // public abstract function tableForm();
     public abstract function pageCta();
     public abstract function defineSearch();
+
+    public function openModalRecord($id)
+    {
+        $this->modalRecordId = $id;
+    }
 
     public function useMoreCols()
     {

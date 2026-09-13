@@ -97,6 +97,10 @@
             $event.detail.asModal
         )">
 
+    <div wire:loading.delay.longest class="progress-loader-wrapper">
+        <div class="progress-loader"></div>
+    </div>
+    
     @persist('pagesubnavs')
         @if (!empty($this->pageSubNavs))
         <div class="page-sub-navs">

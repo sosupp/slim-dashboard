@@ -42,13 +42,5 @@
                 @endif
             </div>
         </template>
-
-        <div wire:loading.delay.longest>
-            <div class="full-table-loading">
-                <div class="loading-spinner">
-                    <x-slim-dashboard::icons.bars-spinner-fade w="50" h="50" />
-                </div>
-            </div>
-        </div>
     </div>
 </div>

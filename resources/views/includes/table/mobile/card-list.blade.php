@@ -6,18 +6,21 @@
         modalRecord: $wire.entangle('modalRecord').live,
         cardItem: [],
         withMoreData: [],
+
         openCardModal(moreData, item, deleted){
             const key = moreData.id;
-            if(key==this.selectedCard){
-                this.cardModal = !this.cardModal;
-                this.cardItem = item;
-                this.modalRecordId = key;
-                this.modalRecord = item
-                this.recordDeleted = deleted;
-                this.withMoreData = moreData;
-            }
 
-            console.log('tes')
+            this.selectedCard = key;
+            this.cardModal = true;
+            this.cardItem = item;
+            this.modalRecordId = key;
+            this.modalRecord = item;
+            this.recordDeleted = deleted;
+            this.withMoreData = moreData;
+
+            this.$wire.openModalRecord(key);
+
+            console.log('Successfully opened card modal for ID:', key);
         },
         ctaRoute(url = 'login', model = null){
             let setUrl = `${url}/${this.selectedCard}`
@@ -26,7 +29,12 @@
     }">
 
     @forelse ($this->tableRecords as $record)
-        <div class="as-card-item-plain as-pointer" {{$record->deleted_at ? 'deleted-record' : ''}}>
+        <div class="as-card-item-plain as-pointer" {{$record->deleted_at ? 'deleted-record' : ''}}
+            x-on:click="openCardModal(
+                @js($record),
+                @js($this->withCardModalData($record)),
+                @js($record->deleted_at)
+            )">
             <div class="card-item-details">
                 @if ($this->withListCardImage() === 'editable')
                     <div class="card-item-image">
@@ -40,11 +48,7 @@
                     {{$this->withListCardImage()}}
                 @endif
 
-                <div class="card-item-info card-item-info-detail" x-on:click="selectedCard='{{$record->id}}',openCardModal(
-                    {{$record}},
-                    {{$this->withCardModalData($record)}},
-                    '{{$record->deleted_at}}'
-                )">
+                <div class="card-item-info card-item-info-detail">
                     <div>
                         @if ($this->tableColsForMobile())
                             @foreach ($this->tableCols() as $key => $rowItem)
@@ -170,14 +174,6 @@
     @empty
 
     @endforelse
-
-    <div wire:loading.delay.longest>
-        <div class="full-table-loading">
-            <div class="loading-spinner">
-                <x-slim-dashboard::icons.bars-spinner-fade w="50" h="50" />
-            </div>
-        </div>
-    </div>
 
     <div x-cloak x-show="cardModal" x-on:keydown.escape.window="cardModal = false">
         <div class="action-modal" style="">
