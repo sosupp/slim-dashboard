@@ -15,6 +15,10 @@ trait HandlesFileExport
     abstract function exportModel();
     abstract function exportFilename(): string;
 
+    public function allowExportCondition()
+    {
+        return true;
+    }
 
     public function renderingHandlesFileExport()
     {
@@ -80,6 +84,10 @@ trait HandlesFileExport
 
     public function executeExport()
     {
+        if(!$this->allowExportCondition()){
+            return;
+        }
+
         $filename = str($this->exportFilename())->slug('_') .'_'. date('Y-m-i-s');
 
         // dd($this->selectedExportType);

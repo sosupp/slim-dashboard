@@ -31,7 +31,7 @@
             multiple>
     </label>
 
-    @if ($colHeading['relation'])
+    @if ($colHeading['relation'] || $colHeading['callback'])
         <template x-if="!imgsrc">
             <img src="{{ asset($this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null)) }}" width="50">
         </template>

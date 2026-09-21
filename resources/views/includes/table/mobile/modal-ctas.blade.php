@@ -1,5 +1,5 @@
 <div x-show="modalRecord" x-cloak>
-    <div>ear
+    <div>
         @if ($action['isVisible'])
             @if ($action['label'] === 'delete')
                 @if ($modalRecordDeleted)
