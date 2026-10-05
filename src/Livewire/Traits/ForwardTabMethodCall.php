@@ -6,7 +6,7 @@ use Livewire\Attributes\Url;
 
 trait ForwardTabMethodCall
 {
-    #[Url(as: 'call', history: true)]
+    #[Url(as: 'call')]
     public $callAction = null;
 
     #[On('extra-data-reset')]

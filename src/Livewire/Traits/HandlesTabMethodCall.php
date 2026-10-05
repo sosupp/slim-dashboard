@@ -6,7 +6,7 @@ use Livewire\Attributes\Url;
 
 trait HandlesTabMethodCall
 {
-    #[Url(as: 'call', history: true)]
+    #[Url(as: 'call')]
     public $callAction = null;
 
     public function mountHandlesTabMethodCall()

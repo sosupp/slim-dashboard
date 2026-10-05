@@ -33,6 +33,16 @@ abstract class TabWrapper extends Component
         // dd($this->tab);
         $this->withMount();
         $this->configureSelected();
+
+        if($this->callAction){
+            $this->dispatch(
+                event: 'opensidepanel',
+                title: $this->sidePanelTitle(), componentName: $this->callAction,
+            );
+
+            $this->reset('callAction');
+            // $result = $this->dispatch('extra-data-reset', 'callAction');
+        }
     }
 
     public function withMount(){}
@@ -43,35 +53,45 @@ abstract class TabWrapper extends Component
     {
         // dd($this->tab);
         if($this->tab !== null){
-            // dd($this->tab);
-            $component = collect($this->tabHeadings())->where('key', $this->tab)->first();
-            $this->selectedTab = $component['key'];
 
-            $this->switchComponent(
-                component: $component['component'],
-                url: $component['url'],
-                view: $component['view'],
-                tab: $this->tab
-            );
-            return;
+            $component = collect($this->tabHeadings())->where('key', $this->tab)->first();
+
+            // dd($component, $this->tabHeadings());
+            if(is_null($component)){
+                $this->resetTab();
+            }else{
+                $this->selectedTab = $component['key'];
+                $this->switchComponent(
+                    component: $component['component'],
+                    url: $component['url'],
+                    view: $component['view'],
+                    tab: $this->tab
+                );
+            }
+        }
+
+        if(is_null($this->tab)){
+            $this->resetTab();
         }
 
         // dd(collect($this->tabHeadings()));
         if(!empty($this->tabHeadings())){
             // dd(collect($this->tabHeadings()));
-            $this->componentName = collect($this->tabHeadings())->first()['component'];
-            $this->selectedUrl = collect($this->tabHeadings())->first()['url'];
-            $this->selectedTab = $this->tab ?? collect($this->tabHeadings())->first()['key'];
+            // $this->resetTab();
 
             // dd($this->componentName, $this->selectedUrl, $this->selectedTab, $this->tab);
             if(empty($this->componentName)){
                 $this->useViewFile = collect($this->tabHeadings())->first()['view'];
             }
         }
+    }
 
-
-
-        // dd($this->selectedUrl);
+    public function resetTab()
+    {
+        $this->componentName = collect($this->tabHeadings())->first()['component'];
+        $this->selectedUrl = collect($this->tabHeadings())->first()['url'];
+        $this->selectedTab = collect($this->tabHeadings())->first()['key'];
+        $this->tab = $this->selectedTab;
     }
 
     #[On('toggle-tab-component')]
@@ -94,6 +114,11 @@ abstract class TabWrapper extends Component
     public function passExtraData(): array
     {
         return [];
+    }
+
+    public function sidePanelTitle(): string
+    {
+        return 'ADD';
     }
 
     public function panelWidth()
