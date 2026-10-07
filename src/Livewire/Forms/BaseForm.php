@@ -2,30 +2,23 @@
 
 namespace Sosupp\SlimDashboard\Livewire\Forms;
 
-use Illuminate\Validation\Rules\File;
-use Livewire\Component;
-use Livewire\WithFileUploads;
+use Livewire\Attributes\Session;
 use Livewire\Attributes\Validate;
-use Sosupp\SlimDashboard\Concerns\UploadImages;
+use Livewire\Component;
 use Sosupp\SlimDashboard\Concerns\Html\WithBreadcrumb;
+use Sosupp\SlimDashboard\Livewire\Traits\HandlesImageUploads;
 use Sosupp\SlimDashboard\Livewire\Traits\HandleUserAlerts;
 use Sosupp\SlimDashboard\Livewire\Traits\PreparesFormEdit;
 
 abstract class BaseForm extends Component
 {
-    use WithFileUploads,
-        UploadImages,
-        PreparesFormEdit,
+    use PreparesFormEdit,
         WithBreadcrumb,
-        HandleUserAlerts;
+        HandleUserAlerts,
+        HandlesImageUploads;
 
     public $pageTitle;
     public $isUpdate = false;
-    
-    #[Validate(rule: 'nullable')]
-    public $imagePath;
-
-    public $image;
 
     public $modelId;
 
@@ -50,27 +43,11 @@ abstract class BaseForm extends Component
         return '';
     }
 
-    public function updatedImage()
+    public function uploadImageOnSave(): bool
     {
-        // dd("yes");
-        $this->validate([
-            'image' => [
-                'nullable',
-                File::image()
-                ->max('10mb')
-            ],
-        ]);
-
-        $this->imagePath = $this->uploadImage(
-            data: [
-                'image' => $this->image,
-                'filename' => $this->colForImageName()
-            ],
-        );
-
-        // dd($this->imagePath);
+        return true;
     }
-    
+
     public function basePage()
     {
         return '';
