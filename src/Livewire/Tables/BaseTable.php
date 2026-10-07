@@ -326,6 +326,18 @@ abstract class BaseTable extends Component
         $this->editLink = '';
     }
 
+    public function fileAsPrivate(): bool
+    {
+        return true;
+    }
+
+    public function storageDirectory()
+    {
+        return config('slimertenancy.enabled')
+        ? tenantImagePath(app('tenant')['subdomain'])
+        : ($this->fileAsPrivate() ? 'images' : null);
+    }
+
     public function updatedInlineImages()
     {
         $cleanFilename = str($this->selectedImageName)->stripTags()->slug()->value();
@@ -335,7 +347,9 @@ abstract class BaseTable extends Component
             data: [
                 'image' => $this->inlineImages[$this->modelImageId][0],
                 'filename' => $cleanFilename
-            ]
+            ],
+            subDir: $this->storageDirectory(),
+            private: $this->fileAsPrivate()
         );
 
         $updatedImage = $this->updateImageColumn($this->modelImageId, $image);
@@ -344,6 +358,7 @@ abstract class BaseTable extends Component
             session()->flash('inline-upload-success'.$this->modelImageId);
         }
     }
+    
     public function showTableCta()
     {
         return true;

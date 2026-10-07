@@ -101,7 +101,10 @@ trait UploadImages
         }
     }
 
-    public function uploadInlineImage(array $data, $width = null, $height = null, $subDir = null)
+    public function uploadInlineImage(
+        array $data, $width = null, $height = null, $subDir = null,
+        $private = false,
+    )
     {
 
         // dd($data, str()->slug($data['filename']));
@@ -116,6 +119,14 @@ trait UploadImages
                 $filename = str($originalName)->slug()->value();
             }
 
+            if($private && $subDir){
+                return $this->storePrivately(
+                    dir: $subDir,
+                    file: $data['image'],
+                    filename: $filename.'.webp'
+                );
+            }
+            
             $image = '';
             if($subDir !== null){
                 $image = 'images/'.$subDir .'/'.$filename.'.webp';
