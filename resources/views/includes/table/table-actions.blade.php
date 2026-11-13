@@ -34,7 +34,13 @@
             @if (isset($action['customRoute']) && ($action['customRoute']))
                 <a wire:navigate href="{{ $this->setCustomRoute($record, $action['customRoute']) ?: '#' }}"
                 class="cta-btn modal-cta-item"
-                :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">{{ $action['label'] }}</a>
+                :class="darkmode ? 'dmode-btn' : 'cta-btn-border'">
+                @if ($action['icon'])
+                    <i class="fas {{$action['icon']}}"></i>
+                @else
+                    {{ $action['label'] }}
+                @endif
+            </a>
             @elseif ($action['sidePanel'])
                 <button type="button" class="cta-btn as-pointer modal-cta-item"
                     title="{{ $action['label'] }}"
