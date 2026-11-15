@@ -7,7 +7,7 @@ class Cards
 
     public static function item(
         ?string $label = null,
-        string $value = '',
+        ?string $value = '',
         string $id = '',
         bool $canView = true,
         string $css = '',

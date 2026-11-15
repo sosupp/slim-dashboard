@@ -87,7 +87,7 @@ abstract class BaseTable extends Component
     public array $columns = [];
     public array $rows = [];
 
-
+    public $tableView;
 
     public abstract function mount();
     public abstract function tableCols();
@@ -268,6 +268,12 @@ abstract class BaseTable extends Component
         return false;
     }
 
+    #[Computed()]
+    public function totalRecordCount(): mixed
+    {
+        return null;
+    }
+
     public function cardsWrapperCss()
     {
         return 'table-inline-stats-summary';
@@ -352,13 +358,13 @@ abstract class BaseTable extends Component
             private: $this->fileAsPrivate()
         );
 
-        $updatedImage = $this->updateImageColumn($this->modelImageId, $image);
+        $updatedImage = $this->updateImageColumn($this->modelImageId, $image) ?: null;
 
         if($updatedImage){
             session()->flash('inline-upload-success'.$this->modelImageId);
         }
     }
-    
+
     public function showTableCta()
     {
         return true;
@@ -368,7 +374,7 @@ abstract class BaseTable extends Component
     {
         return false;
     }
-    
+
     public function showPaginationNavs()
     {
         return true;
@@ -402,6 +408,11 @@ abstract class BaseTable extends Component
     public function tableColsForMobile(): bool
     {
         return false;
+    }
+
+    public function showMobileCardChevron(): bool
+    {
+        return true;
     }
 
     public function listAsCards(): string|View|null
@@ -462,9 +473,73 @@ abstract class BaseTable extends Component
         return true;
     }
 
+    public function mobileDateListing(): bool
+    {
+        return false;
+    }
+
     public function mobileStats(): bool
     {
         return true;
+    }
+
+    public function showGroupedTable(): bool
+    {
+        return $this->tableView === 'grouped';
+    }
+
+    public function howGroupedTable()
+    {
+        return $this->tableView === 'grouped';
+    }
+
+    public function groupByDateColumn(): string
+    {
+        return 'created_at';
+    }
+
+    public function latestGroupedDate(): ?string
+    {
+        return $this->groupedTableRecords()->keys()->first();
+    }
+
+    // public function groupedTableRecords(): Collection
+    // {
+    //     return (collect($this->tableRecords)
+    //         ->filter(fn ($record) => filled(
+    //             data_get($record, $this->groupByDateColumn())
+    //         ))
+    //         ->groupBy(function ($record) {
+    //             return Carbon::parse(
+    //                 data_get($record, $this->groupByDateColumn())
+    //             )->toDateString();
+    //         })
+    //         ->sortKeysDesc());
+    // }
+
+    public function groupedTableRecords(): Collection
+    {
+        // $grouping = $this->howGroupedTable();
+
+        // if (! $grouping) {
+        //     return collect();
+        // }
+
+        $dateColumn = $this->groupByDateColumn();
+
+        $records = $this->paginated
+            ? $this->tableRecords->getCollection()
+            : collect($this->tableRecords);
+
+        return $records
+            ->groupBy(function ($record) use ($dateColumn) {
+                $date = data_get($record, $dateColumn);
+
+                return $date
+                    ? Carbon::parse($date)->toDateString()
+                    : '0000-00-00';
+            })
+            ->sortKeysDesc();
     }
 
     public function resolveMobileRecord($id = null)
@@ -487,9 +562,6 @@ abstract class BaseTable extends Component
     {
         return '';
     }
-
-
-
 
     public function compositePage()
     {
@@ -527,7 +599,6 @@ abstract class BaseTable extends Component
     {
         return false;
     }
-
 
 
     public function render()

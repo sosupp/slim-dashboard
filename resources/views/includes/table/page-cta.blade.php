@@ -199,8 +199,13 @@
         </span>
     </div>
 
-    <span class="as-pointer mobile-more-trigger {{$this->mobileMoreCtaCss()}}" x-on:click="openMobileCta" x-show="isMobile()" x-cloak>
-        <x-slim-dashboard::icons.more w="32" color="#fff"/>
-    </span>
+    <div>
+        <span class="as-pointer mobile-more-trigger {{$this->mobileMoreCtaCss()}}"
+            style="padding: 10px;color:whitesmoke;font-size:12px;text-transform:uppercase"
+            x-on:click="openMobileCta" x-show="isMobile()" x-cloak>
+            {{-- <x-slim-dashboard::icons.more w="32" color="#fff"/> --}}
+            more
+        </span>
+    </div>
 </div>
 @endif

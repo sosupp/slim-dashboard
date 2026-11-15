@@ -18,6 +18,29 @@
         moreData: {},
         moreKeys: [],
         hasCustomDate: false,
+        dateGroups: {},
+        latestDate: @js($this->latestGroupedDate()),
+        groupDates: @js($this->groupedTableRecords()->keys()->values()),
+
+        isDateOpen(date) {
+            return this.dateGroups[date] ??
+                date === this.latestDate;
+        },
+
+        toggleDate(date) {
+            this.dateGroups[date] = !this.isDateOpen(date);
+        },
+
+        expandAllDates() {
+            document.querySelectorAll('[data-date-group]')
+                .forEach(el => {
+                    this.dateGroups[el.dataset.dateGroup] = true;
+                });
+        },
+
+        collapseAllDates() {
+            this.dateGroups = {};
+        },
         subActive(key){
             this.subnav = key
         },
@@ -100,7 +123,7 @@
     <div wire:loading.delay.longest class="progress-loader-wrapper">
         <div class="progress-loader"></div>
     </div>
-    
+
     @persist('pagesubnavs')
         @if (!empty($this->pageSubNavs))
         <div class="page-sub-navs">
@@ -188,9 +211,11 @@
                     </span>
                     @endif
 
-                    <span class="total-record-count">
-                        ({{$this->paginated ? $this->tableRecords->total() : count($this->tableRecords)}}) records
-                    </span>
+                    @if ($this->totalRecordCount)
+                        <span class="total-record-count">
+                            ({{$this->totalRecordCount}}) records
+                        </span>
+                    @endif
                 </div>
                 @endif
 

@@ -1,6 +1,6 @@
-@if ($this->showPaginationFilter())
-<div class="custom-pagination-wrapper">
 
+<div class="custom-pagination-wrapper">
+    @if ($this->showPaginationFilter())
     <div class="mobile-page-filters">
         @include('slim-dashboard::includes.table.mobile.record-filters')
 
@@ -8,23 +8,26 @@
         @include('slim-dashboard::includes.table.table-navs')
         @endif
     </div>
+    @endif
+
+    @include('slim-dashboard::includes.table.page-cta')
 
 </div>
 
 <div class="show-filter-label" style="text-transform: capitalize;margin-bottom: 10px;font-size: 18px;font-weight: bold;">
     <span x-text="filterLabelHeading"></span>
 </div>
-@endif
 
 
-<div class="search-and-listing" x-data="{
+
+<div class="{{$this->mobileListingMainWrapper() ?? 'search-and-listing'}}" x-data="{
         statsPanel: false
     }">
 
     @if($this->mobileTableCta())
     <div class="search-input-and-results" x-data="{openResults: true}">
         @include('slim-dashboard::includes.platform.search-input')
-        @include('slim-dashboard::includes.table.page-cta')
+
 
         @if ($this->hasSearchResultDropdown)
         <div x-show="openResults" @click.outside="openResults=!openResults">
@@ -41,9 +44,11 @@
         @if ($this->showPagination())
         <div class="record-count">
             <span x-cloak x-html="mobileDateLabel"></span>
+            @if ($this->totalRecordCount)
             <span class="total-record-count">
-                ({{$this->paginated ? $this->tableRecords->total() : count($this->tableRecords)}})
+                ({{$this->totalRecordCount }})
             </span>
+            @endif
         </div>
         @endif
 
@@ -104,9 +109,9 @@
 
 
         @if ($this->listAsCards())
-        {!! $this->listAsCards() !!}
+            {!! $this->listAsCards() !!}
         @else
-        @include('slim-dashboard::includes.table.mobile.card-list')
+            @include('slim-dashboard::includes.table.mobile.card-list')
         @endif
 
 
