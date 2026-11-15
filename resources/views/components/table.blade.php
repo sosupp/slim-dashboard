@@ -2,35 +2,8 @@
     x-data="{
         entries: [],
         selected: null,
-        dateGroups: {},
-        latestDate: @js($this->latestGroupedDate()),
-        groupDates: @js($this->groupedTableRecords()->keys()->values()),
-
         toggle(index) {
-            if (this.entries[index]) {
-                this.entries[index].open =
-                    !this.entries[index].open;
-            }
-        },
-
-        isDateOpen(date) {
-            return this.dateGroups[date] ??
-                date === this.latestDate;
-        },
-
-        toggleDate(date) {
-            this.dateGroups[date] = !this.isDateOpen(date);
-        },
-
-        expandAllDates() {
-            document.querySelectorAll('[data-date-group]')
-                .forEach(el => {
-                    this.dateGroups[el.dataset.dateGroup] = true;
-                });
-        },
-
-        collapseAllDates() {
-            this.dateGroups = {};
+            this.entries[index].open = !this.entries[index].open;
         }
     }">
     <table class="custom-table">

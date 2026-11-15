@@ -122,9 +122,10 @@
 
                     <tr>
                         <td colspan="{{ $totalColumns }}">
-                            <p style="color:#94a3b8;">
-                                No records for the selected filters
-                            </p>
+                            <div style="color:#94a3b8;text-align: center">
+                                <p>No records found</p>
+                                <span>Records matching your filters will appear here.</span>
+                            </div>
                         </td>
                     </tr>
 
@@ -150,9 +151,10 @@
                     @empty
                         <tr>
                             <td colspan="{{ $totalColumns }}">
-                                <p style="color:#94a3b8;">
-                                    No records for the selected filters
-                                </p>
+                                <div style="color:#94a3b8;text-align: center">
+                                    <p>No records found</p>
+                                    <span>Records matching your filters will appear here.</span>
+                                </div>
                             </td>
                         </tr>
                     @endforelse

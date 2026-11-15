@@ -87,7 +87,7 @@ abstract class BaseTable extends Component
     public array $columns = [];
     public array $rows = [];
 
-    public $tableView;
+    public $displayRecordView;
 
     public abstract function mount();
     public abstract function tableCols();
@@ -358,7 +358,7 @@ abstract class BaseTable extends Component
             private: $this->fileAsPrivate()
         );
 
-        $updatedImage = $this->updateImageColumn($this->modelImageId, $image) ?: null;
+        $updatedImage = $this->updateImageColumn($this->modelImageId, $image);
 
         if($updatedImage){
             session()->flash('inline-upload-success'.$this->modelImageId);
@@ -485,12 +485,12 @@ abstract class BaseTable extends Component
 
     public function showGroupedTable(): bool
     {
-        return $this->tableView === 'grouped';
+        return false;
     }
 
     public function howGroupedTable()
     {
-        return $this->tableView === 'grouped';
+        return $this->displayRecordView === 'grouped';
     }
 
     public function groupByDateColumn(): string
@@ -503,32 +503,19 @@ abstract class BaseTable extends Component
         return $this->groupedTableRecords()->keys()->first();
     }
 
-    // public function groupedTableRecords(): Collection
-    // {
-    //     return (collect($this->tableRecords)
-    //         ->filter(fn ($record) => filled(
-    //             data_get($record, $this->groupByDateColumn())
-    //         ))
-    //         ->groupBy(function ($record) {
-    //             return Carbon::parse(
-    //                 data_get($record, $this->groupByDateColumn())
-    //             )->toDateString();
-    //         })
-    //         ->sortKeysDesc());
-    // }
-
     public function groupedTableRecords(): Collection
     {
-        // $grouping = $this->howGroupedTable();
+        // dd($this->showGroupedTable());
+        $grouping = $this->howGroupedTable();
 
-        // if (! $grouping) {
-        //     return collect();
-        // }
+        if (! $grouping) {
+            return collect();
+        }
 
         $dateColumn = $this->groupByDateColumn();
 
         $records = $this->paginated
-            ? $this->tableRecords->getCollection()
+            ? $this->tableRecords?->getCollection()
             : collect($this->tableRecords);
 
         return $records
