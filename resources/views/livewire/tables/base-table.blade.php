@@ -148,105 +148,109 @@
 
     {{$this->viewBeforeTable()}}
 
-    @if ($this->hasCardListing())
-        <div class="for-mobile">
-            @include('slim-dashboard::includes.table.card-listing')
+    @if ($this->allScreenCardListing())
+        @include('slim-dashboard::includes.table.card-listing')
+    @else
+        @if ($this->hasCardListing())
+            <div class="for-mobile">
+                @include('slim-dashboard::includes.table.card-listing')
 
-            @if ($this->useSideModal())
-                @include('slim-dashboard::includes.table.side-panel')
-            @endif
-        </div>
-    @endif
-
-    <div class="page-grid-layout {{$this->hasCardListing() ? 'for-desktop' : ''}}">
-        @if (!empty($this->pageSideData()))
-        <div class="page-side-data" :class="darkmode ? 'use-dark-theme card-wrapper' : ''">
-            {{$this->pageSideData()}}
-        </div>
+                @if ($this->useSideModal())
+                    @include('slim-dashboard::includes.table.side-panel')
+                @endif
+            </div>
         @endif
 
-        <div class="page-table-section" :class="darkmode ? 'use-dark-theme card-wrapper' : '{{$this->tableWrapperCss}}'">
-            @if ($this->showTableCta())
-            <div class="table-cta-wrapper {{$this->tableHeadingCss}}">
-                @if (!empty($this->tableHeading()))
-                <div class="table-heading">{!! $this->tableHeading() !!}</div>
+        <div class="page-grid-layout {{$this->hasCardListing() ? 'for-desktop' : ''}}">
+            @if (!empty($this->pageSideData()))
+            <div class="page-side-data" :class="darkmode ? 'use-dark-theme card-wrapper' : ''">
+                {{$this->pageSideData()}}
+            </div>
+            @endif
+
+            <div class="page-table-section" :class="darkmode ? 'use-dark-theme card-wrapper' : '{{$this->tableWrapperCss}}'">
+                @if ($this->showTableCta())
+                <div class="table-cta-wrapper {{$this->tableHeadingCss}}">
+                    @if (!empty($this->tableHeading()))
+                    <div class="table-heading">{!! $this->tableHeading() !!}</div>
+                    @endif
+
+                    <div class="search-input-and-results" x-data="{openResults: true}">
+                        @include('slim-dashboard::includes.platform.search-input')
+
+                        <template x-if="searchFilters">
+                            <span>Searching:
+                                <small class="active-pill" x-text="selectFilterLabel">all branches</small>
+                                <small class="active-pill" x-text="dateLabel"></small>
+                            </span>
+                        </template>
+
+                        @if ($this->hasSearchResultDropdown)
+                        <div x-show="openResults" @click.outside="openResults=!openResults">
+                            @if (!empty($this->search))
+                                @includeIf($this->searchResultDropdownView)
+                            @endif
+                        </div>
+                        @endif
+                    </div>
+
+
+                    @include('slim-dashboard::includes.table.page-cta')
+
+                </div>
                 @endif
 
-                <div class="search-input-and-results" x-data="{openResults: true}">
-                    @include('slim-dashboard::includes.platform.search-input')
+                @if ($this->useSideModal())
+                @include('slim-dashboard::includes.table.side-panel')
+                @endif
 
-                    <template x-if="searchFilters">
-                        <span>Searching:
-                            <small class="active-pill" x-text="selectFilterLabel">all branches</small>
-                            <small class="active-pill" x-text="dateLabel"></small>
+                @if ($this->showPaginationFilter())
+                <div class="custom-pagination-wrapper">
+                    @if ($this->showPagination())
+                    <div class="record-count">
+                        @if ($this->withDesktop)
+                        <span class="pull-remote-trigger" style="color: green;cursor: pointer;">
+                            <i class="fa-solid fa-circle-down"></i>
                         </span>
-                    </template>
+                        @endif
 
-                    @if ($this->hasSearchResultDropdown)
-                    <div x-show="openResults" @click.outside="openResults=!openResults">
-                        @if (!empty($this->search))
-                            @includeIf($this->searchResultDropdownView)
+                        @if ($this->totalRecordCount)
+                            <span class="total-record-count">
+                                ({{$this->totalRecordCount}}) records
+                            </span>
                         @endif
                     </div>
                     @endif
-                </div>
 
+                    <div class="filters-and-pagination">
+                        @if($this->showTableFilters())
+                        @include('slim-dashboard::includes.table.table-filters')
+                        @endif
 
-                @include('slim-dashboard::includes.table.page-cta')
+                        @if ($this->showPaginationNavs())
+                        @include('slim-dashboard::includes.table.table-navs')
+                        @endif
+                    </div>
 
-            </div>
-            @endif
-
-            @if ($this->useSideModal())
-            @include('slim-dashboard::includes.table.side-panel')
-            @endif
-
-            @if ($this->showPaginationFilter())
-            <div class="custom-pagination-wrapper">
-                @if ($this->showPagination())
-                <div class="record-count">
-                    @if ($this->withDesktop)
-                    <span class="pull-remote-trigger" style="color: green;cursor: pointer;">
-                        <i class="fa-solid fa-circle-down"></i>
-                    </span>
-                    @endif
-
-                    @if ($this->totalRecordCount)
-                        <span class="total-record-count">
-                            ({{$this->totalRecordCount}}) records
-                        </span>
-                    @endif
                 </div>
                 @endif
 
-                <div class="filters-and-pagination">
-                    @if($this->showTableFilters())
-                    @include('slim-dashboard::includes.table.table-filters')
-                    @endif
+                @if ($this->showInlineTableStatistics)
+                @include('slim-dashboard::includes.table.table-inline-statistics')
+                @endif
 
-                    @if ($this->showPaginationNavs())
-                    @include('slim-dashboard::includes.table.table-navs')
-                    @endif
-                </div>
+
+                @if($this->useCustomTableView())
+                    {{ $this->useCustomTableView() }}
+                @else
+                    {{-- @include('slim-dashboard::includes.table.table-to-cards') --}}
+                    @include('slim-dashboard::includes.table.standard')
+                @endif
+
 
             </div>
-            @endif
-
-            @if ($this->showInlineTableStatistics)
-            @include('slim-dashboard::includes.table.table-inline-statistics')
-            @endif
-
-
-            @if($this->useCustomTableView())
-                {{ $this->useCustomTableView() }}
-            @else
-                @include('slim-dashboard::includes.table.table-to-cards')
-                @include('slim-dashboard::includes.table.standard')
-            @endif
-
-
         </div>
-    </div>
+    @endif
 
     <div x-cloak x-show="tableSidePanel">
         <div class="side-modal-overlay" x-on:click="tableSidePanel=false"></div>

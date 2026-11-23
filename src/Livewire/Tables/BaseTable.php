@@ -279,11 +279,6 @@ abstract class BaseTable extends Component
         return 'table-inline-stats-summary';
     }
 
-    public function cardListingWrapper(): string
-    {
-        return 'white-list-wrapper';
-    }
-
     public function configureCustomRelation($model, $relation, $col)
     {
         $testMethod = $this->callback;
@@ -473,7 +468,7 @@ abstract class BaseTable extends Component
         return true;
     }
 
-    public function mobileDateListing(): bool
+    public function groupListingByDate(): bool
     {
         return false;
     }
@@ -486,6 +481,16 @@ abstract class BaseTable extends Component
     public function showGroupedTable(): bool
     {
         return false;
+    }
+
+    public function allScreenCardListing(): bool
+    {
+        return false;
+    }
+
+    public function useCustomCardUi($record = null): ?string
+    {
+        return null;
     }
 
     public function howGroupedTable()

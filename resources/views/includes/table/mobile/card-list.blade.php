@@ -1,4 +1,4 @@
-<div x-data="{
+<div class="{{$this->cardListingWrapper()}}" x-data="{
         cardModal: false,
         selectedCard: null,
 
@@ -44,10 +44,9 @@
         }
     }">
 
-    @if ($this->mobileDateListing())
+    @if ($this->groupListingByDate())
         <div class="mobile-date-groups">
             @forelse ($this->groupedTableRecords() as $date => $records)
-
                 <section class="mobile-date-group"
                     wire:key="mobile-date-group-{{ $date }}">
 
@@ -83,8 +82,7 @@
                     </button>
 
                     {{-- Group records --}}
-                    <div class="mobile-date-group-content"
-                        x-cloak
+                    <div class="mobile-date-group-content" x-cloak
                         x-show="isDateOpen(@js($date))"
                         x-transition:enter="transition ease-out duration-200"
                         x-transition:enter-start="opacity-0 -translate-y-1"
@@ -99,7 +97,6 @@
                     </div>
 
                 </section>
-
             @empty
                 <div class="mobile-empty-state">
                     <p>No records found</p>

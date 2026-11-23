@@ -2,30 +2,31 @@
     @if (!empty($this->tableAsCardsView()))
         @includeIf($this->tableAsCardsView())
     @else
-    <div class="table-convert-card-wrapper for-small for-mobile">
-        @forelse ($this->tableRecords as $index => $record)
-        <div class="table-card-item-wrapper" :class="darkmode ? '' : 'lmode-wrapper'">
-            <div class="table-card-item">
-                <div class="table-card-image">
-                    @foreach ($this->tableCols() as $index => $colHeading)
-                        @if (isset($colHeading['key']) && $colHeading['key'] === 'image')
-                            @if ($colHeading['label'] === 'image')
-                                @include('slim-dashboard::includes.table.table-inline-image')
+
+        @include('slim-dashboard::includes.table.card-listing')
+        {{-- <div class="table-convert-card-wrapper">
+            @forelse ($this->tableRecords as $index => $record)
+            <div class="table-card-item-wrapper" :class="darkmode ? '' : 'lmode-wrapper'">
+                <div class="table-card-item">
+                    <div class="table-card-image">
+                        @foreach ($this->tableCols() as $index => $colHeading)
+                            @if (isset($colHeading['key']) && $colHeading['key'] === 'image')
+                                @if ($colHeading['label'] === 'image')
+                                    @include('slim-dashboard::includes.table.table-inline-image')
+                                @endif
                             @endif
-                        @endif
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
 
-                <div class="table-card-info grid-wrapper">
-                    @foreach ($this->tableCols() as $index => $colHeading)
-                        @if($colHeading['canView'] && $colHeading['screen'] == 'all')
-                            @if (isset($colHeading['key']) && $colHeading['key'] === 'info')
-
+                    <div class="table-card-info grid-wrapper">
+                        @foreach ($this->tableCols() as $index => $colHeading)
+                            @if($colHeading['canView'] && $colHeading['screen'] == 'all')
                                 @if (is_array($colHeading))
+
                                     @if ($colHeading['label'] === 'image')
                                         @include('slim-dashboard::includes.table.table-inline-image')
                                     @else
-                                        @if (isset($colHeading['relation']) || $colHeading !== null)
+                                        @if (isset($colHeading['relation']) || $colHeading['callback'] !== null)
                                         <div class="card-item-wrapper {{$colHeading['valueCss']}}">
                                             {!! $this->relation($record, $colHeading['relation'], $colHeading['col'], $colHeading['callback'] ?? null, $colHeading['valueCss']) !!}
                                             @if ($colHeading['showLabel'])
@@ -66,23 +67,21 @@
                                         @endif
                                     </div>
                                 @endif
-
                             @endif
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="table-card-cta">
+                    @forelse ($this->tableActions() as $action)
+                        @include('slim-dashboard::includes.table.table-actions')
+                    @empty
+                    @endforelse
                 </div>
             </div>
+            @empty
 
-            <div class="table-card-cta">
-                @forelse ($this->tableActions() as $action)
-                    @include('slim-dashboard::includes.table.table-actions')
-                @empty
-                @endforelse
-            </div>
-        </div>
-        @empty
-
-        @endforelse
-    </div>
+            @endforelse
+        </div> --}}
     @endif
 @endif

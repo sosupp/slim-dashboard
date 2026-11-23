@@ -86,6 +86,7 @@
             @include('slim-dashboard::includes.table.mobile.record-filters', [
                 'filterWrapper'=> 'mobile-filter-modal', 'filterTriggerCss' => 'as-absolute'
             ])
+
             @forelse (collect($this->inlineTableStatistics) as $card)
                 @if (is_array($card))
                     @if ($card['canView'])
@@ -105,17 +106,11 @@
 
     </div>
 
-    <div class="item-listings-wrapper {{$this->cardListingWrapper()}}">
-
-
-        @if ($this->listAsCards())
-            {!! $this->listAsCards() !!}
-        @else
-            @include('slim-dashboard::includes.table.mobile.card-list')
-        @endif
-
-
-    </div>
+    @if ($this->listAsCards())
+        {!! $this->listAsCards() !!}
+    @else
+        @include('slim-dashboard::includes.table.mobile.card-list')
+    @endif
 </div>
 
 
